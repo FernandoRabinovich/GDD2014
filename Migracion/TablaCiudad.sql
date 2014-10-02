@@ -1,0 +1,6 @@
+CREATE TABLE GRAFO_LOCO.Ciudad
+	(
+	idCiudad int NOT NULL PRIMARY KEY ,
+	Nombre char(50) NOT NULL,
+	idPais int FOREIGN KEY REFERENCES GRAFO_LOCO.Pais (idPais)
+	)  ON [PRIMARY]	
