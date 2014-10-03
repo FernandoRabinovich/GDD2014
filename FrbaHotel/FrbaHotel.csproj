@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BAFE3016-AC06-4C43-ABEF-87F21AB5699B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -78,17 +78,41 @@
     <Compile Include="ABM de Usuario\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="baja.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="baja.Designer.cs">
+      <DependentUpon>baja.cs</DependentUpon>
+    </Compile>
     <Compile Include="Cancelar Reserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cancelar Reserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="ListadoDeSeleccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ListadoDeSeleccion.Designer.cs">
+      <DependentUpon>ListadoDeSeleccion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modificacion.Designer.cs">
+      <DependentUpon>modificacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VistaAlta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VistaAlta.Designer.cs">
+      <DependentUpon>VistaAlta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VistaListado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VistaListado.Designer.cs">
+      <DependentUpon>VistaListado.cs</DependentUpon>
     </Compile>
     <Compile Include="Generar Modificar Reserva\Form1.cs">
       <SubType>Form</SubType>
@@ -110,6 +134,25 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="baja.resx">
+      <DependentUpon>baja.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListadoDeSeleccion.resx">
+      <DependentUpon>ListadoDeSeleccion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="modificacion.resx">
+      <DependentUpon>modificacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VistaAlta.resx">
+      <DependentUpon>VistaAlta.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VistaListado.resx">
+      <DependentUpon>VistaListado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
