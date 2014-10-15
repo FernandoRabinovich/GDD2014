@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.Cancelar_Reserva
+﻿namespace FrbaHotel.Generar_Modificar_Reserva
 {
-    partial class CancelarReserva
+    partial class GenerarModificarReserva
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.habitacion = new System.Windows.Forms.GroupBox();
-            this.fechaHasta = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.Fecha = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tipo = new System.Windows.Forms.TextBox();
@@ -41,6 +39,8 @@
             this.regimen = new System.Windows.Forms.TextBox();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.fechaHasta = new System.Windows.Forms.TextBox();
             this.habitacion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,34 +57,15 @@
             this.habitacion.Controls.Add(this.label3);
             this.habitacion.Controls.Add(this.fechaDesde);
             this.habitacion.Controls.Add(this.regimen);
-            this.habitacion.Location = new System.Drawing.Point(7, 16);
+            this.habitacion.Location = new System.Drawing.Point(13, 25);
             this.habitacion.Name = "habitacion";
             this.habitacion.Size = new System.Drawing.Size(312, 154);
-            this.habitacion.TabIndex = 37;
+            this.habitacion.TabIndex = 31;
             this.habitacion.TabStop = false;
             this.habitacion.Text = "Reserva";
             // 
-            // fechaHasta
-            // 
-            this.fechaHasta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.fechaHasta.Enabled = false;
-            this.fechaHasta.Location = new System.Drawing.Point(188, 48);
-            this.fechaHasta.Name = "fechaHasta";
-            this.fechaHasta.Size = new System.Drawing.Size(61, 20);
-            this.fechaHasta.TabIndex = 24;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(137, 51);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Hasta";
-            // 
             // Fecha
             // 
-            this.Fecha.Enabled = false;
             this.Fecha.Location = new System.Drawing.Point(113, 23);
             this.Fecha.Name = "Fecha";
             this.Fecha.Size = new System.Drawing.Size(160, 20);
@@ -154,34 +135,53 @@
             // botonLimpiar
             // 
             this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.botonLimpiar.Location = new System.Drawing.Point(7, 190);
+            this.botonLimpiar.Location = new System.Drawing.Point(13, 197);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(100, 30);
-            this.botonLimpiar.TabIndex = 36;
+            this.botonLimpiar.TabIndex = 30;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
             // 
             // botonGuardar
             // 
             this.botonGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonGuardar.Location = new System.Drawing.Point(219, 190);
+            this.botonGuardar.Location = new System.Drawing.Point(225, 197);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(100, 30);
-            this.botonGuardar.TabIndex = 35;
+            this.botonGuardar.TabIndex = 29;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
             this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
-            // CancelarReserva
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(137, 51);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Hasta";
+            // 
+            // fechaHasta
+            // 
+            this.fechaHasta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.fechaHasta.Enabled = false;
+            this.fechaHasta.Location = new System.Drawing.Point(188, 48);
+            this.fechaHasta.Name = "fechaHasta";
+            this.fechaHasta.Size = new System.Drawing.Size(61, 20);
+            this.fechaHasta.TabIndex = 24;
+            // 
+            // GenerarModificarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 236);
+            this.ClientSize = new System.Drawing.Size(338, 251);
             this.Controls.Add(this.habitacion);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonGuardar);
-            this.Name = "CancelarReserva";
-            this.Text = "Cancerlar Reserva";
+            this.Name = "GenerarModificarReserva";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.GenerarModificarReserva_Load);
             this.habitacion.ResumeLayout(false);
             this.habitacion.PerformLayout();
             this.ResumeLayout(false);

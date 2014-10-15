@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.Cancelar_Reserva
+﻿namespace FrbaHotel.Generar_Modificar_Reserva
 {
-    partial class CancelarReserva
+    partial class modificarReserva
     {
         /// <summary>
         /// Required designer variable.
@@ -57,12 +57,13 @@
             this.habitacion.Controls.Add(this.label3);
             this.habitacion.Controls.Add(this.fechaDesde);
             this.habitacion.Controls.Add(this.regimen);
-            this.habitacion.Location = new System.Drawing.Point(7, 16);
+            this.habitacion.Location = new System.Drawing.Point(15, 29);
             this.habitacion.Name = "habitacion";
             this.habitacion.Size = new System.Drawing.Size(312, 154);
-            this.habitacion.TabIndex = 37;
+            this.habitacion.TabIndex = 34;
             this.habitacion.TabStop = false;
             this.habitacion.Text = "Reserva";
+            this.habitacion.Enter += new System.EventHandler(this.habitacion_Enter);
             // 
             // fechaHasta
             // 
@@ -154,34 +155,35 @@
             // botonLimpiar
             // 
             this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.botonLimpiar.Location = new System.Drawing.Point(7, 190);
+            this.botonLimpiar.Location = new System.Drawing.Point(15, 228);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(100, 30);
-            this.botonLimpiar.TabIndex = 36;
+            this.botonLimpiar.TabIndex = 33;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
             // botonGuardar
             // 
             this.botonGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonGuardar.Location = new System.Drawing.Point(219, 190);
+            this.botonGuardar.Location = new System.Drawing.Point(227, 228);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(100, 30);
-            this.botonGuardar.TabIndex = 35;
+            this.botonGuardar.TabIndex = 32;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
             this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
-            // CancelarReserva
+            // modificarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 236);
+            this.ClientSize = new System.Drawing.Size(343, 288);
             this.Controls.Add(this.habitacion);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonGuardar);
-            this.Name = "CancelarReserva";
-            this.Text = "Cancerlar Reserva";
+            this.Name = "modificarReserva";
+            this.Text = "modificarReserva";
             this.habitacion.ResumeLayout(false);
             this.habitacion.PerformLayout();
             this.ResumeLayout(false);
@@ -203,5 +205,6 @@
         private System.Windows.Forms.TextBox regimen;
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonGuardar;
+
     }
 }

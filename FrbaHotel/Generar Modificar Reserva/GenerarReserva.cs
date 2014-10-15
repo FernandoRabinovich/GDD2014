@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.Cancelar_Reserva
+namespace FrbaHotel.Generar_Modificar_Reserva
 {
-    public partial class CancelarReserva : Form
+    public partial class GenerarModificarReserva : Form
     {
-        public CancelarReserva()
+        public GenerarModificarReserva()
         {
             InitializeComponent();
+        }
+
+        private void GenerarModificarReserva_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void botonGuardar_Click(object sender, EventArgs e)
@@ -32,15 +37,13 @@ namespace FrbaHotel.Cancelar_Reserva
                 form1.Show();
                 regimenDeEstadia = form1.DameRegimen();//me llevo el regimen elegido del cartel, si no selecciono uno al generar la reserva
             }
-            else
-            {
+            else {
                 regimenDeEstadia = this.regimen;
-
+            
             }
-            DateTime fecha = System.DateTime();
+           DateTime fecha = System.DateTime();
             fechaDesde1 = (DateTime)fechaDesde;
-            fechaHasta1 = (DataTime)fechaHasta;
-
+            fechaHasta1 = (DataTime) fechaHasta;
 
         }
     }
