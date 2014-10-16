@@ -48,17 +48,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ABM de Cliente\Form1.cs">
+    <Compile Include="ABM de Cliente\AltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ABM de Cliente\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+      <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Habitacion\Form1.cs">
+    <Compile Include="ABM de Habitacion\baja.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Habitacion\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Habitacion\baja.Designer.cs">
+      <DependentUpon>baja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Habitacion\modificacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Habitacion\modificacion.Designer.cs">
+      <DependentUpon>modificacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Habitacion\alta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Habitacion\alta.Designer.cs">
+      <DependentUpon>alta.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM de Regimen\Form1.cs">
       <SubType>Form</SubType>
@@ -78,17 +90,23 @@
     <Compile Include="ABM de Usuario\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="baja.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="baja.Designer.cs">
-      <DependentUpon>baja.cs</DependentUpon>
-    </Compile>
     <Compile Include="Cancelar Reserva\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Cancelar Reserva\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Modificar Reserva\cartelRegimen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Modificar Reserva\cartelRegimen.Designer.cs">
+      <DependentUpon>cartelRegimen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generar Modificar Reserva\modificarReserva.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Modificar Reserva\modificarReserva.Designer.cs">
+      <DependentUpon>modificarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="ListadoDeSeleccion.cs">
       <SubType>Form</SubType>
@@ -96,29 +114,24 @@
     <Compile Include="ListadoDeSeleccion.Designer.cs">
       <DependentUpon>ListadoDeSeleccion.cs</DependentUpon>
     </Compile>
-    <Compile Include="modificacion.cs">
+    <Compile Include="Login\login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="modificacion.Designer.cs">
-      <DependentUpon>modificacion.cs</DependentUpon>
+    <Compile Include="Login\login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
     </Compile>
-    <Compile Include="VistaAlta.cs">
+    <Compile Include="Program.cs" />
+    <Compile Include="TipoDeAcceso.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VistaAlta.Designer.cs">
-      <DependentUpon>VistaAlta.cs</DependentUpon>
+    <Compile Include="TipoDeAcceso.Designer.cs">
+      <DependentUpon>TipoDeAcceso.cs</DependentUpon>
     </Compile>
-    <Compile Include="VistaListado.cs">
+    <Compile Include="Generar Modificar Reserva\GenerarReserva.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VistaListado.Designer.cs">
-      <DependentUpon>VistaListado.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Generar Modificar Reserva\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Generar Modificar Reserva\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Generar Modificar Reserva\GenerarReserva.Designer.cs">
+      <DependentUpon>GenerarReserva.cs</DependentUpon>
     </Compile>
     <Compile Include="Listado Estadistico\Form1.cs">
       <SubType>Form</SubType>
@@ -126,32 +139,50 @@
     <Compile Include="Listado Estadistico\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="baja.resx">
+    <EmbeddedResource Include="ABM de Cliente\Form1.resx">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\baja.resx">
       <DependentUpon>baja.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\modificacion.resx">
+      <DependentUpon>modificacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\alta.resx">
+      <DependentUpon>alta.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Reserva\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Modificar Reserva\cartelRegimen.resx">
+      <DependentUpon>cartelRegimen.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Modificar Reserva\GenerarReserva.resx">
+      <DependentUpon>GenerarReserva.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generar Modificar Reserva\modificarReserva.resx">
+      <DependentUpon>modificarReserva.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ListadoDeSeleccion.resx">
       <DependentUpon>ListadoDeSeleccion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="modificacion.resx">
-      <DependentUpon>modificacion.cs</DependentUpon>
+    <EmbeddedResource Include="Login\login.resx">
+      <DependentUpon>login.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="VistaAlta.resx">
-      <DependentUpon>VistaAlta.cs</DependentUpon>
+    <EmbeddedResource Include="TipoDeAcceso.resx">
+      <DependentUpon>TipoDeAcceso.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="VistaListado.resx">
-      <DependentUpon>VistaListado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
