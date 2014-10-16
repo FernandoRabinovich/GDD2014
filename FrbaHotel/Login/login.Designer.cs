@@ -28,34 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
+            this.txtPass = new System.Windows.Forms.TextBox();
             this.Usuario = new System.Windows.Forms.Label();
             this.Contraseña = new System.Windows.Forms.Label();
             this.Aceptar = new System.Windows.Forms.Button();
             this.Cancelar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtUsuario
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(115, 35);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 20);
-            this.textBox1.TabIndex = 0;
+            this.txtUsuario.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtUsuario.Location = new System.Drawing.Point(81, 16);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(132, 20);
+            this.txtUsuario.TabIndex = 0;
             // 
-            // textBox2
+            // txtPass
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(115, 61);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(132, 20);
-            this.textBox2.TabIndex = 1;
+            this.txtPass.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtPass.Location = new System.Drawing.Point(81, 42);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
+            this.txtPass.Size = new System.Drawing.Size(132, 20);
+            this.txtPass.TabIndex = 1;
             // 
             // Usuario
             // 
+            this.Usuario.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Usuario.AutoSize = true;
-            this.Usuario.Location = new System.Drawing.Point(12, 38);
+            this.Usuario.Location = new System.Drawing.Point(12, 19);
             this.Usuario.Name = "Usuario";
             this.Usuario.Size = new System.Drawing.Size(43, 13);
             this.Usuario.TabIndex = 2;
@@ -63,8 +65,9 @@
             // 
             // Contraseña
             // 
+            this.Contraseña.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Contraseña.AutoSize = true;
-            this.Contraseña.Location = new System.Drawing.Point(12, 64);
+            this.Contraseña.Location = new System.Drawing.Point(12, 45);
             this.Contraseña.Name = "Contraseña";
             this.Contraseña.Size = new System.Drawing.Size(61, 13);
             this.Contraseña.TabIndex = 3;
@@ -72,7 +75,7 @@
             // 
             // Aceptar
             // 
-            this.Aceptar.Location = new System.Drawing.Point(15, 103);
+            this.Aceptar.Location = new System.Drawing.Point(12, 74);
             this.Aceptar.Name = "Aceptar";
             this.Aceptar.Size = new System.Drawing.Size(75, 23);
             this.Aceptar.TabIndex = 4;
@@ -82,7 +85,7 @@
             // 
             // Cancelar
             // 
-            this.Cancelar.Location = new System.Drawing.Point(172, 103);
+            this.Cancelar.Location = new System.Drawing.Point(139, 74);
             this.Cancelar.Name = "Cancelar";
             this.Cancelar.Size = new System.Drawing.Size(75, 23);
             this.Cancelar.TabIndex = 5;
@@ -94,15 +97,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 129);
+            this.ClientSize = new System.Drawing.Size(222, 104);
             this.Controls.Add(this.Cancelar);
             this.Controls.Add(this.Aceptar);
             this.Controls.Add(this.Contraseña);
             this.Controls.Add(this.Usuario);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtPass);
+            this.Controls.Add(this.txtUsuario);
+            this.MaximizeBox = false;
             this.Name = "login";
-            this.Text = "login";
+            this.Text = "Login";
             this.Load += new System.EventHandler(this.login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -111,8 +115,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtUsuario;
+        private System.Windows.Forms.TextBox txtPass;
         private System.Windows.Forms.Label Usuario;
         private System.Windows.Forms.Label Contraseña;
         private System.Windows.Forms.Button Aceptar;

@@ -18,29 +18,12 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-             #region     VARIABLES
-
-            DateTime fechaDesde1;
-            DateTime fechaHasta1;
-            string tipoHabitacion;
-            string regimenDeEstadia;
-
-            #endregion
-            var form1 = new cartelRegimen();
-            if (regimen.Text == null)
-            {
-                form1.Show();
-                regimenDeEstadia = form1.DameRegimen();//me llevo el regimen elegido del cartel, si no selecciono uno al generar la reserva
-            }
-            else {
-                regimenDeEstadia = this.regimen;
-            
-            }
-           DateTime fecha = System.DateTime();
-            fechaDesde1 = (DateTime)fechaDesde;
-            fechaHasta1 = (DataTime) fechaHasta;
-
-        
+            DateTime fecha = DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString());
+            DateTime fDesde = fechaDesde.Value;
+            DateTime fHasta = fechaHasta.Value;
+            int tipoHabitacion = Int32.Parse(cmbTipoHabitacion.SelectedValue.ToString());
+            int regimenDeEstadia = Int32.Parse(cmbRegimenHotel.SelectedValue.ToString());
+            int hotel = Int32.Parse(cmbHotel.SelectedValue.ToString());
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -51,6 +34,11 @@ namespace FrbaHotel.Generar_Modificar_Reserva
         private void habitacion_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            // Aca tengo que buscar la reserva y cargar los datos
         }
     }
 }

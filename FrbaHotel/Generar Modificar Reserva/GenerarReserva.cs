@@ -18,33 +18,27 @@ namespace FrbaHotel.Generar_Modificar_Reserva
 
         private void GenerarModificarReserva_Load(object sender, EventArgs e)
         {
-
+            // Cargar el tipo de Habitacion
         }
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
             #region     VARIABLES
 
-            DateTime fechaDesde1;
-            DateTime fechaHasta1;
-            string tipoHabitacion;
-            string regimenDeEstadia;
+            DateTime fDesde;
+            DateTime fHasta;
+            int tipoHabitacion;
+            int regimenDeEstadia;
+            int hotel;
 
             #endregion
-            var form1 = new cartelRegimen();
-            if (regimen.Text == null)
-            {
-                form1.Show();
-                regimenDeEstadia = form1.DameRegimen();//me llevo el regimen elegido del cartel, si no selecciono uno al generar la reserva
-            }
-            else {
-                regimenDeEstadia = this.regimen;
-            
-            }
-           DateTime fecha = System.DateTime();
-            fechaDesde1 = (DateTime)fechaDesde;
-            fechaHasta1 = (DataTime) fechaHasta;
 
+            DateTime fecha = DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString());
+            fDesde = fechaDesde.Value;
+            fHasta = fechaHasta.Value;
+            tipoHabitacion = Int32.Parse(cmbTipoHabitacion.SelectedValue.ToString());
+            regimenDeEstadia = Int32.Parse(cmbRegimenHotel.SelectedValue.ToString());
+            hotel = Int32.Parse(cmbHotel.SelectedValue.ToString());
         }
     }
 }
