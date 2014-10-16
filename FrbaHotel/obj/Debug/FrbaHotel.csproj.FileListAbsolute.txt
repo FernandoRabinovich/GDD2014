@@ -1,0 +1,15 @@
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\bin\Debug\FrbaHotel.exe
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\bin\Debug\FrbaHotel.pdb
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.baja.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ListadoDeSeleccion.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.modificacion.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.VistaAlta.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Properties.Resources.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.csproj.GenerateResource.Cache
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.exe
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.pdb
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.ABM_de_Cliente.AltaCliente.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.Generar_Modificar_Reserva.GenerarModificarReserva.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.login.resources
+C:\Users\usuario\Desktop\GDD\tp\TP Hotel Frba 1.0 - 2C 2014\Aplicacion Desktop\FrbaHotel\FrbaHotel\obj\Debug\FrbaHotel.TipoDeAcceso.resources

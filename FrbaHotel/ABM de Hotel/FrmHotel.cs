@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.ABM_de_Cliente
+namespace FrbaHotel.ABM_de_Hotel
 {
-    public partial class Form1 : Form
+    public partial class FrmHotel : Form
     {
         System.Data.SqlClient.SqlConnection conexion;
 
-        public Form1()
+        public FrmHotel()
         {
             InitializeComponent();
         }
@@ -21,18 +21,17 @@ namespace FrbaHotel.ABM_de_Cliente
         private void Limpiar()
         {
             txtNombre.Text = "";
-            txtApellido.Text = "";
-            cmbTipoDoc.Text = "";
-            txtNroDocumento.Text = "";
+            cantEstrellas.Value = 0;
+            cmbTipoRegimen.Text = "";
             txtDireccion.Text = "";
-            txtLocalidad.Text = "";
+            txtCiudad.Text = "";
             cmbPais.Text = "";
             txtTelefono.Text = "";
             txtMail.Text = "";
-            txtBusquedaFechaNac.Text = "";
+            txtFechaCreacion.Text = "";
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FrmHotel_Load(object sender, EventArgs e)
         {
             conexion = new System.Data.SqlClient.SqlConnection();//falta agregar la ruta de conexion
             //conexion.....    aca iria la ruta de conexion
@@ -49,28 +48,26 @@ namespace FrbaHotel.ABM_de_Cliente
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             #region variables
-            string nombreCliente;
-            string apellido;
-            string tipoDeDocumento;
-            string numeroDeDocumento;
+            string nombre;
+            string estrellas;
+            string tipoDeRegimen;
+            string ciudad;
             string mail;
             string telefono;
             string calle;
-            string localidad;
             string pais;
-            string fechaDeNacimiento;
+            string fechaCreacion;
             #endregion
 
-            nombreCliente = txtNombre.Text;//Nombre
-            apellido = txtApellido.Text;
-            tipoDeDocumento = cmbTipoDoc.Text;//Tipo de Documento
-            numeroDeDocumento = txtNroDocumento.Text;//Numero de Documento
+            nombre= txtNombre.Text;//Nombre
+            estrellas = cantEstrellas.Value.ToString();
+            tipoDeRegimen = cmbTipoRegimen.Text;
+            ciudad = txtCiudad.Text;
             mail = txtMail.Text;// Mail
             telefono = txtTelefono.Text;//telefono
             calle = txtDireccion.Text; //Calle, direccion
-            localidad = txtLocalidad.Text;
             pais = cmbPais.Text;
-            fechaDeNacimiento = txtBusquedaFechaNac.Text;
+            fechaCreacion = txtFechaCreacion.Text;
 
             //VALIDAR Y GUARDAR EN LA BASE
         }
@@ -82,6 +79,5 @@ namespace FrbaHotel.ABM_de_Cliente
             this.Close(); //al cerrar esta pantalla, vuelvo a la pantalla principal
 
         }
-
     }
 }
