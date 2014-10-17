@@ -68,6 +68,7 @@ namespace FrbaHotel
             {
                 int idHotel = ((Hotel)lstHotel.SelectedItem).Id;
                 frmSeleccionRol frmSelectRol = new frmSeleccionRol(idUsuario, idHotel);
+                frmSelectRol.StartPosition = FormStartPosition.CenterScreen;
                 frmSelectRol.ShowDialog();
                 this.Close();
             }

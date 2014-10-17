@@ -12,26 +12,26 @@ namespace FrbaHotel
 {
     public partial class frmPrincipal : Form
     {
-        int idUsuario;
-        int idHotel;
-        int idRol;
+        public static int idUsuario;
+        public static int idHotel;
+        public static int idRol;
 
         public frmPrincipal()
         {
             InitializeComponent();
+
+            login login = new login();
+            login.Closed += new EventHandler(DisposeChildForm);
+            login.ShowDialog();
+
+            this.LoguearUsuarioConPermisos(idUsuario, idHotel, idRol);
         }
 
-        private void mLogin_Click(object sender, EventArgs e)
+        public void LoguearUsuarioConPermisos(int idUser, int idDeHotel, int idDeRol)
         {
-            login frmLogin = new login();
-            frmLogin.ShowDialog();
-        }
-
-        public void LoguearUsuarioConPermisos(int idUsuario, int idHotel, int idRol)
-        {
-            this.idUsuario = idUsuario;
-            this.idHotel = idHotel;
-            this.idRol = idRol;
+            idUsuario = idUser;
+            idHotel = idDeHotel;
+            idRol = idDeRol;
 
             // Acá tengo que obtener las funcionalidades por rol y actualizar el menú (el login lo saco).
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
@@ -58,7 +58,10 @@ namespace FrbaHotel
                         foreach (ToolStripMenuItem item2 in item.DropDown.Items)
                         {
                             if ((item2.Tag != null) && (!string.IsNullOrEmpty(item2.Tag.ToString())) && (Int32.Parse(item2.Tag.ToString()) == Int32.Parse(reader["id"].ToString())))
-                                item2.Visible = true;   
+                            {
+                                item2.Visible = true;
+                                item.Visible = true;
+                            }
                         }
                     }
                 }
@@ -73,8 +76,36 @@ namespace FrbaHotel
                 if (cmd != null)
                     cmd.Dispose();
             }
+        }
 
-            mLogin.Visible = false;
+        private void DisposeChildForm(object sender, System.EventArgs e)
+        {
+            ((Form)sender).Dispose();
+            this.Show();
+        }
+
+        private void mEstadistico_Click(object sender, EventArgs e)
+        {
+            frmListadoEstadistico frmEstadistico = new frmListadoEstadistico();
+            frmEstadistico.StartPosition = FormStartPosition.CenterScreen;
+            frmEstadistico.MdiParent = this;
+            frmEstadistico.Show();
+        }
+
+        private void mAltaRol_Click(object sender, EventArgs e)
+        {
+            frmAltaRol frmRol = new frmAltaRol();
+            frmRol.MdiParent = this;
+            frmRol.StartPosition = FormStartPosition.CenterScreen;
+            frmRol.Show();
+        }
+
+        private void mBajaRol_Click(object sender, EventArgs e)
+        {
+            frmRoles frmRoles = new frmRoles();
+            frmRoles.MdiParent = this;
+            frmRoles.StartPosition = FormStartPosition.CenterScreen;
+            frmRoles.Show();
         }
     }
 }

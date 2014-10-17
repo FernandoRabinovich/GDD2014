@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FrbaHotel
 {
-    public class Rol
+    public class Funcionalidad
     {
         private int id;
         public int Id
@@ -21,21 +21,7 @@ namespace FrbaHotel
             set { this.descripcion = value; }
         }
 
-        private bool estado;
-        public bool Estado
-        {
-            get { return this.estado; }
-            set { this.estado = value; }
-        }
-
-        public Rol(int id, string descripcion, bool estado)
-        {
-            this.id = id;
-            this.descripcion = descripcion;
-            this.estado = estado;
-        }
-
-        public Rol(int id, string descripcion)
+        public Funcionalidad(int id, string descripcion)
         {
             this.id = id;
             this.descripcion = descripcion;

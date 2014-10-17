@@ -32,9 +32,9 @@ namespace FrbaHotel
             if (lstRol.SelectedItem != null)
             {
                 int idRol = ((Rol)lstRol.SelectedItem).Id;
-                frmPrincipal frmPrincipal = new frmPrincipal();
-                frmPrincipal.LoguearUsuarioConPermisos(idUsuario, idHotel, idRol);
-
+                frmPrincipal.idUsuario = idUsuario;
+                frmPrincipal.idHotel = idHotel;
+                frmPrincipal.idRol = idRol;
                 this.Close();
             }
             else

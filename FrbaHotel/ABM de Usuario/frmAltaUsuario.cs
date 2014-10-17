@@ -7,22 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.ABM_de_Rol
+namespace FrbaHotel.ABM_de_Usuario
 {
-    public partial class Form1 : Form
+    public partial class frmAltaUsuario : Form
     {
         System.Data.SqlClient.SqlConnection conexion;
 
-        public Form1()
+        public frmAltaUsuario()
         {
             InitializeComponent();
         }
 
         private void Limpiar()
         {
-            txtNombre.Text = "";
-            cmbFuncionalidades.Text = "";
-            chkEstado.Checked = false;
+            txtUsername.Text = "";
+            txtPassword.Text = "";
+            cmbRol.Text = "";
+            txtNombreApellido.Text = "";
+            cmbTipoDoc.Text = "";
+            txtNroDocumento.Text = "";
+            txtMail.Text = "";
+            txtDireccion.Text = "";
+            txtTelefono.Text = "";
+            txtBusquedaFechaNac.Text = "";
+            cmbHotel.Text = "";
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -50,14 +58,30 @@ namespace FrbaHotel.ABM_de_Rol
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             #region variables
-            string nombre;
-            string funcionalidades;
-            bool estado;
+            string userName;
+            string password;
+            string rol;
+            string mail;
+            string telefono;
+            string direccion;
+            string nombreApellido;
+            string tipoDoc;
+            string nroDoc;
+            DateTime fechaNac;
+            string hotel;
             #endregion
 
-            nombre = txtNombre.Text;//Nombre
-            funcionalidades = cmbFuncionalidades.Text;
-            estado = chkEstado.Checked;
+            userName = txtUsername.Text;
+            password = txtPassword.Text;
+            rol = cmbRol.Text;
+            nombreApellido = txtNombreApellido.Text;//Nombre
+            mail = txtMail.Text;
+            telefono = txtTelefono.Text;
+            direccion = txtDireccion.Text;
+            tipoDoc = cmbTipoDoc.Text;
+            nroDoc = txtNroDocumento.Text;
+            fechaNac = Convert.ToDateTime(txtBusquedaFechaNac.Text);
+            hotel = cmbHotel.Text;
 
             //VALIDAR Y GUARDAR EN LA BASE
         }

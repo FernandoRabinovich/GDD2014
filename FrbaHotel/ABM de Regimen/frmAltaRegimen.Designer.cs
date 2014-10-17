@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.Listado_Estadistico
+﻿namespace FrbaHotel.ABM_de_Regimen
 {
-    partial class Form1
+    partial class frmAltaRegimen
     {
         /// <summary>
         /// Required designer variable.

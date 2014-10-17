@@ -20,22 +20,20 @@ namespace FrbaHotel
             InitializeComponent();
         }
 
-        private void login_Load(object sender, EventArgs e)
-        {                                  
-        }
-
         private void Cancelar_Click(object sender, EventArgs e)
-        {            
-            this.Close();
+        {
+            Application.Exit();
         }
 
         private void Aceptar_Click(object sender, EventArgs e)
         {
+            #region Generar password
             SHA256 mySHA256 = SHA256Managed.Create();            
             byte[] byteArray = Encoding.UTF8.GetBytes(txtPass.Text);
-            MemoryStream stream = new MemoryStream(byteArray);
-            //string password = System.Text.Encoding.UTF8.GetString(mySHA256.ComputeHash(stream));
+            MemoryStream stream = new MemoryStream(byteArray);            
             string password = Convert.ToBase64String(mySHA256.ComputeHash(stream));
+            #endregion
+
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
             int idUsuario = 0;
@@ -79,6 +77,7 @@ namespace FrbaHotel
                 if (idUsuario > 0)
                 {
                     frmSeleccionHotel frmSelectHotel = new frmSeleccionHotel(idUsuario);
+                    frmSelectHotel.StartPosition = FormStartPosition.CenterScreen;
                     frmSelectHotel.ShowDialog();
                     this.Close();
                 }
@@ -93,6 +92,13 @@ namespace FrbaHotel
                 if (cmd != null)
                     cmd.Dispose();
             }
+        }
+
+        private void lblSinUsuario_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            frmPrincipal.idUsuario = 3; // Guest
+            frmPrincipal.idRol = 3; // Guest
+            this.Close();
         }
     }
 }

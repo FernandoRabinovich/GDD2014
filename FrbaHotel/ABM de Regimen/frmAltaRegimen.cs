@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.Listado_Estadistico
+namespace FrbaHotel.ABM_de_Regimen
 {
-    public partial class Form1 : Form
+    public partial class frmAltaRegimen : Form
     {
-        public Form1()
+        public frmAltaRegimen()
         {
             InitializeComponent();
         }

@@ -55,11 +55,11 @@
     <Compile Include="ABM de Cliente\Form1.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Habitacion\baja.cs">
+    <Compile Include="ABM de Cliente\frmModifCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Habitacion\baja.Designer.cs">
-      <DependentUpon>baja.cs</DependentUpon>
+    <Compile Include="ABM de Cliente\frmModifCliente.Designer.cs">
+      <DependentUpon>frmModifCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="ABM de Habitacion\modificacion.cs">
       <SubType>Form</SubType>
@@ -73,23 +73,41 @@
     <Compile Include="ABM de Habitacion\alta.Designer.cs">
       <DependentUpon>alta.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Regimen\Form1.cs">
+    <Compile Include="ABM de Regimen\frmAltaRegimen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Regimen\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Regimen\frmAltaRegimen.Designer.cs">
+      <DependentUpon>frmAltaRegimen.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Rol\Form1.cs">
+    <Compile Include="ABM de Rol\frmAltaRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Rol\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Rol\frmAltaRol.Designer.cs">
+      <DependentUpon>frmAltaRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABM de Usuario\Form1.cs">
+    <Compile Include="ABM de Rol\frmModifRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABM de Usuario\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ABM de Rol\frmModifRol.Designer.cs">
+      <DependentUpon>frmModifRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Rol\frmRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Rol\frmRoles.Designer.cs">
+      <DependentUpon>frmRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Usuario\frmAltaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Usuario\frmAltaUsuario.Designer.cs">
+      <DependentUpon>frmAltaUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Usuario\frmModifUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Usuario\frmModifUsuario.Designer.cs">
+      <DependentUpon>frmModifUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Cancelar Reserva\frmCancelarReserva.cs">
       <SubType>Form</SubType>
@@ -97,6 +115,7 @@
     <Compile Include="Cancelar Reserva\frmCancelarReserva.Designer.cs">
       <DependentUpon>frmCancelarReserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clases\Funcionalidad.cs" />
     <Compile Include="Clases\Hotel.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="frmPrincipal.cs">
@@ -142,19 +161,15 @@
     <Compile Include="Generar Modificar Reserva\GenerarReserva.Designer.cs">
       <DependentUpon>GenerarReserva.cs</DependentUpon>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.cs">
+    <Compile Include="Listado Estadistico\frmListadoEstadistico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Listado Estadistico\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Listado Estadistico\frmListadoEstadistico.Designer.cs">
+      <DependentUpon>frmListadoEstadistico.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ABM de Cliente\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ABM de Habitacion\baja.resx">
-      <DependentUpon>baja.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Habitacion\modificacion.resx">
       <DependentUpon>modificacion.cs</DependentUpon>
@@ -163,6 +178,15 @@
     <EmbeddedResource Include="ABM de Habitacion\alta.resx">
       <DependentUpon>alta.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Rol\frmAltaRol.resx">
+      <DependentUpon>frmAltaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Rol\frmModifRol.resx">
+      <DependentUpon>frmModifRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Rol\frmRoles.resx">
+      <DependentUpon>frmRoles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Cancelar Reserva\frmCancelarReserva.resx">
       <DependentUpon>frmCancelarReserva.cs</DependentUpon>
@@ -182,6 +206,9 @@
     <EmbeddedResource Include="Generar Modificar Reserva\modificarReserva.resx">
       <DependentUpon>modificarReserva.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Listado Estadistico\frmListadoEstadistico.resx">
+      <DependentUpon>frmListadoEstadistico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmSeleccionHotel.resx">
       <DependentUpon>frmSeleccionHotel.cs</DependentUpon>
