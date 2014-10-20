@@ -175,12 +175,14 @@
             this.mAltaUsuario.Name = "mAltaUsuario";
             this.mAltaUsuario.Size = new System.Drawing.Size(171, 22);
             this.mAltaUsuario.Text = "Alta";
+            this.mAltaUsuario.Click += new System.EventHandler(this.mAltaUsuario_Click);
             // 
             // mBajaUsuario
             // 
             this.mBajaUsuario.Name = "mBajaUsuario";
             this.mBajaUsuario.Size = new System.Drawing.Size(171, 22);
             this.mBajaUsuario.Text = "Baja/Modificación";
+            this.mBajaUsuario.Click += new System.EventHandler(this.mBajaUsuario_Click);
             // 
             // mRegimen
             // 

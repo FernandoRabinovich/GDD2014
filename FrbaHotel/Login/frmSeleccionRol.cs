@@ -13,18 +13,20 @@ namespace FrbaHotel
     public partial class frmSeleccionRol : Form
     {
         int idUsuario;
-        int idHotel; 
+        int idHotel;
+        string hotel;
 
         public frmSeleccionRol()
         {
             InitializeComponent();
         }
 
-        public frmSeleccionRol(int idUsuario, int idHotel)
+        public frmSeleccionRol(int idUsuario, int idHotel, string hotel)
         {
             InitializeComponent();
             this.idHotel = idHotel;
             this.idUsuario = idUsuario;
+            this.hotel = hotel;
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
@@ -35,6 +37,7 @@ namespace FrbaHotel
                 frmPrincipal.idUsuario = idUsuario;
                 frmPrincipal.idHotel = idHotel;
                 frmPrincipal.idRol = idRol;
+                frmPrincipal.hotel = this.hotel;
                 this.Close();
             }
             else

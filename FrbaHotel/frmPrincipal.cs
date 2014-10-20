@@ -15,6 +15,7 @@ namespace FrbaHotel
         public static int idUsuario;
         public static int idHotel;
         public static int idRol;
+        public static string hotel;
 
         public frmPrincipal()
         {
@@ -106,6 +107,22 @@ namespace FrbaHotel
             frmRoles.MdiParent = this;
             frmRoles.StartPosition = FormStartPosition.CenterScreen;
             frmRoles.Show();
+        }
+
+        private void mAltaUsuario_Click(object sender, EventArgs e)
+        {
+            frmAltaUsuario frmAltaUsuario = new frmAltaUsuario();
+            frmAltaUsuario.MdiParent = this;
+            frmAltaUsuario.StartPosition = FormStartPosition.CenterScreen;
+            frmAltaUsuario.Show();
+        }
+
+        private void mBajaUsuario_Click(object sender, EventArgs e)
+        {
+            frmUsuarios frmUsuarios = new frmUsuarios();
+            frmUsuarios.MdiParent = this;
+            frmUsuarios.StartPosition = FormStartPosition.CenterScreen;
+            frmUsuarios.Show();
         }
     }
 }

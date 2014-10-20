@@ -32,20 +32,27 @@
             this.cmbListado = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cmTrimestre = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtAño = new System.Windows.Forms.MaskedTextBox();
             this.btnAceptar = new System.Windows.Forms.Button();
+            this.txtAño = new System.Windows.Forms.MaskedTextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmTrimestre = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdResultado)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grdResultado
             // 
+            this.grdResultado.AllowUserToAddRows = false;
+            this.grdResultado.AllowUserToDeleteRows = false;
+            this.grdResultado.AllowUserToResizeRows = false;
             this.grdResultado.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdResultado.Location = new System.Drawing.Point(12, 96);
+            this.grdResultado.MultiSelect = false;
             this.grdResultado.Name = "grdResultado";
+            this.grdResultado.ReadOnly = true;
+            this.grdResultado.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.grdResultado.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdResultado.Size = new System.Drawing.Size(824, 283);
             this.grdResultado.TabIndex = 0;
             // 
@@ -89,14 +96,32 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro";
             // 
-            // label2
+            // btnAceptar
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Año";
+            this.btnAceptar.Location = new System.Drawing.Point(743, 36);
+            this.btnAceptar.Name = "btnAceptar";
+            this.btnAceptar.Size = new System.Drawing.Size(75, 24);
+            this.btnAceptar.TabIndex = 8;
+            this.btnAceptar.Text = "Aceptar";
+            this.btnAceptar.UseVisualStyleBackColor = true;
+            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            // 
+            // txtAño
+            // 
+            this.txtAño.Location = new System.Drawing.Point(20, 37);
+            this.txtAño.Mask = "9999";
+            this.txtAño.Name = "txtAño";
+            this.txtAño.Size = new System.Drawing.Size(100, 20);
+            this.txtAño.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(132, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(50, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Trimestre";
             // 
             // cmTrimestre
             // 
@@ -112,32 +137,14 @@
             this.cmTrimestre.Size = new System.Drawing.Size(192, 21);
             this.cmTrimestre.TabIndex = 5;
             // 
-            // label3
+            // label2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(132, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Trimestre";
-            // 
-            // txtAño
-            // 
-            this.txtAño.Location = new System.Drawing.Point(20, 37);
-            this.txtAño.Mask = "9999";
-            this.txtAño.Name = "txtAño";
-            this.txtAño.Size = new System.Drawing.Size(100, 20);
-            this.txtAño.TabIndex = 7;
-            // 
-            // btnAceptar
-            // 
-            this.btnAceptar.Location = new System.Drawing.Point(743, 36);
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(75, 24);
-            this.btnAceptar.TabIndex = 8;
-            this.btnAceptar.Text = "Aceptar";
-            this.btnAceptar.UseVisualStyleBackColor = true;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(26, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Año";
             // 
             // frmListadoEstadistico
             // 
