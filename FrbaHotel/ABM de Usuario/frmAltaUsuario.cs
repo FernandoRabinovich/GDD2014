@@ -23,7 +23,6 @@ namespace FrbaHotel
         {
             txtUsername.Text = "";
             txtPassword.Text = "";
-            cmbRol.Text = "";
             txtNombre.Text = "";
             cmbTipoDoc.Text = "";
             txtNroDocumento.Text = "";
@@ -35,15 +34,12 @@ namespace FrbaHotel
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Tengo que cargar el combo de rol y el txtHotel (solo puede crear usuarios del hotel donde este logueado).
-            /* Elijo un combo para Rol porque, el enunciado dice que por ahora solo puede tener un Rol asignado (de todas formas
-             * la BDD soporta múltiples roles para un usuario, al igual que el login.
-             */
-
-            txtHotel.Text = frmPrincipal.hotel;
+            /* Tengo que cargar la lista de roles y la lista de hoteles (a los que pertenece el administrador, solo puede crear
+               usuarios de hoteles a los que pertenece.*/
 
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -52,16 +48,21 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerRoles";
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = cmd;
-                DataTable table = new DataTable();
-                adapter.Fill(table);
-                cmbRol.DataSource = table;
+                reader = cmd.ExecuteReader();
 
-                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDoc";
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
-                cmbTipoDoc.DataSource = table;
+                while (reader.Read())
+                    lstRol.Items.Add(new Rol(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+
+
+                cmd.CommandText = "GRAFO_LOCO.ObtenerHotelesPorUsuario";
+                SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
+                usuario.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(usuario);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                    lstRol.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+
             }
             catch (Exception ex)
             {
@@ -70,7 +71,7 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
-               
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }  
@@ -84,10 +85,7 @@ namespace FrbaHotel
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Tengo que cargar el combo de rol y el txtHotel (solo puede crear usuarios del hotel donde este logueado).
-            /* Elijo un combo para Rol porque, el enunciado dice que por ahora solo puede tener un Rol asignado (de todas formas
-             * la BDD soporta múltiples roles para un usuario, al igual que el login.
-             */
+            // Tengo que cargar la lista de rol y de hoteles (solo puede modificar los hoteles a los que pertenece el administrador).
 
             #region Generar password
             SHA256 mySHA256 = SHA256Managed.Create();            
@@ -99,11 +97,13 @@ namespace FrbaHotel
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
 
+            cn.Open();
+            SqlTransaction sqlTran = cn.BeginTransaction();
+            cmd = cn.CreateCommand();
+            cmd.Transaction = sqlTran;
+
             try
             {
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.IngresarUsuario";
 
@@ -115,9 +115,6 @@ namespace FrbaHotel
                 password.SqlDbType = SqlDbType.VarChar;
                 password.Size = 65;
                 cmd.Parameters.Add(password);
-                SqlParameter rol = new SqlParameter("@rol", ((Rol)cmbRol.SelectedItem).Id);
-                rol.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(rol);
                 SqlParameter nombre = new SqlParameter("@nombre", txtNombre.Text);
                 nombre.SqlDbType = SqlDbType.VarChar;
                 nombre.Size = 30;
@@ -147,9 +144,6 @@ namespace FrbaHotel
                 SqlParameter fechaNac = new SqlParameter("@fechaNac", fechaNacimiento.Value);
                 fechaNac.SqlDbType = SqlDbType.DateTime;
                 cmd.Parameters.Add(fechaNac);
-                SqlParameter hotel = new SqlParameter("@hotel", frmPrincipal.idHotel);
-                hotel.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(hotel);
                 SqlParameter estado = new SqlParameter("@estado", chkEstado.Checked);
                 estado.SqlDbType = SqlDbType.Bit;
                 cmd.Parameters.Add(estado);
@@ -160,11 +154,56 @@ namespace FrbaHotel
                 piso.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(piso);
 
-                cmd.ExecuteNonQuery();
+                Int32 idUsuario = (Int32)cmd.ExecuteScalar();
+
+                /* Inserto los roles que tendrá el usuario*/
+                cmd.Parameters.Clear();
+                SqlParameter usuario = new SqlParameter("@idUsuario", idUsuario);
+                usuario.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(usuario);
+
+                foreach (Rol r in lstRol.CheckedItems)
+                {
+                    SqlParameter rol = new SqlParameter("@idRol", r.Id);
+                    rol.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(rol);
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.Parameters.RemoveAt("@idRol");
+                }
+
+                /* Inserto los hoteles a los que pertenecerá el usuario*/
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(usuario);
+
+                foreach (Hotel h in lstHoteles.CheckedItems)
+                {
+                    SqlParameter hotel = new SqlParameter("@idHotel", h.Id);
+                    hotel.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(hotel);
+
+                    cmd.ExecuteNonQuery();
+
+                    cmd.Parameters.RemoveAt("@idHotel");
+                }
+
+                sqlTran.Commit();
+
+                MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                try
+                {
+                    sqlTran.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             finally
             {

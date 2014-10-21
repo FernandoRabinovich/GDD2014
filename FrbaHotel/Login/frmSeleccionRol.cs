@@ -65,7 +65,8 @@ namespace FrbaHotel
 
                 while (reader.Read())
                 {
-                    lstRol.Items.Add(new Rol(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+                    if (Int32.Parse(reader["pertenece"].ToString()) == 1)
+                        lstRol.Items.Add(new Rol(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
                 }
             }
             catch (Exception ex)

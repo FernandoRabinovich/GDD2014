@@ -47,7 +47,8 @@ namespace FrbaHotel
 
                 while (reader.Read())
                 {
-                    lstHotel.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+                    if(Int32.Parse(reader["pertenece"].ToString()) == 1)
+                        lstHotel.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
                 }
             }
             catch (Exception ex)

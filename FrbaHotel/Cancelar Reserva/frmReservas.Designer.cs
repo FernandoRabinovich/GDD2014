@@ -1,0 +1,201 @@
+﻿namespace FrbaHotel
+{
+    partial class frmReservas
+    {
+        /// <summary>
+        /// Variable del diseñador requerida.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Limpiar los recursos que se estén utilizando.
+        /// </summary>
+        /// <param name="disposing">true si los recursos administrados se deben eliminar; false en caso contrario, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Código generado por el Diseñador de Windows Forms
+
+        /// <summary>
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido del método con el editor de código.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.grdReservas = new System.Windows.Forms.DataGridView();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnAplicar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.MaskedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.fechaDede = new System.Windows.Forms.DateTimePicker();
+            this.fechaHasta = new System.Windows.Forms.DateTimePicker();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtNroDocumento = new System.Windows.Forms.MaskedTextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.grdReservas)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // grdReservas
+            // 
+            this.grdReservas.AllowUserToAddRows = false;
+            this.grdReservas.AllowUserToDeleteRows = false;
+            this.grdReservas.AllowUserToOrderColumns = true;
+            this.grdReservas.AllowUserToResizeRows = false;
+            this.grdReservas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdReservas.Location = new System.Drawing.Point(12, 108);
+            this.grdReservas.MultiSelect = false;
+            this.grdReservas.Name = "grdReservas";
+            this.grdReservas.ReadOnly = true;
+            this.grdReservas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdReservas.Size = new System.Drawing.Size(611, 249);
+            this.grdReservas.TabIndex = 0;
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(548, 363);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 32);
+            this.btnCancelar.TabIndex = 1;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtNroDocumento);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.fechaHasta);
+            this.groupBox1.Controls.Add(this.fechaDede);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.txtCodigo);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.btnAplicar);
+            this.groupBox1.Location = new System.Drawing.Point(12, 2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(611, 100);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtro";
+            // 
+            // btnAplicar
+            // 
+            this.btnAplicar.Location = new System.Drawing.Point(450, 66);
+            this.btnAplicar.Name = "btnAplicar";
+            this.btnAplicar.Size = new System.Drawing.Size(75, 27);
+            this.btnAplicar.TabIndex = 0;
+            this.btnAplicar.Text = "Aplicar";
+            this.btnAplicar.UseVisualStyleBackColor = true;
+            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(86, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Código Reserva:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(111, 17);
+            this.txtCodigo.Mask = "99999";
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(100, 20);
+            this.txtCodigo.TabIndex = 2;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Fecha Desde:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 80);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(71, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Fecha Hasta:";
+            // 
+            // fechaDede
+            // 
+            this.fechaDede.Location = new System.Drawing.Point(111, 44);
+            this.fechaDede.Name = "fechaDede";
+            this.fechaDede.Size = new System.Drawing.Size(200, 20);
+            this.fechaDede.TabIndex = 5;
+            // 
+            // fechaHasta
+            // 
+            this.fechaHasta.Location = new System.Drawing.Point(111, 74);
+            this.fechaHasta.Name = "fechaHasta";
+            this.fechaHasta.Size = new System.Drawing.Size(200, 20);
+            this.fechaHasta.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(331, 20);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(88, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Nro. Documento:";
+            // 
+            // txtNroDocumento
+            // 
+            this.txtNroDocumento.Location = new System.Drawing.Point(425, 17);
+            this.txtNroDocumento.Mask = "9999999999";
+            this.txtNroDocumento.Name = "txtNroDocumento";
+            this.txtNroDocumento.Size = new System.Drawing.Size(100, 20);
+            this.txtNroDocumento.TabIndex = 9;
+            // 
+            // frmReservas
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(635, 403);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btnCancelar);
+            this.Controls.Add(this.grdReservas);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "frmReservas";
+            this.Text = "Reservas";
+            this.Load += new System.EventHandler(this.frmReservas_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.grdReservas)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.DataGridView grdReservas;
+        private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnAplicar;
+        private System.Windows.Forms.MaskedTextBox txtNroDocumento;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker fechaHasta;
+        private System.Windows.Forms.DateTimePicker fechaDede;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.MaskedTextBox txtCodigo;
+        private System.Windows.Forms.Label label1;
+    }
+}

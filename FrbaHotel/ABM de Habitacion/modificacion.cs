@@ -10,30 +10,76 @@ using System.Data.SqlClient;
 
 namespace FrbaHotel
 {
-    public partial class modificacion : Form
+    public partial class frmModifHabitacion : Form
     {
-        public modificacion()
+        int idHabitacion = 0;
+
+        public frmModifHabitacion()
         {
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        public frmModifHabitacion(Habitacion habitacion)
         {
-            SqlConnection cn = new SqlConnection("Data Source=GDDVM\\SQLSERVER2008;Initial Catalog=GD2C2014;User ID=gd; Password = gd2014");
+            InitializeComponent();
+
+            txtNumero.Text = habitacion.Numero.ToString();
+            txtPiso.Text = habitacion.Piso.ToString();
+            txtComodidades.Text = habitacion.Descripcion;
+            chkEstado.Checked = habitacion.Estado.Equals("Activo") ? true:false;
+            chkFrente.Checked = habitacion.Frente.Equals("S") ? true:false;
+            this.idHabitacion = habitacion.Id;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            // Tengo que cargar el combo con los tipos de habitaccion
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             try
             {
-                cn.Open();//me conecto a la base desde que se quiere 'logear'
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.ActualizarHabitacionPorHotel";
+
+                SqlParameter numero = new SqlParameter("@nroHabitacion", Int32.Parse(txtNumero.Text));
+                numero.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(numero);
+                SqlParameter habitacion = new SqlParameter("@idHabitacion", this.idHabitacion);
+                habitacion.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(habitacion);
+                SqlParameter piso = new SqlParameter("@piso", Int32.Parse(txtPiso.Text));
+                piso.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(piso);
+                SqlParameter frente = new SqlParameter("@frente", chkFrente.Checked ? "S" : "N");
+                frente.SqlDbType = SqlDbType.VarChar;
+                frente.Size = 1;
+                cmd.Parameters.Add(frente);
+                SqlParameter estado = new SqlParameter("@estado", chkEstado.Checked);
+                estado.SqlDbType = SqlDbType.Bit;
+                cmd.Parameters.Add(estado);
+                SqlParameter descripcion = new SqlParameter("@descripcion", txtComodidades.Text);
+                descripcion.SqlDbType = SqlDbType.VarChar;
+                descripcion.Size = 255;
+                cmd.Parameters.Add(descripcion);
+
+                cmd.ExecuteNonQuery();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo en la Conexion, intente nuevamente");
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
+            finally
+            {
+                cn.Close();
+                reader.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }  
         }
     }
 }

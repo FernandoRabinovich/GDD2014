@@ -11,116 +11,98 @@ using System.Data.SqlClient;
 namespace FrbaHotel
 
 {
-    public partial class VistaAlta : Form
+    public partial class frmAltaHabitacion : Form
     {
-        #region variables
-        string pisoHabitacion;
-        string numeroDeHabitacion;
-        string ubicacion;
-        string comodidadesHabitacion;
-        string tipoDeHabitacion;
-        string idHabitacion;
-        
-    #endregion
-
-        public VistaAlta()
+        public frmAltaHabitacion()
         {
             InitializeComponent();
         }
 
         private void VistaAlta_Load(object sender, EventArgs e)
         {
+           // Tengo que cargar el combo con los tipos de habitaccion
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
-            SqlConnection cn = new SqlConnection("Data Source=GDDVM\\SQLSERVER2008;Initial Catalog=GD2C2014;User ID=gd; Password = gd2014");
-            
             try
             {
-                cn.Open();//me conecto a la base desde que se quiere 'logear'
-                MessageBox.Show("Conexión OK");
-
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoHabitacion";
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                cmbTipoHabitacion.DataSource = table;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Fallo en la Conexion, intente nuevamente");
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                cn.Close();
+                reader.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }     
         }
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            #region validacion
-            pisoHabitacion = piso.Text;
-            numeroDeHabitacion = habitacionNumero.Text;//deberia validarse con la base de datos, para que no haya  dos iguales, por ahora esta validado como campo obligatorio
-            ubicacion = ubicación.Text;
-            comodidadesHabitacion = comodidades.Text;
-            tipoDeHabitacion = habitacionTipo.Text;
-            idHabitacion = textBox1.Text;
+            // Tengo que cargar el combo con los tipos de habitaccion
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
+
             try
             {
-                validar(pisoHabitacion, numeroDeHabitacion, ubicacion, comodidadesHabitacion, tipoDeHabitacion,idHabitacion);
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.IngresarHabitacion";
+
+                SqlParameter numero = new SqlParameter("@nroHabitacion", Int32.Parse(txtNumero.Text));
+                numero.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(numero);
+                SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
+                hotel.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(hotel);
+                SqlParameter piso = new SqlParameter("@piso", Int32.Parse(txtPiso.Text));
+                piso.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(piso);
+                SqlParameter frente = new SqlParameter("@frente", chkFrente.Checked ? "S":"N");
+                frente.SqlDbType = SqlDbType.VarChar;
+                frente.Size = 1;
+                cmd.Parameters.Add(frente);
+                SqlParameter tipoHabitacion = new SqlParameter("@idTipoHabitacion", ((TipoHabitacion)cmbTipoHabitacion.SelectedItem).Id);
+                tipoHabitacion.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(tipoHabitacion);
+                SqlParameter estado = new SqlParameter("@estado", chkEstado.Checked);
+                estado.SqlDbType = SqlDbType.Bit;
+                cmd.Parameters.Add(estado);
+                SqlParameter descripcion = new SqlParameter("@descripcion", txtComodidades.Text);
+                descripcion.SqlDbType = SqlDbType.VarChar;
+                descripcion.Size = 255;
+                cmd.Parameters.Add(descripcion);
+
+                cmd.ExecuteNonQuery();
             }
-            catch (Exception excepcion)
+            catch (Exception ex)
             {
-
-                MessageBox.Show( excepcion.Message, "Error en el alta de habitación");
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            #endregion
-
-            //grabar los datos en la base de datos
-
-
-        }
-
-        private void validar(string pisoHabitacion, string numeroDeHabitacion, string ubicacion, string comodidadesHabitacion, string tipoDeHabitacion, string idHabitacion)
-        {
-                if(pisoHabitacion == null) throw new Exception("Piso de la habitación no ingresado");
-                if (numeroDeHabitacion == null) throw new Exception("Numero de la habitación no ingresado");
-                if (ubicacion == null) throw new Exception("Ubicacion de la habitación no ingresado");
-                if (comodidadesHabitacion == null) throw new Exception("Comodidades no especificadas");
-                if (tipoDeHabitacion == null) throw new Exception("Ingrese tipo de habitación");
-                if (idHabitacion == null) throw new Exception("Ingrese id de Habitacion");
-            
-        }
-
-        private void botonLimpiar_Click(object sender, EventArgs e)
-        {
-            Console.Clear();
-        }
-
-        private void habitacion_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void habitacionNumero_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            textBox1.Enabled = true;
-            
-             string idhab = textBox1.Text;
-            SqlConnection cn = new SqlConnection("Data Source=GDDVM\\SQLSERVER2008;Initial Catalog=GD2C2014;User ID=gd; Password = gd2014");
-            SqlCommand sql = new SqlCommand();
-            SqlDataReader rs;
-            sql.Connection = cn;
-            sql.CommandText = "SELECT * FROM GRAFO_LOCO.Habitacion where idHabitacion = 2"; //Como se pasa el parametro idhab que ya "setie" antes?.
-           
-            cn.Open();
-            rs = sql.ExecuteReader();
-            //Debería en este caso completar los campos con la información que devuelve la consulta (siempre y cuando devuelva algo -> Mientras no sea fin de archivo 1 fila 1 columna)
-            
-            
-
-
-            
-
-
-        }
-
-        
+            finally
+            {
+                cn.Close();
+                reader.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }  
+        }     
     }
 }

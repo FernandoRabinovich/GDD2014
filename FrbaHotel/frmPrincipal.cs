@@ -67,7 +67,7 @@ namespace FrbaHotel
                     }
                 }
 
-                if (idUsuario != 0)
+                if (idUsuario != 3) //Guest
                     mCambiarPass.Visible = true;
                 else
                     mCambiarPass.Visible = false;
@@ -136,6 +136,38 @@ namespace FrbaHotel
             frmPass.MdiParent = this;
             frmPass.StartPosition = FormStartPosition.CenterScreen;
             frmPass.Show();
+        }
+
+        private void mAltaHabitacion_Click(object sender, EventArgs e)
+        {
+            frmAltaHabitacion frmAltaHab = new frmAltaHabitacion();
+            frmAltaHab.MdiParent = this;
+            frmAltaHab.StartPosition = FormStartPosition.CenterScreen;
+            frmAltaHab.Show();
+        }
+
+        private void mModifHabitacion_Click(object sender, EventArgs e)
+        {
+            frmHabitaciones frmHab = new frmHabitaciones();
+            frmHab.MdiParent = this;
+            frmHab.StartPosition = FormStartPosition.CenterScreen;
+            frmHab.Show();
+        }
+
+        private void mAltaRegimen_Click(object sender, EventArgs e)
+        {
+            frmAltaRegimen frmRegimen = new frmAltaRegimen();
+            frmRegimen.MdiParent = this;
+            frmRegimen.StartPosition = FormStartPosition.CenterScreen;
+            frmRegimen.Show();
+        }
+
+        private void mCancelarReserva_Click(object sender, EventArgs e)
+        {
+            frmReservas frmReservas = new frmReservas();
+            frmReservas.MdiParent = this;
+            frmReservas.StartPosition = FormStartPosition.CenterScreen;
+            frmReservas.Show();
         }
     }
 }

@@ -95,13 +95,13 @@ namespace FrbaHotel
                  
                 foreach(Funcionalidad f in lstFuncionalidades.CheckedItems)
                 {
-                    SqlParameter funcionalidad = new SqlParameter("idFuncionalidad", f.Id);
+                    SqlParameter funcionalidad = new SqlParameter("@idFuncionalidad", f.Id);
                     funcionalidad.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(funcionalidad);
 
                     cmd.ExecuteNonQuery();
 
-                    cmd.Parameters.RemoveAt("idFuncionalidad");
+                    cmd.Parameters.RemoveAt("@idFuncionalidad");
                 }
                 
                 sqlTran.Commit();

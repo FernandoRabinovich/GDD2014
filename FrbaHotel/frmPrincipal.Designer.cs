@@ -96,7 +96,7 @@
             this.mAltaCliente,
             this.mBajaCliente});
             this.mCliente.Name = "mCliente";
-            this.mCliente.Size = new System.Drawing.Size(132, 22);
+            this.mCliente.Size = new System.Drawing.Size(152, 22);
             this.mCliente.Tag = "3";
             this.mCliente.Text = "Cliente";
             this.mCliente.Visible = false;
@@ -119,7 +119,7 @@
             this.mAltaHabitacion,
             this.mModifHabitacion});
             this.mHabitacion.Name = "mHabitacion";
-            this.mHabitacion.Size = new System.Drawing.Size(132, 22);
+            this.mHabitacion.Size = new System.Drawing.Size(152, 22);
             this.mHabitacion.Tag = "5";
             this.mHabitacion.Text = "Habitación";
             this.mHabitacion.Visible = false;
@@ -129,12 +129,14 @@
             this.mAltaHabitacion.Name = "mAltaHabitacion";
             this.mAltaHabitacion.Size = new System.Drawing.Size(171, 22);
             this.mAltaHabitacion.Text = "Alta";
+            this.mAltaHabitacion.Click += new System.EventHandler(this.mAltaHabitacion_Click);
             // 
             // mModifHabitacion
             // 
             this.mModifHabitacion.Name = "mModifHabitacion";
             this.mModifHabitacion.Size = new System.Drawing.Size(171, 22);
             this.mModifHabitacion.Text = "Baja/Modificación";
+            this.mModifHabitacion.Click += new System.EventHandler(this.mModifHabitacion_Click);
             // 
             // mRol
             // 
@@ -142,7 +144,7 @@
             this.mAltaRol,
             this.mBajaRol});
             this.mRol.Name = "mRol";
-            this.mRol.Size = new System.Drawing.Size(132, 22);
+            this.mRol.Size = new System.Drawing.Size(152, 22);
             this.mRol.Tag = "1";
             this.mRol.Text = "Rol";
             this.mRol.Visible = false;
@@ -167,7 +169,7 @@
             this.mAltaUsuario,
             this.mBajaUsuario});
             this.mUsuario.Name = "mUsuario";
-            this.mUsuario.Size = new System.Drawing.Size(132, 22);
+            this.mUsuario.Size = new System.Drawing.Size(152, 22);
             this.mUsuario.Tag = "2";
             this.mUsuario.Text = "Usuario";
             this.mUsuario.Visible = false;
@@ -191,7 +193,7 @@
             this.mRegimen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mAltaRegimen});
             this.mRegimen.Name = "mRegimen";
-            this.mRegimen.Size = new System.Drawing.Size(132, 22);
+            this.mRegimen.Size = new System.Drawing.Size(152, 22);
             this.mRegimen.Tag = "6";
             this.mRegimen.Text = "Regimen";
             this.mRegimen.Visible = false;
@@ -201,6 +203,7 @@
             this.mAltaRegimen.Name = "mAltaRegimen";
             this.mAltaRegimen.Size = new System.Drawing.Size(95, 22);
             this.mAltaRegimen.Text = "Alta";
+            this.mAltaRegimen.Click += new System.EventHandler(this.mAltaRegimen_Click);
             // 
             // mHotel
             // 
@@ -208,7 +211,7 @@
             this.mAltaHotel,
             this.mBajaHotel});
             this.mHotel.Name = "mHotel";
-            this.mHotel.Size = new System.Drawing.Size(132, 22);
+            this.mHotel.Size = new System.Drawing.Size(152, 22);
             this.mHotel.Tag = "4";
             this.mHotel.Text = "Hotel";
             this.mHotel.Visible = false;
@@ -241,7 +244,7 @@
             // mGenerarReserva
             // 
             this.mGenerarReserva.Name = "mGenerarReserva";
-            this.mGenerarReserva.Size = new System.Drawing.Size(125, 22);
+            this.mGenerarReserva.Size = new System.Drawing.Size(152, 22);
             this.mGenerarReserva.Tag = "7";
             this.mGenerarReserva.Text = "Generar";
             this.mGenerarReserva.Visible = false;
@@ -249,15 +252,16 @@
             // mCancelarReserva
             // 
             this.mCancelarReserva.Name = "mCancelarReserva";
-            this.mCancelarReserva.Size = new System.Drawing.Size(125, 22);
+            this.mCancelarReserva.Size = new System.Drawing.Size(152, 22);
             this.mCancelarReserva.Tag = "8";
             this.mCancelarReserva.Text = "Cancelar";
             this.mCancelarReserva.Visible = false;
+            this.mCancelarReserva.Click += new System.EventHandler(this.mCancelarReserva_Click);
             // 
             // mModifReserva
             // 
             this.mModifReserva.Name = "mModifReserva";
-            this.mModifReserva.Size = new System.Drawing.Size(125, 22);
+            this.mModifReserva.Size = new System.Drawing.Size(152, 22);
             this.mModifReserva.Tag = "7";
             this.mModifReserva.Text = "Modificar";
             this.mModifReserva.Visible = false;

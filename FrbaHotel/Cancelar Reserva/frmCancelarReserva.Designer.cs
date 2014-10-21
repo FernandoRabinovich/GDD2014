@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.Cancelar_Reserva
+﻿namespace FrbaHotel
 {
-    partial class CancelarReserva
+    partial class frmCancelarReserva
     {
         /// <summary>
         /// Required designer variable.
@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.habitacion = new System.Windows.Forms.GroupBox();
+            this.txtCodigoReserva = new System.Windows.Forms.TextBox();
+            this.botonGuardar = new System.Windows.Forms.Button();
+            this.botonLimpiar = new System.Windows.Forms.Button();
             this.lblNumero = new System.Windows.Forms.Label();
             this.txtMotivo = new System.Windows.Forms.TextBox();
             this.lblMotivo = new System.Windows.Forms.Label();
-            this.botonLimpiar = new System.Windows.Forms.Button();
-            this.botonGuardar = new System.Windows.Forms.Button();
-            this.txtNumero = new System.Windows.Forms.MaskedTextBox();
             this.habitacion.SuspendLayout();
             this.SuspendLayout();
             // 
             // habitacion
             // 
             this.habitacion.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.habitacion.Controls.Add(this.txtNumero);
+            this.habitacion.Controls.Add(this.txtCodigoReserva);
             this.habitacion.Controls.Add(this.botonGuardar);
             this.habitacion.Controls.Add(this.botonLimpiar);
             this.habitacion.Controls.Add(this.lblNumero);
@@ -53,6 +53,35 @@
             this.habitacion.TabIndex = 37;
             this.habitacion.TabStop = false;
             this.habitacion.Text = "Reserva";
+            // 
+            // txtCodigoReserva
+            // 
+            this.txtCodigoReserva.Enabled = false;
+            this.txtCodigoReserva.Location = new System.Drawing.Point(74, 23);
+            this.txtCodigoReserva.Name = "txtCodigoReserva";
+            this.txtCodigoReserva.Size = new System.Drawing.Size(116, 20);
+            this.txtCodigoReserva.TabIndex = 37;
+            // 
+            // botonGuardar
+            // 
+            this.botonGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonGuardar.Location = new System.Drawing.Point(206, 160);
+            this.botonGuardar.Name = "botonGuardar";
+            this.botonGuardar.Size = new System.Drawing.Size(100, 30);
+            this.botonGuardar.TabIndex = 35;
+            this.botonGuardar.Text = "Guardar";
+            this.botonGuardar.UseVisualStyleBackColor = true;
+            this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
+            // 
+            // botonLimpiar
+            // 
+            this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.botonLimpiar.Location = new System.Drawing.Point(6, 160);
+            this.botonLimpiar.Name = "botonLimpiar";
+            this.botonLimpiar.Size = new System.Drawing.Size(100, 30);
+            this.botonLimpiar.TabIndex = 36;
+            this.botonLimpiar.Text = "Limpiar";
+            this.botonLimpiar.UseVisualStyleBackColor = true;
             // 
             // lblNumero
             // 
@@ -80,35 +109,6 @@
             this.lblMotivo.TabIndex = 3;
             this.lblMotivo.Text = "Motivo:";
             // 
-            // botonLimpiar
-            // 
-            this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.botonLimpiar.Location = new System.Drawing.Point(6, 160);
-            this.botonLimpiar.Name = "botonLimpiar";
-            this.botonLimpiar.Size = new System.Drawing.Size(100, 30);
-            this.botonLimpiar.TabIndex = 36;
-            this.botonLimpiar.Text = "Limpiar";
-            this.botonLimpiar.UseVisualStyleBackColor = true;
-            // 
-            // botonGuardar
-            // 
-            this.botonGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonGuardar.Location = new System.Drawing.Point(206, 160);
-            this.botonGuardar.Name = "botonGuardar";
-            this.botonGuardar.Size = new System.Drawing.Size(100, 30);
-            this.botonGuardar.TabIndex = 35;
-            this.botonGuardar.Text = "Guardar";
-            this.botonGuardar.UseVisualStyleBackColor = true;
-            this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
-            // 
-            // txtNumero
-            // 
-            this.txtNumero.Location = new System.Drawing.Point(74, 23);
-            this.txtNumero.Mask = "999999";
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(100, 20);
-            this.txtNumero.TabIndex = 37;
-            // 
             // CancelarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -118,6 +118,7 @@
             this.MaximizeBox = false;
             this.Name = "CancelarReserva";
             this.Text = "Cancerlar Reserva";
+            this.Load += new System.EventHandler(this.CancelarReserva_Load);
             this.habitacion.ResumeLayout(false);
             this.habitacion.PerformLayout();
             this.ResumeLayout(false);
@@ -132,6 +133,6 @@
         private System.Windows.Forms.Label lblMotivo;
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonGuardar;
-        private System.Windows.Forms.MaskedTextBox txtNumero;
+        private System.Windows.Forms.TextBox txtCodigoReserva;
     }
 }

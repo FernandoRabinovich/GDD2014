@@ -61,6 +61,12 @@
     <Compile Include="ABM de Cliente\frmModifCliente.Designer.cs">
       <DependentUpon>frmModifCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM de Habitacion\frmHabitaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Habitacion\frmHabitaciones.Designer.cs">
+      <DependentUpon>frmHabitaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM de Habitacion\modificacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,10 +127,18 @@
     <Compile Include="Cancelar Reserva\frmCancelarReserva.Designer.cs">
       <DependentUpon>frmCancelarReserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cancelar Reserva\frmReservas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Reserva\frmReservas.Designer.cs">
+      <DependentUpon>frmReservas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Clases\Funcionalidad.cs" />
+    <Compile Include="Clases\Habitacion.cs" />
     <Compile Include="Clases\Hotel.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\TipoDoc.cs" />
+    <Compile Include="Clases\TipoHabitacion.cs" />
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="frmPrincipal.cs">
       <SubType>Form</SubType>
@@ -185,6 +199,9 @@
     <EmbeddedResource Include="ABM de Cliente\AltaCliente.resx">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Habitacion\frmHabitaciones.resx">
+      <DependentUpon>frmHabitaciones.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM de Habitacion\modificacion.resx">
       <DependentUpon>modificacion.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -192,6 +209,9 @@
     <EmbeddedResource Include="ABM de Habitacion\alta.resx">
       <DependentUpon>alta.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Regimen\frmAltaRegimen.resx">
+      <DependentUpon>frmAltaRegimen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Rol\frmAltaRol.resx">
       <DependentUpon>frmAltaRol.cs</DependentUpon>
@@ -214,6 +234,9 @@
     <EmbeddedResource Include="Cancelar Reserva\frmCancelarReserva.resx">
       <DependentUpon>frmCancelarReserva.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Reserva\frmReservas.resx">
+      <DependentUpon>frmReservas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>

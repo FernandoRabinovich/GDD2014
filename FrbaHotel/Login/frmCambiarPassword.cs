@@ -63,6 +63,8 @@ namespace FrbaHotel
                     cmd.Parameters.Add(passNueva);
 
                     cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("La opreción se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
