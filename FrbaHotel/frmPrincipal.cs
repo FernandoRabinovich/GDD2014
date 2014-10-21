@@ -66,6 +66,11 @@ namespace FrbaHotel
                         }
                     }
                 }
+
+                if (idUsuario != 0)
+                    mCambiarPass.Visible = true;
+                else
+                    mCambiarPass.Visible = false;
             }
             catch (Exception ex)
             {
@@ -123,6 +128,14 @@ namespace FrbaHotel
             frmUsuarios.MdiParent = this;
             frmUsuarios.StartPosition = FormStartPosition.CenterScreen;
             frmUsuarios.Show();
+        }
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCambiarPassword frmPass = new frmCambiarPassword();
+            frmPass.MdiParent = this;
+            frmPass.StartPosition = FormStartPosition.CenterScreen;
+            frmPass.Show();
         }
     }
 }

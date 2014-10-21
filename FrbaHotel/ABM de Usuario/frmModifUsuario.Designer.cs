@@ -31,6 +31,10 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtPiso = new System.Windows.Forms.MaskedTextBox();
+            this.txtNumero = new System.Windows.Forms.MaskedTextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.chkEstado = new System.Windows.Forms.CheckBox();
             this.txtHotel = new System.Windows.Forms.TextBox();
             this.fechaNacimiento = new System.Windows.Forms.DateTimePicker();
@@ -50,16 +54,10 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.txtPiso = new System.Windows.Forms.MaskedTextBox();
-            this.txtNumero = new System.Windows.Forms.MaskedTextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +65,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpiar.Location = new System.Drawing.Point(12, 430);
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 400);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(100, 30);
             this.btnLimpiar.TabIndex = 28;
@@ -77,7 +75,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.Location = new System.Drawing.Point(260, 430);
+            this.btnGuardar.Location = new System.Drawing.Point(260, 400);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(100, 30);
             this.btnGuardar.TabIndex = 27;
@@ -109,12 +107,46 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtNombre);
             this.groupBox2.Controls.Add(this.txtMail);
-            this.groupBox2.Location = new System.Drawing.Point(13, 114);
+            this.groupBox2.Location = new System.Drawing.Point(13, 82);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(347, 308);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos identificatorios";
+            // 
+            // txtPiso
+            // 
+            this.txtPiso.Location = new System.Drawing.Point(133, 203);
+            this.txtPiso.Mask = "99";
+            this.txtPiso.Name = "txtPiso";
+            this.txtPiso.Size = new System.Drawing.Size(100, 20);
+            this.txtPiso.TabIndex = 43;
+            // 
+            // txtNumero
+            // 
+            this.txtNumero.Location = new System.Drawing.Point(133, 177);
+            this.txtNumero.Mask = "99999";
+            this.txtNumero.Name = "txtNumero";
+            this.txtNumero.Size = new System.Drawing.Size(100, 20);
+            this.txtNumero.TabIndex = 42;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(20, 203);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(30, 13);
+            this.label13.TabIndex = 41;
+            this.label13.Text = "Piso:";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(21, 177);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(47, 13);
+            this.label12.TabIndex = 40;
+            this.label12.Text = "Numero:";
             // 
             // chkEstado
             // 
@@ -277,37 +309,16 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtPassword);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtUsername);
             this.groupBox1.Controls.Add(this.cmbRol);
             this.groupBox1.Location = new System.Drawing.Point(13, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(348, 96);
+            this.groupBox1.Size = new System.Drawing.Size(348, 70);
             this.groupBox1.TabIndex = 25;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos para Usuario";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 42);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "Password:";
-            // 
-            // txtPassword
-            // 
-            this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPassword.Enabled = false;
-            this.txtPassword.Location = new System.Drawing.Point(170, 39);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(160, 20);
-            this.txtPassword.TabIndex = 20;
             // 
             // label1
             // 
@@ -321,7 +332,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 68);
+            this.label2.Location = new System.Drawing.Point(23, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(26, 13);
             this.label2.TabIndex = 3;
@@ -342,51 +353,17 @@
             this.cmbRol.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbRol.DisplayMember = "descripcion";
             this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(170, 65);
+            this.cmbRol.Location = new System.Drawing.Point(170, 39);
             this.cmbRol.Name = "cmbRol";
             this.cmbRol.Size = new System.Drawing.Size(160, 21);
             this.cmbRol.TabIndex = 13;
             this.cmbRol.ValueMember = "id";
             // 
-            // txtPiso
-            // 
-            this.txtPiso.Location = new System.Drawing.Point(133, 203);
-            this.txtPiso.Mask = "99";
-            this.txtPiso.Name = "txtPiso";
-            this.txtPiso.Size = new System.Drawing.Size(100, 20);
-            this.txtPiso.TabIndex = 43;
-            // 
-            // txtNumero
-            // 
-            this.txtNumero.Location = new System.Drawing.Point(133, 177);
-            this.txtNumero.Mask = "99999";
-            this.txtNumero.Name = "txtNumero";
-            this.txtNumero.Size = new System.Drawing.Size(100, 20);
-            this.txtNumero.TabIndex = 42;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(20, 203);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(30, 13);
-            this.label13.TabIndex = 41;
-            this.label13.Text = "Piso:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(21, 177);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(47, 13);
-            this.label12.TabIndex = 40;
-            this.label12.Text = "Numero:";
-            // 
             // frmModifUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(372, 472);
+            this.ClientSize = new System.Drawing.Size(372, 442);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.groupBox2);
@@ -429,8 +406,6 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtUsername;

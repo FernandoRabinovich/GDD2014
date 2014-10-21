@@ -144,6 +144,12 @@
     <Compile Include="Generar Modificar Reserva\modificarReserva.Designer.cs">
       <DependentUpon>modificarReserva.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login\frmCambiarPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\frmCambiarPassword.Designer.cs">
+      <DependentUpon>frmCambiarPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\frmSeleccionHotel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\frmListadoEstadistico.resx">
       <DependentUpon>frmListadoEstadistico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\frmCambiarPassword.resx">
+      <DependentUpon>frmCambiarPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmSeleccionHotel.resx">
       <DependentUpon>frmSeleccionHotel.cs</DependentUpon>
