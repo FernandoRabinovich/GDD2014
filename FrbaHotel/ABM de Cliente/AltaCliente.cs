@@ -10,23 +10,44 @@ using System.Data.OleDb;
 using System.Data.Sql;
 using System.Data.SqlClient;
 
-namespace FrbaHotel.ABM_de_Cliente
+namespace FrbaHotel
 {
-    public partial class Form1 : Form
+    public partial class frmAltaCliente : Form
     {
-        public Form1()
+        public frmAltaCliente()
         {
             InitializeComponent();
         }
        
         private void AltaCliente_Load(object sender, EventArgs e)
         {
-            // Cargar el combro de tipo dni
-        }
-                   
-        private void Cancelar_Click(object sender, EventArgs e)
-        {
-            this.Close(); //al cerrar esta pantalla, vuelvo a la pantalla principal
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+
+            try
+            {
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                DataTable table = new DataTable();
+                adapter.SelectCommand = cmd;
+                adapter.Fill(table);
+
+                cmbTipoDoc.DataSource = table;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cn.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -46,17 +67,9 @@ namespace FrbaHotel.ABM_de_Cliente
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            string nombre = txtNombre.Text;
-            string apellido = txtApellido.Text;
-            string mail = txtMail.Text;
-            string telefono = txtTelefono.Text;
-            string direccion = txtDireccion.Text;
-            int numero = Int32.Parse(txtNumeroCalle.Text);
-            string departamento = txtDpto.Text;
-            string localidad = txtLocalidad.Text;
-            string nacionalidad = txtNacionalidad.Text;
-            DateTime fNacicmiento = fechaNacimiento.Value;
-            int tipoDni = Int32.Parse(cmbTipoDoc.SelectedValue.ToString());
+            // Devuelvo el objeto creado con los datos ingresados para el nuevo cliente.
+            frmGenerarReserva.cliente = new Cliente(txtApellido.Text, txtDireccion.Text, fechaNacimiento.Value, txtMail.Text, txtNombre.Text, Int32.Parse(txtNumeroCalle.Text), Int32.Parse(txtNroDocumento.Text), Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem).Descripcion, 
+                txtNacionalidad.Text, txtLocalidad.Text, txtDpto.Text);
         }                                  
     }
 }

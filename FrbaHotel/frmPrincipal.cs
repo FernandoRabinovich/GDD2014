@@ -169,5 +169,29 @@ namespace FrbaHotel
             frmReservas.StartPosition = FormStartPosition.CenterScreen;
             frmReservas.Show();
         }
+
+        private void mGenerarReserva_Click(object sender, EventArgs e)
+        {
+            frmGenerarReserva frmGenReserva = new frmGenerarReserva();
+            frmGenReserva.MdiParent = this;
+            frmGenReserva.StartPosition = FormStartPosition.CenterScreen;
+            frmGenReserva.Show();
+        }
+
+        private void mModifReserva_Click(object sender, EventArgs e)
+        {
+            frmModificarReserva frmModifReserva = new frmModificarReserva();
+            frmModifReserva.MdiParent = this;
+            frmModifReserva.StartPosition = FormStartPosition.CenterScreen;
+            frmModifReserva.Show();
+        }
+
+        private void mBajaCliente_Click(object sender, EventArgs e)
+        {
+            frmClientes frmCliente = new frmClientes();
+            frmCliente.MdiParent = this;
+            frmCliente.StartPosition = FormStartPosition.CenterScreen;
+            frmCliente.Show();
+        }
     }
 }

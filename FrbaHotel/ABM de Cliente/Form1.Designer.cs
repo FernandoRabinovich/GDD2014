@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.ABM_de_Cliente
+﻿namespace FrbaHotel
 {
-    partial class Form1
+    partial class frmAltaCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -54,12 +54,16 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtPiso = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox1.Controls.Add(this.txtPiso);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.txtDpto);
             this.groupBox1.Controls.Add(this.txtNumeroCalle);
             this.groupBox1.Controls.Add(this.label11);
@@ -85,14 +89,14 @@
             this.groupBox1.Controls.Add(this.txtNombre);
             this.groupBox1.Location = new System.Drawing.Point(15, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(312, 327);
+            this.groupBox1.Size = new System.Drawing.Size(312, 351);
             this.groupBox1.TabIndex = 23;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos identificatorios";
             // 
             // txtDpto
             // 
-            this.txtDpto.Location = new System.Drawing.Point(107, 217);
+            this.txtDpto.Location = new System.Drawing.Point(106, 243);
             this.txtDpto.Mask = "A";
             this.txtDpto.Name = "txtDpto";
             this.txtDpto.Size = new System.Drawing.Size(51, 20);
@@ -110,7 +114,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(21, 220);
+            this.label11.Location = new System.Drawing.Point(21, 246);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(77, 13);
             this.label11.TabIndex = 49;
@@ -127,14 +131,14 @@
             // 
             // fechaNacimiento
             // 
-            this.fechaNacimiento.Location = new System.Drawing.Point(106, 295);
+            this.fechaNacimiento.Location = new System.Drawing.Point(105, 323);
             this.fechaNacimiento.Name = "fechaNacimiento";
             this.fechaNacimiento.Size = new System.Drawing.Size(200, 20);
             this.fechaNacimiento.TabIndex = 47;
             // 
             // txtNacionalidad
             // 
-            this.txtNacionalidad.Location = new System.Drawing.Point(107, 269);
+            this.txtNacionalidad.Location = new System.Drawing.Point(105, 297);
             this.txtNacionalidad.Name = "txtNacionalidad";
             this.txtNacionalidad.Size = new System.Drawing.Size(160, 20);
             this.txtNacionalidad.TabIndex = 46;
@@ -142,7 +146,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(21, 272);
+            this.label4.Location = new System.Drawing.Point(23, 300);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 13);
             this.label4.TabIndex = 45;
@@ -152,7 +156,7 @@
             // 
             this.txtLocalidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLocalidad.Enabled = false;
-            this.txtLocalidad.Location = new System.Drawing.Point(107, 243);
+            this.txtLocalidad.Location = new System.Drawing.Point(105, 271);
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(160, 20);
             this.txtLocalidad.TabIndex = 44;
@@ -160,7 +164,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 246);
+            this.label2.Location = new System.Drawing.Point(23, 274);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 13);
             this.label2.TabIndex = 43;
@@ -205,7 +209,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(21, 301);
+            this.label9.Location = new System.Drawing.Point(23, 329);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(81, 13);
             this.label9.TabIndex = 36;
@@ -298,7 +302,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpiar.Location = new System.Drawing.Point(15, 355);
+            this.btnLimpiar.Location = new System.Drawing.Point(15, 367);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(100, 30);
             this.btnLimpiar.TabIndex = 26;
@@ -309,7 +313,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.Location = new System.Drawing.Point(227, 355);
+            this.btnGuardar.Location = new System.Drawing.Point(227, 367);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(100, 30);
             this.btnGuardar.TabIndex = 25;
@@ -317,16 +321,33 @@
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
-            // AltaCliente
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(21, 220);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 52;
+            this.label5.Text = "Piso:";
+            // 
+            // txtPiso
+            // 
+            this.txtPiso.Location = new System.Drawing.Point(106, 217);
+            this.txtPiso.Mask = "999";
+            this.txtPiso.Name = "txtPiso";
+            this.txtPiso.Size = new System.Drawing.Size(100, 20);
+            this.txtPiso.TabIndex = 53;
+            // 
+            // frmAltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 397);
+            this.ClientSize = new System.Drawing.Size(343, 409);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
-            this.Name = "AltaCliente";
+            this.Name = "frmAltaCliente";
             this.Text = "ABM de Cliente";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -362,5 +383,7 @@
         private System.Windows.Forms.MaskedTextBox txtNumeroCalle;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label lblNumero;
+        private System.Windows.Forms.MaskedTextBox txtPiso;
+        private System.Windows.Forms.Label label5;
     }
 }

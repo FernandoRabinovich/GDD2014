@@ -1,6 +1,6 @@
-﻿namespace FrbaHotel.Generar_Modificar_Reserva
+﻿namespace FrbaHotel
 {
-    partial class modificarReserva
+    partial class frmModificarReserva
     {
         /// <summary>
         /// Required designer variable.
@@ -229,7 +229,7 @@
             this.botonGuardar.UseVisualStyleBackColor = true;
             this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
-            // modificarReserva
+            // frmModificarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -237,8 +237,8 @@
             this.Controls.Add(this.habitacion);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonGuardar);
-            this.Name = "modificarReserva";
-            this.Text = "modificarReserva";
+            this.Name = "frmModificarReserva";
+            this.Text = "Modificar Reserva";
             this.habitacion.ResumeLayout(false);
             this.habitacion.PerformLayout();
             this.groupBox1.ResumeLayout(false);

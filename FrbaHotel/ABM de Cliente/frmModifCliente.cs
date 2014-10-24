@@ -7,13 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace FrbaHotel.ABM_de_Cliente
+namespace FrbaHotel
 {
     public partial class frmModifCliente : Form
     {
+        int idCliente;
+
         public frmModifCliente()
         {
             InitializeComponent();
+        }
+
+        public frmModifCliente(int idCliente)
+        {
+            InitializeComponent();
+            this.idCliente = idCliente;
+        }
+
+        private void frmModifCliente_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

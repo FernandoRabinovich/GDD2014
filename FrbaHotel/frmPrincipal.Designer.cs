@@ -31,7 +31,6 @@
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.mABM = new System.Windows.Forms.ToolStripMenuItem();
             this.mCliente = new System.Windows.Forms.ToolStripMenuItem();
-            this.mAltaCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.mBajaCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.mHabitacion = new System.Windows.Forms.ToolStripMenuItem();
             this.mAltaHabitacion = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,7 +92,6 @@
             // mCliente
             // 
             this.mCliente.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mAltaCliente,
             this.mBajaCliente});
             this.mCliente.Name = "mCliente";
             this.mCliente.Size = new System.Drawing.Size(152, 22);
@@ -101,17 +99,12 @@
             this.mCliente.Text = "Cliente";
             this.mCliente.Visible = false;
             // 
-            // mAltaCliente
-            // 
-            this.mAltaCliente.Name = "mAltaCliente";
-            this.mAltaCliente.Size = new System.Drawing.Size(171, 22);
-            this.mAltaCliente.Text = "Alta";
-            // 
             // mBajaCliente
             // 
             this.mBajaCliente.Name = "mBajaCliente";
             this.mBajaCliente.Size = new System.Drawing.Size(171, 22);
             this.mBajaCliente.Text = "Baja/Modificación";
+            this.mBajaCliente.Click += new System.EventHandler(this.mBajaCliente_Click);
             // 
             // mHabitacion
             // 
@@ -244,15 +237,16 @@
             // mGenerarReserva
             // 
             this.mGenerarReserva.Name = "mGenerarReserva";
-            this.mGenerarReserva.Size = new System.Drawing.Size(152, 22);
+            this.mGenerarReserva.Size = new System.Drawing.Size(125, 22);
             this.mGenerarReserva.Tag = "7";
             this.mGenerarReserva.Text = "Generar";
             this.mGenerarReserva.Visible = false;
+            this.mGenerarReserva.Click += new System.EventHandler(this.mGenerarReserva_Click);
             // 
             // mCancelarReserva
             // 
             this.mCancelarReserva.Name = "mCancelarReserva";
-            this.mCancelarReserva.Size = new System.Drawing.Size(152, 22);
+            this.mCancelarReserva.Size = new System.Drawing.Size(125, 22);
             this.mCancelarReserva.Tag = "8";
             this.mCancelarReserva.Text = "Cancelar";
             this.mCancelarReserva.Visible = false;
@@ -261,10 +255,11 @@
             // mModifReserva
             // 
             this.mModifReserva.Name = "mModifReserva";
-            this.mModifReserva.Size = new System.Drawing.Size(152, 22);
+            this.mModifReserva.Size = new System.Drawing.Size(125, 22);
             this.mModifReserva.Tag = "7";
             this.mModifReserva.Text = "Modificar";
             this.mModifReserva.Visible = false;
+            this.mModifReserva.Click += new System.EventHandler(this.mModifReserva_Click);
             // 
             // mEstadia
             // 
@@ -365,7 +360,6 @@
         private System.Windows.Forms.ToolStripMenuItem mFacturar;
         private System.Windows.Forms.ToolStripMenuItem mReportes;
         private System.Windows.Forms.ToolStripMenuItem mCliente;
-        private System.Windows.Forms.ToolStripMenuItem mAltaCliente;
         private System.Windows.Forms.ToolStripMenuItem mBajaCliente;
         private System.Windows.Forms.ToolStripMenuItem mHabitacion;
         private System.Windows.Forms.ToolStripMenuItem mAltaHabitacion;
