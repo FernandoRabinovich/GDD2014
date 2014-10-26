@@ -61,6 +61,8 @@
             this.btnFiltro = new System.Windows.Forms.Button();
             this.menuCliente = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mSeleccionar = new System.Windows.Forms.ToolStripMenuItem();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblCostoTotal = new System.Windows.Forms.Label();
             this.habitacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHabitaciones)).BeginInit();
             this.menuGrid.SuspendLayout();
@@ -73,6 +75,8 @@
             // habitacion
             // 
             this.habitacion.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.habitacion.Controls.Add(this.lblCostoTotal);
+            this.habitacion.Controls.Add(this.label9);
             this.habitacion.Controls.Add(this.btnAgregar);
             this.habitacion.Controls.Add(this.grdHabitaciones);
             this.habitacion.Controls.Add(this.cmbHotel);
@@ -97,7 +101,7 @@
             // 
             this.btnAgregar.Location = new System.Drawing.Point(213, 175);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(113, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(113, 26);
             this.btnAgregar.TabIndex = 33;
             this.btnAgregar.Text = "Agregar Habitación";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -378,6 +382,26 @@
             this.mSeleccionar.Text = "Seleccionar";
             this.mSeleccionar.Click += new System.EventHandler(this.mSeleccionar_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(9, 185);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(76, 13);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "Costo Total:";
+            // 
+            // lblCostoTotal
+            // 
+            this.lblCostoTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCostoTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCostoTotal.Location = new System.Drawing.Point(91, 182);
+            this.lblCostoTotal.Name = "lblCostoTotal";
+            this.lblCostoTotal.Size = new System.Drawing.Size(106, 19);
+            this.lblCostoTotal.TabIndex = 35;
+            this.lblCostoTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // frmGenerarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -436,5 +460,7 @@
         private System.Windows.Forms.Button btnFiltro;
         private System.Windows.Forms.ContextMenuStrip menuCliente;
         private System.Windows.Forms.ToolStripMenuItem mSeleccionar;
+        private System.Windows.Forms.Label lblCostoTotal;
+        private System.Windows.Forms.Label label9;
     }
 }

@@ -239,6 +239,7 @@
             this.Controls.Add(this.botonGuardar);
             this.Name = "frmModificarReserva";
             this.Text = "Modificar Reserva";
+            this.Load += new System.EventHandler(this.frmModificarReserva_Load);
             this.habitacion.ResumeLayout(false);
             this.habitacion.PerformLayout();
             this.groupBox1.ResumeLayout(false);

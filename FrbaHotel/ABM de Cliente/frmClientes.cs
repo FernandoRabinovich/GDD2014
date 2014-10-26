@@ -114,7 +114,13 @@ namespace FrbaHotel
 
         private void mEditar_Click(object sender, EventArgs e)
         {
-            frmModifCliente frmModif = new frmModifCliente(Int32.Parse(grdClientes.Rows[0].Cells["id"].Value.ToString()));
+            frmModifCliente frmModif = new frmModifCliente(new Cliente(Int32.Parse(grdClientes.SelectedRows[0].Cells["id"].Value.ToString()), grdClientes.SelectedRows[0].Cells["Apellido"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Direccion"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Estado"].Value.ToString(),
+                    DateTime.Parse(grdClientes.SelectedRows[0].Cells["FechaNacimiento"].Value.ToString()), grdClientes.SelectedRows[0].Cells["Mail"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Nombre"].Value.ToString(), Int32.Parse(grdClientes.SelectedRows[0].Cells["NumeroCalle"].Value.ToString()),
+                    Int32.Parse(grdClientes.SelectedRows[0].Cells["NroDocumento"].Value.ToString()), Int32.Parse(grdClientes.SelectedRows[0].Cells["Piso"].Value.ToString()),
+                    grdClientes.SelectedRows[0].Cells["IdTipoDocumento"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Departamento"].Value.ToString()));
             frmModif.StartPosition = FormStartPosition.CenterScreen;
             frmModif.ShowDialog();
         }

@@ -28,22 +28,21 @@ namespace FrbaHotel
         private void GenerarModificarReserva_Load(object sender, EventArgs e)
         {
             btnReservar.Visible = false;
+            lblCostoTotal.Text = "0";
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
 
             #region Cargar Hoteles
 
-            if (frmPrincipal.idUsuario != 3)
-            {
-                // Cargar los hoteles (según usuario).                                
-
+            if (frmPrincipal.idUsuario == 3)
+            {                                              
                 try
                 {
                     cn.Open();
                     cmd = new SqlCommand();
                     cmd.Connection = cn;
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = "GRAFO_LOCO.ObtenerHotelesPorUsuario";
+                    cmd.CommandText = "GRAFO_LOCO.ObtenerHoteles";
 
                     SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
                     usuario.SqlDbType = SqlDbType.Int;
@@ -158,7 +157,7 @@ namespace FrbaHotel
 
                         sqlTran.Commit();
 
-                        MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("La operación se realizó correctamente. El código de reserva es: " + idReserva.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
                     {
@@ -239,28 +238,42 @@ namespace FrbaHotel
               informo que no hay disponibilidad. */
             cmbHotel.Enabled = false;
             cmbRegimenHotel.Enabled = false;
+            decimal costo;
 
-            int idHabitacion = this.VerificarDisponibilidad();
+            int idHabitacion = this.VerificarDisponibilidad(out costo);
             
             if(idHabitacion != 0)
             {
-                habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion, ((TipoHabitacion)cmbTipoHabitacion.SelectedItem).Descripcion, ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, idHabitacion));
+                habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion, ((TipoHabitacion)cmbTipoHabitacion.SelectedItem).Descripcion, ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, idHabitacion, costo));
                 grdHabitaciones.DataSource = habitaciones;
                 grdHabitaciones.Refresh();
+                lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + costo).ToString();
             }
         }
 
         private void mEliminar_Click(object sender, EventArgs e)
         {
+            decimal costo = Decimal.Parse(grdHabitaciones.Rows[0].Cells["costo"].Value.ToString());
             /* Tengo que permitir eliminar una habitación de la "posible" reserva */
-            habitaciones.Remove(new HabitacionesPorReserva(grdHabitaciones.Rows[0].Cells["Hotel"].Value.ToString(), grdHabitaciones.Rows[0].Cells["TipoHabitacion"].Value.ToString(), grdHabitaciones.Rows[0].Cells["Regimen"].Value.ToString(), Int32.Parse(grdHabitaciones.Rows[0].Cells["idHabitacion"].Value.ToString())));
+            habitaciones.Remove(new HabitacionesPorReserva(grdHabitaciones.Rows[0].Cells["Hotel"].Value.ToString(), 
+                grdHabitaciones.Rows[0].Cells["TipoHabitacion"].Value.ToString(), grdHabitaciones.Rows[0].Cells["Regimen"].Value.ToString(), 
+                Int32.Parse(grdHabitaciones.Rows[0].Cells["idHabitacion"].Value.ToString()), Decimal.Parse(grdHabitaciones.Rows[0].Cells["costo"].Value.ToString())));
             grdHabitaciones.DataSource = habitaciones;
-            grdHabitaciones.Refresh();            
+            grdHabitaciones.Refresh();
+
+            lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + costo).ToString();
+
+            if (habitaciones.Count == 0)
+            {
+                cmbHotel.Enabled = frmPrincipal.idUsuario == 3 ? true:false;
+                cmbRegimenHotel.Enabled = true;
+            }
         }
 
-        private int VerificarDisponibilidad()
+        private int VerificarDisponibilidad(out decimal costo)
         {
             int idHabitacion = 0;
+            costo = 0;
             /* Validar las fechas ingresadas. Deben ser superiores o iguales a la fecha del sistema */
             DateTime fechaSistema = DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString());
             if ((fechaHasta.Value >= fechaSistema) && (fechaHasta.Value >= fechaSistema) && (fechaHasta.Value > fechaDesde.Value))
@@ -303,6 +316,7 @@ namespace FrbaHotel
 
                     reader.Read();
                     idHabitacion = Int32.Parse(reader["id"].ToString());
+                    costo = Decimal.Parse(reader["costo"].ToString());
 
                     /* Si hay disponibilidad inhabilito la modificacion de la reserva */                    
                     if (idHabitacion != 0)
@@ -487,6 +501,9 @@ namespace FrbaHotel
             SqlParameter regimen = new SqlParameter("@idRegimen", ((Regimen)cmbRegimenHotel.SelectedItem).Id);
             regimen.SqlDbType = SqlDbType.Int;
             cmd.Parameters.Add(regimen);
+            SqlParameter usuario = new SqlParameter("@idUsuario", frmPrincipal.idUsuario);
+            usuario.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(usuario);
         }
     }
 }

@@ -35,12 +35,20 @@ namespace FrbaHotel
             set { this.idHabitacion = value; }
         }
 
-        public HabitacionesPorReserva(string hotel, string tipoHabitacion, string regimen, int idHabitacion)
+        private decimal costoHabitacion;
+        public decimal CostoHabitacion
+        {
+            get { return this.costoHabitacion; }
+            set { this.costoHabitacion = value; }
+        }
+
+        public HabitacionesPorReserva(string hotel, string tipoHabitacion, string regimen, int idHabitacion, decimal costoHabitacion)
         {
             this.regimen = regimen;
             this.hotel = hotel;
             this.tipoHabitacion = tipoHabitacion;
             this.idHabitacion = idHabitacion;
+            this.costoHabitacion = costoHabitacion;
         }
 
         public HabitacionesPorReserva()
