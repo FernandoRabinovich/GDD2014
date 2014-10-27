@@ -193,5 +193,13 @@ namespace FrbaHotel
             frmCliente.StartPosition = FormStartPosition.CenterScreen;
             frmCliente.Show();
         }
+
+        private void mClientesErroneos_Click(object sender, EventArgs e)
+        {
+            FrmClientesDuplicados frmDuplicados = new FrmClientesDuplicados();
+            frmDuplicados.MdiParent = this;
+            frmDuplicados.StartPosition = FormStartPosition.CenterScreen;
+            frmDuplicados.Show();
+        }
     }
 }

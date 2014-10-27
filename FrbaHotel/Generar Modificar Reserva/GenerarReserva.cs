@@ -102,88 +102,93 @@ namespace FrbaHotel
         private void botonGuardar_Click(object sender, EventArgs e)
         {                        
             /* Si hay disponibilidad y di de alta al cliente, hacer la reserva e informar el código de la misma. */
-            if (idCliente != 0)
+            if (habitaciones.Count > 0)
             {
-                if (MessageBox.Show("¿Confirma los datos para realizar la reserva?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (idCliente != 0)
                 {
-                    SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-                    SqlCommand cmd = null;
-
-                    cn.Open();
-                    SqlTransaction sqlTran = cn.BeginTransaction();
-                    cmd = cn.CreateCommand();
-                    cmd.Transaction = sqlTran;
-
-                    try
+                    if (MessageBox.Show("¿Confirma los datos para realizar la reserva?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        /* NO DEBERIA PODER CREAR UN CLIENTE SI LUEGO NO GENERO LA RESERVA CORRECTAMENTE. Por esto le puedo pedir los datos para 
-                         * dar el alta y hacerlo al momento de reservar*/
-                        if (idCliente == 0) // Pregunto si el cliente es nuevo o uno existente
-                        {
-                            cmd.CommandText = "GRAFO_LOCO.IngresarCliente";
+                        SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                        SqlCommand cmd = null;
 
-                            this.CargarParametrosCliente(ref cmd);
-                            
-                            idCliente = (Int32)cmd.ExecuteScalar();                                
-                        }                            
-                            
-                        /* Tengo que hacer un insert en Reserva */ 
-                        cmd.Parameters.Clear();
-                        cmd.CommandText = "GRAFO_LOCO.GenerarReserva";
-
-                        this.CargarParametrosReserva(ref cmd, idCliente);
-
-                        Int32 idReserva = (Int32)cmd.ExecuteScalar();
-
-                        /* Y uno por cada habitacion en HabitacionesPorReserva */
-                        cmd.Parameters.Clear();
-                        cmd.CommandText = "GRAFO_LOCO.IngresarHabitacionesPorReserva";
-
-                        SqlParameter reserva = new SqlParameter("@idReserva", idReserva);
-                        reserva.SqlDbType = SqlDbType.Int;
-                        cmd.Parameters.Add(reserva);                  
-
-                        foreach(HabitacionesPorReserva h in habitaciones)
-                        {
-                            SqlParameter habitacion = new SqlParameter("@idHabitacion", h.IdHabitacion);
-                            habitacion.SqlDbType = SqlDbType.Int;
-                            cmd.Parameters.Add(habitacion);
-
-                            cmd.ExecuteNonQuery();
-
-                            cmd.Parameters.Remove(habitacion);
-                        }
-
-                        sqlTran.Commit();
-
-                        MessageBox.Show("La operación se realizó correctamente. El código de reserva es: " + idReserva.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        cn.Open();
+                        SqlTransaction sqlTran = cn.BeginTransaction();
+                        cmd = cn.CreateCommand();
+                        cmd.Transaction = sqlTran;
 
                         try
                         {
-                            sqlTran.Rollback();
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            /* NO DEBERIA PODER CREAR UN CLIENTE SI LUEGO NO GENERO LA RESERVA CORRECTAMENTE. Por esto le puedo pedir los datos para 
+                             * dar el alta y hacerlo al momento de reservar*/
+                            if (idCliente == 0) // Pregunto si el cliente es nuevo o uno existente
+                            {
+                                cmd.CommandText = "GRAFO_LOCO.IngresarCliente";
+
+                                this.CargarParametrosCliente(ref cmd);
+
+                                idCliente = (Int32)cmd.ExecuteScalar();
+                            }
+
+                            /* Tengo que hacer un insert en Reserva */
+                            cmd.Parameters.Clear();
+                            cmd.CommandText = "GRAFO_LOCO.GenerarReserva";
+
+                            this.CargarParametrosReserva(ref cmd, idCliente);
+
+                            Int32 idReserva = (Int32)cmd.ExecuteScalar();
+
+                            /* Y uno por cada habitacion en HabitacionesPorReserva */
+                            cmd.Parameters.Clear();
+                            cmd.CommandText = "GRAFO_LOCO.IngresarHabitacionesPorReserva";
+
+                            SqlParameter reserva = new SqlParameter("@idReserva", idReserva);
+                            reserva.SqlDbType = SqlDbType.Int;
+                            cmd.Parameters.Add(reserva);
+
+                            foreach (HabitacionesPorReserva h in habitaciones)
+                            {
+                                SqlParameter habitacion = new SqlParameter("@idHabitacion", h.IdHabitacion);
+                                habitacion.SqlDbType = SqlDbType.Int;
+                                cmd.Parameters.Add(habitacion);
+
+                                cmd.ExecuteNonQuery();
+
+                                cmd.Parameters.Remove(habitacion);
+                            }
+
+                            sqlTran.Commit();
+
+                            MessageBox.Show("La operación se realizó correctamente. El código de reserva es: " + idReserva.ToString(), this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
-                        catch (Exception ex2)
+                        catch (Exception ex)
                         {
-                            MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            try
+                            {
+                                sqlTran.Rollback();
+                            }
+                            catch (Exception ex2)
+                            {
+                                MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        finally
+                        {
+                            cn.Close();
+                            if (cmd != null)
+                                cmd.Dispose();
                         }
                     }
-                    finally
-                    {
-                        cn.Close();
-                        if (cmd != null)
-                            cmd.Dispose();
-                    }
+                    else
+                        MessageBox.Show("La operación ha sido cancelada.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
-                    MessageBox.Show("La operación ha sido cancelada.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Debe ingresar un cliente para efectuar la reserva.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
-                MessageBox.Show("Debe ingresar un cliente para efectuar la reserva.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("No ha seleccionado ninguna habitación.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void cmbHotel_SelectedIndexChanged(object sender, EventArgs e)
