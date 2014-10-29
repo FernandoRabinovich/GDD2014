@@ -14,6 +14,7 @@ namespace FrbaHotel
 {
     public partial class frmAltaCliente : Form
     {
+        public static Cliente cliente;
         public frmAltaCliente()
         {
             InitializeComponent();
@@ -68,8 +69,10 @@ namespace FrbaHotel
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             // Devuelvo el objeto creado con los datos ingresados para el nuevo cliente.
-            frmGenerarReserva.cliente = new Cliente(txtApellido.Text, txtDireccion.Text, fechaNacimiento.Value, txtMail.Text, txtNombre.Text, Int32.Parse(txtNumeroCalle.Text), Int32.Parse(txtNroDocumento.Text), Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem).Descripcion, 
+            cliente = new Cliente(txtApellido.Text, txtDireccion.Text, fechaNacimiento.Value, txtMail.Text, txtNombre.Text, Int32.Parse(txtNumeroCalle.Text), Int32.Parse(txtNroDocumento.Text), Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem).Descripcion, 
                 txtNacionalidad.Text, txtLocalidad.Text, txtDpto.Text);
+
+            this.Close();
         }                                  
     }
 }

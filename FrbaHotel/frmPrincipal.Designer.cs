@@ -56,7 +56,6 @@
             this.mEstadistico = new System.Windows.Forms.ToolStripMenuItem();
             this.mClientesErroneos = new System.Windows.Forms.ToolStripMenuItem();
             this.mCambiarPass = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -263,8 +262,7 @@
             // mEstadia
             // 
             this.mEstadia.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mRegistrarEstadia,
-            this.checkOutToolStripMenuItem});
+            this.mRegistrarEstadia});
             this.mEstadia.Name = "mEstadia";
             this.mEstadia.Size = new System.Drawing.Size(56, 20);
             this.mEstadia.Text = "&Estadía";
@@ -275,8 +273,9 @@
             this.mRegistrarEstadia.Name = "mRegistrarEstadia";
             this.mRegistrarEstadia.Size = new System.Drawing.Size(152, 22);
             this.mRegistrarEstadia.Tag = "9";
-            this.mRegistrarEstadia.Text = "Check-In";
+            this.mRegistrarEstadia.Text = "Registrar";
             this.mRegistrarEstadia.Visible = false;
+            this.mRegistrarEstadia.Click += new System.EventHandler(this.mRegistrarEstadia_Click);
             // 
             // mReportes
             // 
@@ -312,13 +311,6 @@
             this.mCambiarPass.Size = new System.Drawing.Size(127, 20);
             this.mCambiarPass.Text = "Cambiar Contraseña";
             this.mCambiarPass.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
-            // 
-            // checkOutToolStripMenuItem
-            // 
-            this.checkOutToolStripMenuItem.Name = "checkOutToolStripMenuItem";
-            this.checkOutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.checkOutToolStripMenuItem.Tag = "9";
-            this.checkOutToolStripMenuItem.Text = "Check-Out";
             // 
             // frmPrincipal
             // 
@@ -369,7 +361,6 @@
         private System.Windows.Forms.ToolStripMenuItem mAltaHotel;
         private System.Windows.Forms.ToolStripMenuItem mBajaHotel;
         private System.Windows.Forms.ToolStripMenuItem mCambiarPass;
-        private System.Windows.Forms.ToolStripMenuItem checkOutToolStripMenuItem;
     }
 }
 

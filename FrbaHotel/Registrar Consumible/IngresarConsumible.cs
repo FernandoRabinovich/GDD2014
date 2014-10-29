@@ -8,13 +8,23 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace FrbaHotel.Registrar_Consumible
+namespace FrbaHotel
 {
     public partial class IngresarConsumible : Form
     {
+        Reserva reserva = new Reserva();
+        List<HabitacionesPorReserva> habitaciones = new List<HabitacionesPorReserva>();
+
         public IngresarConsumible()
         {
             InitializeComponent();
+        }
+
+        public IngresarConsumible(Reserva reserva, List<HabitacionesPorReserva> habitaciones)
+        {
+            InitializeComponent();
+            this.reserva = reserva;
+            this.habitaciones = habitaciones;
         }
 
         private void Form1_Load(object sender, EventArgs e)

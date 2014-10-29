@@ -13,7 +13,7 @@ namespace FrbaHotel
     public partial class frmGenerarReserva : Form
     {
         int idCliente = 0;
-        public static Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente();
 
         List<HabitacionesPorReserva> habitaciones = new List<HabitacionesPorReserva>();
         List<Int32> habitacionesReservadas = new List<Int32>();
@@ -358,9 +358,9 @@ namespace FrbaHotel
         private void btnAltaCliente_Click(object sender, EventArgs e)
         {
             /* Si hay disponibilidad doy de alta el cliente (si es necesario). */
-            frmClientes frmCliente = new frmClientes();
+            frmAltaCliente frmCliente = new frmAltaCliente();
             frmCliente.StartPosition = FormStartPosition.CenterScreen;
-            frmCliente.FormClosed += new FormClosedEventHandler(AltaClienteClosed);
+            frmCliente.FormClosing += new FormClosingEventHandler(AltaClienteClosing);
             frmCliente.ShowDialog();
         }
 
@@ -426,10 +426,11 @@ namespace FrbaHotel
             btnAltaCliente.Visible = false;
         }
 
-        private void AltaClienteClosed(object sender, EventArgs e)
+        private void AltaClienteClosing(object sender, FormClosingEventArgs e)
         {
-            if (cliente.Id != 0)
+            if (frmAltaCliente.cliente.Id != 0)
             {
+                this.cliente = frmAltaCliente.cliente;
                 btnAltaCliente.Enabled = false;
                 btnReservar.Enabled = true;
             }

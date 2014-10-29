@@ -201,5 +201,13 @@ namespace FrbaHotel
             frmDuplicados.StartPosition = FormStartPosition.CenterScreen;
             frmDuplicados.Show();
         }
+
+        private void mRegistrarEstadia_Click(object sender, EventArgs e)
+        {
+            frmRegistrarEstadia frmEstadia = new frmRegistrarEstadia();
+            frmEstadia.MdiParent = this;
+            frmEstadia.StartPosition = FormStartPosition.CenterScreen;
+            frmEstadia.Show();
+        }
     }
 }

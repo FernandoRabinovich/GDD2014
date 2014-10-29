@@ -1,4 +1,4 @@
-﻿namespace FrbaHotel.Registrar_Consumible
+﻿namespace FrbaHotel
 {
     partial class IngresarConsumible
     {

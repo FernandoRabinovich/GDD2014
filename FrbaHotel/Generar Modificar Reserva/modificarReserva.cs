@@ -296,7 +296,6 @@ namespace FrbaHotel
                         cmbTipoHabitacion.Enabled = false;
                         cmbRegimenHotel.Enabled = false;
                         btnAgregar.Enabled = false;
-                        btnAltaCliente.Visible = true;
                     }
                     else
                         MessageBox.Show("No hay disponibilidad para la reserva requerida.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Stop);
