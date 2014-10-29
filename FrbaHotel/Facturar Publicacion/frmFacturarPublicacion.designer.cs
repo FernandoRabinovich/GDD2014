@@ -56,13 +56,12 @@
             // 
             // NroDeFactura
             // 
+            this.NroDeFactura.Enabled = false;
             this.NroDeFactura.Location = new System.Drawing.Point(107, 37);
             this.NroDeFactura.Name = "NroDeFactura";
             this.NroDeFactura.Size = new System.Drawing.Size(129, 20);
             this.NroDeFactura.TabIndex = 0;
             this.NroDeFactura.TextChanged += new System.EventHandler(this.NroDeFactura_TextChanged);
-            this.NroDeFactura.Leave += new System.EventHandler(this.NroDeFactura_Leave);
-            this.NroDeFactura.Enter += new System.EventHandler(this.frmFacturarPublicacion_Enter);
             // 
             // NroFactura
             // 
@@ -84,12 +83,12 @@
             // 
             // FechaFactura
             // 
+            this.FechaFactura.Enabled = false;
             this.FechaFactura.Location = new System.Drawing.Point(445, 37);
             this.FechaFactura.Name = "FechaFactura";
             this.FechaFactura.Size = new System.Drawing.Size(99, 20);
             this.FechaFactura.TabIndex = 3;
             this.FechaFactura.TextChanged += new System.EventHandler(this.FechaFactura_TextChanged);
-            this.FechaFactura.Enter += new System.EventHandler(this.FechaFactura_Enter);
             // 
             // label2
             // 
@@ -102,12 +101,12 @@
             // 
             // NroDeEstadia
             // 
+            this.NroDeEstadia.Enabled = false;
             this.NroDeEstadia.Location = new System.Drawing.Point(107, 73);
             this.NroDeEstadia.Name = "NroDeEstadia";
             this.NroDeEstadia.Size = new System.Drawing.Size(129, 20);
             this.NroDeEstadia.TabIndex = 5;
             this.NroDeEstadia.TextChanged += new System.EventHandler(this.NroDeEstadia_TextChanged);
-            this.NroDeEstadia.Leave += new System.EventHandler(this.NroDeEstadia_leave);
             // 
             // label3
             // 
@@ -129,6 +128,7 @@
             // 
             // NroPasaporte
             // 
+            this.NroPasaporte.Enabled = false;
             this.NroPasaporte.Location = new System.Drawing.Point(445, 73);
             this.NroPasaporte.Name = "NroPasaporte";
             this.NroPasaporte.Size = new System.Drawing.Size(162, 20);
@@ -136,6 +136,7 @@
             // 
             // NombreCliente
             // 
+            this.NombreCliente.Enabled = false;
             this.NombreCliente.Location = new System.Drawing.Point(445, 111);
             this.NombreCliente.Name = "NombreCliente";
             this.NombreCliente.Size = new System.Drawing.Size(162, 20);
@@ -152,6 +153,7 @@
             // 
             // NombreHotel
             // 
+            this.NombreHotel.Enabled = false;
             this.NombreHotel.Location = new System.Drawing.Point(107, 111);
             this.NombreHotel.Name = "NombreHotel";
             this.NombreHotel.Size = new System.Drawing.Size(198, 20);
@@ -171,6 +173,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(111, 20);
             this.textBox4.TabIndex = 13;
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
@@ -188,7 +191,6 @@
             this.MedioPago.Name = "MedioPago";
             this.MedioPago.Size = new System.Drawing.Size(121, 21);
             this.MedioPago.TabIndex = 15;
-            this.MedioPago.SelectedIndexChanged += new System.EventHandler(this.MedioPago_SelectedIndexChanged);
             this.MedioPago.Leave += new System.EventHandler(this.MedioDePago_Leave);
             // 
             // label7
@@ -220,6 +222,7 @@
             // 
             // NombreTarjeta
             // 
+            this.NombreTarjeta.Enabled = false;
             this.NombreTarjeta.Location = new System.Drawing.Point(115, 363);
             this.NombreTarjeta.Name = "NombreTarjeta";
             this.NombreTarjeta.Size = new System.Drawing.Size(121, 20);
@@ -227,6 +230,7 @@
             // 
             // NumeroTarjeta
             // 
+            this.NumeroTarjeta.Enabled = false;
             this.NumeroTarjeta.Location = new System.Drawing.Point(115, 399);
             this.NumeroTarjeta.Name = "NumeroTarjeta";
             this.NumeroTarjeta.Size = new System.Drawing.Size(121, 20);
