@@ -43,6 +43,7 @@
             this.lstFuncionalidades.Name = "lstFuncionalidades";
             this.lstFuncionalidades.Size = new System.Drawing.Size(240, 214);
             this.lstFuncionalidades.TabIndex = 34;
+            this.lstFuncionalidades.Tag = "Funcionalidades";
             // 
             // label1
             // 
@@ -79,6 +80,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(159, 20);
             this.txtNombre.TabIndex = 32;
+            this.txtNombre.Tag = "Nombre";
             // 
             // btnGuardar
             // 

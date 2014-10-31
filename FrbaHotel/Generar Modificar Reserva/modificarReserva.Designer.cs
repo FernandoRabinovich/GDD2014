@@ -34,6 +34,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.grdHabitaciones = new System.Windows.Forms.DataGridView();
+            this.menuGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mEliminar = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbHotel = new System.Windows.Forms.ComboBox();
             this.lblHotel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -50,12 +52,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
-            this.menuGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mEliminar = new System.Windows.Forms.ToolStripMenuItem();
             this.habitacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHabitaciones)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.menuGrid.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // habitacion
@@ -129,15 +129,30 @@
             this.grdHabitaciones.Size = new System.Drawing.Size(320, 109);
             this.grdHabitaciones.TabIndex = 36;
             // 
+            // menuGrid
+            // 
+            this.menuGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mEliminar});
+            this.menuGrid.Name = "menuGrid";
+            this.menuGrid.Size = new System.Drawing.Size(118, 26);
+            // 
+            // mEliminar
+            // 
+            this.mEliminar.Name = "mEliminar";
+            this.mEliminar.Size = new System.Drawing.Size(117, 22);
+            this.mEliminar.Text = "Eliminar";
+            this.mEliminar.Click += new System.EventHandler(this.mEliminar_Click);
+            // 
             // cmbHotel
             // 
             this.cmbHotel.DisplayMember = "descripcion";
             this.cmbHotel.Enabled = false;
             this.cmbHotel.FormattingEnabled = true;
-            this.cmbHotel.Location = new System.Drawing.Point(87, 154);
+            this.cmbHotel.Location = new System.Drawing.Point(94, 154);
             this.cmbHotel.Name = "cmbHotel";
-            this.cmbHotel.Size = new System.Drawing.Size(207, 21);
+            this.cmbHotel.Size = new System.Drawing.Size(200, 21);
             this.cmbHotel.TabIndex = 35;
+            this.cmbHotel.Tag = "Hotel";
             this.cmbHotel.ValueMember = "id";
             this.cmbHotel.SelectedIndexChanged += new System.EventHandler(this.cmbHotel_SelectedIndexChanged);
             // 
@@ -145,7 +160,7 @@
             // 
             this.lblHotel.AutoSize = true;
             this.lblHotel.Enabled = false;
-            this.lblHotel.Location = new System.Drawing.Point(24, 157);
+            this.lblHotel.Location = new System.Drawing.Point(14, 157);
             this.lblHotel.Name = "lblHotel";
             this.lblHotel.Size = new System.Drawing.Size(35, 13);
             this.lblHotel.TabIndex = 34;
@@ -180,6 +195,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(100, 20);
             this.txtNumero.TabIndex = 31;
+            this.txtNumero.Tag = "Número";
             // 
             // label4
             // 
@@ -199,6 +215,7 @@
             this.cmbRegimenHotel.Name = "cmbRegimenHotel";
             this.cmbRegimenHotel.Size = new System.Drawing.Size(177, 21);
             this.cmbRegimenHotel.TabIndex = 27;
+            this.cmbRegimenHotel.Tag = "Régimen";
             this.cmbRegimenHotel.ValueMember = "id";
             // 
             // cmbTipoHabitacion
@@ -210,6 +227,7 @@
             this.cmbTipoHabitacion.Name = "cmbTipoHabitacion";
             this.cmbTipoHabitacion.Size = new System.Drawing.Size(177, 21);
             this.cmbTipoHabitacion.TabIndex = 26;
+            this.cmbTipoHabitacion.Tag = "Tipo Habitación";
             this.cmbTipoHabitacion.ValueMember = "id";
             // 
             // fechaHasta
@@ -290,20 +308,6 @@
             this.botonGuardar.UseVisualStyleBackColor = true;
             this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
-            // menuGrid
-            // 
-            this.menuGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mEliminar});
-            this.menuGrid.Name = "menuGrid";
-            this.menuGrid.Size = new System.Drawing.Size(118, 26);
-            // 
-            // mEliminar
-            // 
-            this.mEliminar.Name = "mEliminar";
-            this.mEliminar.Size = new System.Drawing.Size(152, 22);
-            this.mEliminar.Text = "Eliminar";
-            this.mEliminar.Click += new System.EventHandler(this.mEliminar_Click);
-            // 
             // frmModificarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -318,9 +322,9 @@
             this.habitacion.ResumeLayout(false);
             this.habitacion.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHabitaciones)).EndInit();
+            this.menuGrid.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.menuGrid.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

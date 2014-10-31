@@ -31,6 +31,8 @@
             this.botonGuardar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.habitacion = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.chkEstado = new System.Windows.Forms.CheckBox();
             this.cmbTipoHabitacion = new System.Windows.Forms.ComboBox();
             this.chkFrente = new System.Windows.Forms.CheckBox();
             this.txtPiso = new System.Windows.Forms.MaskedTextBox();
@@ -41,8 +43,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.chkEstado = new System.Windows.Forms.CheckBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.habitacion.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,6 +89,24 @@
             this.habitacion.TabStop = false;
             this.habitacion.Text = "Habitacion";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 139);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 26;
+            this.label6.Text = "Estado:";
+            // 
+            // chkEstado
+            // 
+            this.chkEstado.AutoSize = true;
+            this.chkEstado.Location = new System.Drawing.Point(88, 139);
+            this.chkEstado.Name = "chkEstado";
+            this.chkEstado.Size = new System.Drawing.Size(15, 14);
+            this.chkEstado.TabIndex = 25;
+            this.chkEstado.UseVisualStyleBackColor = true;
+            // 
             // cmbTipoHabitacion
             // 
             this.cmbTipoHabitacion.DisplayMember = "descripcion";
@@ -97,6 +115,7 @@
             this.cmbTipoHabitacion.Name = "cmbTipoHabitacion";
             this.cmbTipoHabitacion.Size = new System.Drawing.Size(183, 21);
             this.cmbTipoHabitacion.TabIndex = 24;
+            this.cmbTipoHabitacion.Tag = "Tipo";
             this.cmbTipoHabitacion.ValueMember = "id";
             // 
             // chkFrente
@@ -115,6 +134,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(100, 20);
             this.txtPiso.TabIndex = 22;
+            this.txtPiso.Tag = "Piso";
             // 
             // txtNumero
             // 
@@ -123,6 +143,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(100, 20);
             this.txtNumero.TabIndex = 21;
+            this.txtNumero.Tag = "Número";
             // 
             // txtComodidades
             // 
@@ -133,6 +154,7 @@
             this.txtComodidades.Name = "txtComodidades";
             this.txtComodidades.Size = new System.Drawing.Size(213, 55);
             this.txtComodidades.TabIndex = 4;
+            this.txtComodidades.Tag = "Comodidades";
             // 
             // label4
             // 
@@ -178,24 +200,6 @@
             this.label5.Size = new System.Drawing.Size(68, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Comodidaes:";
-            // 
-            // chkEstado
-            // 
-            this.chkEstado.AutoSize = true;
-            this.chkEstado.Location = new System.Drawing.Point(88, 139);
-            this.chkEstado.Name = "chkEstado";
-            this.chkEstado.Size = new System.Drawing.Size(15, 14);
-            this.chkEstado.TabIndex = 25;
-            this.chkEstado.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 139);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(43, 13);
-            this.label6.TabIndex = 26;
-            this.label6.Text = "Estado:";
             // 
             // frmAltaHabitacion
             // 

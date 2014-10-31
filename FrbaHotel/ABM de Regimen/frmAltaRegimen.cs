@@ -19,40 +19,61 @@ namespace FrbaHotel
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-            SqlDataReader reader = null;
+            if (this.ValidarCamposRequeridos())
+            {
+                SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                SqlCommand cmd = null;
+                SqlDataReader reader = null;
 
-            try
-            {
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.IngresarRegimen";
+                try
+                {
+                    cn.Open();
+                    cmd = new SqlCommand();
+                    cmd.Connection = cn;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "GRAFO_LOCO.IngresarRegimen";
 
-                SqlParameter descripcion = new SqlParameter("@descripcion", txtDescripcion.Text);
-                descripcion.SqlDbType = SqlDbType.VarChar;
-                descripcion.Size = 255;
-                cmd.Parameters.Add(descripcion);
-                SqlParameter precio = new SqlParameter("@precio", decimal.Parse(txtPrecio.Text));
-                precio.SqlDbType = SqlDbType.Decimal;
-                precio.Precision = 2;
-                cmd.Parameters.Add(precio);
-           
-                cmd.ExecuteNonQuery();
+                    SqlParameter descripcion = new SqlParameter("@descripcion", txtDescripcion.Text);
+                    descripcion.SqlDbType = SqlDbType.VarChar;
+                    descripcion.Size = 255;
+                    cmd.Parameters.Add(descripcion);
+                    SqlParameter precio = new SqlParameter("@precio", decimal.Parse(txtPrecio.Text));
+                    precio.SqlDbType = SqlDbType.Decimal;
+                    precio.Precision = 2;
+                    cmd.Parameters.Add(precio);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    cn.Close();
+                    reader.Close();
+                    if (cmd != null)
+                        cmd.Dispose();
+                }
             }
-            catch (Exception ex)
+        }
+
+        private bool ValidarCamposRequeridos()
+        {
+            string campo = string.Empty;
+
+            if (txtDescripcion.Text.Length == 0)
+                campo = txtDescripcion.Tag.ToString();
+            if (txtPrecio.Text.Length == 0)
+                campo = txtPrecio.Tag.ToString();
+
+            if (campo.Length > 0)
             {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El campo " + campo + " es requerido.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-            finally
-            {
-                cn.Close();
-                reader.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            }  
+
+            return true;
         }
     }
 }

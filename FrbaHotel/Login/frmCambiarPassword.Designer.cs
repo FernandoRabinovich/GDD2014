@@ -54,6 +54,7 @@
             this.txtPassAnterior.PasswordChar = '*';
             this.txtPassAnterior.Size = new System.Drawing.Size(145, 20);
             this.txtPassAnterior.TabIndex = 1;
+            this.txtPassAnterior.Tag = "Actual";
             // 
             // txtPassNueva
             // 
@@ -62,6 +63,7 @@
             this.txtPassNueva.PasswordChar = '*';
             this.txtPassNueva.Size = new System.Drawing.Size(145, 20);
             this.txtPassNueva.TabIndex = 2;
+            this.txtPassNueva.Tag = "Nueva";
             // 
             // txtPassRepetir
             // 
@@ -70,6 +72,7 @@
             this.txtPassRepetir.PasswordChar = '*';
             this.txtPassRepetir.Size = new System.Drawing.Size(145, 20);
             this.txtPassRepetir.TabIndex = 3;
+            this.txtPassRepetir.Tag = "Repetir";
             // 
             // label1
             // 

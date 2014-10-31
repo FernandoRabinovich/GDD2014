@@ -80,78 +80,99 @@ namespace FrbaHotel
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-
-            cn.Open();
-            SqlTransaction sqlTran = cn.BeginTransaction();
-            cmd = cn.CreateCommand();
-            cmd.Transaction = sqlTran;
-
-            try
+            if (this.ValidarCamposRequeridos())
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                /*ACTUALIZO EL ROL*/
-                cmd.CommandText = "GRAFO_LOCO.ActualizarRol";
-                SqlParameter idRol = new SqlParameter("@rol", rol.Id);
-                idRol.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(idRol);
-                SqlParameter nombreRol = new SqlParameter("@nombre", txtNombre.Text);
-                nombreRol.SqlDbType = SqlDbType.VarChar;
-                nombreRol.Size = 20;
-                cmd.Parameters.Add(nombreRol);
-                SqlParameter estadoRol = new SqlParameter("estado", chkEstado.Checked);
-                estadoRol.SqlDbType = SqlDbType.Bit;
-                cmd.Parameters.Add(estadoRol);
+                SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                SqlCommand cmd = null;
 
-                cmd.ExecuteNonQuery();
-
-                /*ELIMINO LAS FUNCIOANLIDADES ACTUALES PARA RECREARLAS*/
-                cmd.Parameters.Clear();
-                cmd.CommandText = "GRAFO_LOCO.EliminarFuncionalidadesPorRol";
-                idRol = new SqlParameter("@rol", rol.Id);
-                idRol.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(idRol);
-
-                cmd.ExecuteNonQuery();
-
-                /*RECREO LAS FUNCIONALIDADES CON LAS SELECCIONADAS*/
-                cmd.CommandText = "GRAFO_LOCO.IngresarFuncionalidadPorRol";
-
-                foreach (Funcionalidad f in lstFuncionalidades.CheckedItems)
-                {
-                    SqlParameter funcionalidad = new SqlParameter("idFuncionalidad", f.Id);
-                    funcionalidad.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(funcionalidad);
-
-                    cmd.ExecuteNonQuery();
-
-                    cmd.Parameters.RemoveAt("idFuncionalidad");
-                }
-
-                sqlTran.Commit();
-
-                MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cn.Open();
+                SqlTransaction sqlTran = cn.BeginTransaction();
+                cmd = cn.CreateCommand();
+                cmd.Transaction = sqlTran;
 
                 try
                 {
-                    sqlTran.Rollback();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    /*ACTUALIZO EL ROL*/
+                    cmd.CommandText = "GRAFO_LOCO.ActualizarRol";
+                    SqlParameter idRol = new SqlParameter("@rol", rol.Id);
+                    idRol.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(idRol);
+                    SqlParameter nombreRol = new SqlParameter("@nombre", txtNombre.Text);
+                    nombreRol.SqlDbType = SqlDbType.VarChar;
+                    nombreRol.Size = 20;
+                    cmd.Parameters.Add(nombreRol);
+                    SqlParameter estadoRol = new SqlParameter("estado", chkEstado.Checked);
+                    estadoRol.SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.Add(estadoRol);
+
+                    cmd.ExecuteNonQuery();
+
+                    /*ELIMINO LAS FUNCIOANLIDADES ACTUALES PARA RECREARLAS*/
+                    cmd.Parameters.Clear();
+                    cmd.CommandText = "GRAFO_LOCO.EliminarFuncionalidadesPorRol";
+                    idRol = new SqlParameter("@rol", rol.Id);
+                    idRol.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(idRol);
+
+                    cmd.ExecuteNonQuery();
+
+                    /*RECREO LAS FUNCIONALIDADES CON LAS SELECCIONADAS*/
+                    cmd.CommandText = "GRAFO_LOCO.IngresarFuncionalidadPorRol";
+
+                    foreach (Funcionalidad f in lstFuncionalidades.CheckedItems)
+                    {
+                        SqlParameter funcionalidad = new SqlParameter("idFuncionalidad", f.Id);
+                        funcionalidad.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(funcionalidad);
+
+                        cmd.ExecuteNonQuery();
+
+                        cmd.Parameters.RemoveAt("idFuncionalidad");
+                    }
+
+                    sqlTran.Commit();
+
+                    MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch (Exception ex2)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    try
+                    {
+                        sqlTran.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                finally
+                {
+                    cn.Close();
+                    if (cmd != null)
+                        cmd.Dispose();
                 }
             }
-            finally
+        }
+
+        private bool ValidarCamposRequeridos()
+        {
+            string campo = string.Empty;
+
+            if (txtNombre.Text.Length == 0)
+                campo = txtNombre.Tag.ToString();
+            if (lstFuncionalidades.Items.Count == 0)
+                campo = lstFuncionalidades.Tag.ToString();
+
+            if (campo.Length > 0)
             {
-                cn.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            }            
+                MessageBox.Show("El campo " + campo + " es requerido.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
     }
 }

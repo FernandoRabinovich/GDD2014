@@ -209,5 +209,13 @@ namespace FrbaHotel
             frmEstadia.StartPosition = FormStartPosition.CenterScreen;
             frmEstadia.Show();
         }
+
+        private void mAltaCliente_Click(object sender, EventArgs e)
+        {
+            frmAltaCliente frmCliente = new frmAltaCliente();
+            frmCliente.MdiParent = this;
+            frmCliente.StartPosition = FormStartPosition.CenterScreen;
+            frmCliente.Show();
+        }
     }
 }

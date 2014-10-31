@@ -51,9 +51,9 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cmbTipoDoc = new System.Windows.Forms.ComboBox();
             this.txtMail = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
             this.txtApellido = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -86,6 +86,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(100, 20);
             this.txtPiso.TabIndex = 78;
+            this.txtPiso.Tag = "Piso";
             // 
             // label5
             // 
@@ -103,6 +104,7 @@
             this.txtDpto.Name = "txtDpto";
             this.txtDpto.Size = new System.Drawing.Size(51, 20);
             this.txtDpto.TabIndex = 76;
+            this.txtDpto.Tag = "Departamento";
             // 
             // txtNumeroCalle
             // 
@@ -111,6 +113,7 @@
             this.txtNumeroCalle.Name = "txtNumeroCalle";
             this.txtNumeroCalle.Size = new System.Drawing.Size(100, 20);
             this.txtNumeroCalle.TabIndex = 75;
+            this.txtNumeroCalle.Tag = "Número";
             this.txtNumeroCalle.ValidatingType = typeof(int);
             // 
             // label11
@@ -144,6 +147,7 @@
             this.txtNacionalidad.Name = "txtNacionalidad";
             this.txtNacionalidad.Size = new System.Drawing.Size(160, 20);
             this.txtNacionalidad.TabIndex = 71;
+            this.txtNacionalidad.Tag = "Nacionalidad";
             // 
             // label4
             // 
@@ -162,6 +166,7 @@
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(160, 20);
             this.txtLocalidad.TabIndex = 69;
+            this.txtLocalidad.Tag = "Localidad";
             // 
             // label2
             // 
@@ -180,6 +185,7 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(160, 20);
             this.txtDireccion.TabIndex = 67;
+            this.txtDireccion.Tag = "Dirección";
             // 
             // label8
             // 
@@ -198,6 +204,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(93, 20);
             this.txtTelefono.TabIndex = 65;
+            this.txtTelefono.Tag = "Teléfono";
             // 
             // label10
             // 
@@ -225,6 +232,7 @@
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(93, 20);
             this.txtNroDocumento.TabIndex = 62;
+            this.txtNroDocumento.Tag = "Nro. Documento";
             // 
             // label6
             // 
@@ -254,6 +262,7 @@
             this.cmbTipoDoc.Name = "cmbTipoDoc";
             this.cmbTipoDoc.Size = new System.Drawing.Size(66, 21);
             this.cmbTipoDoc.TabIndex = 60;
+            this.cmbTipoDoc.Tag = "Tipo Documento";
             this.cmbTipoDoc.ValueMember = "id";
             // 
             // txtMail
@@ -264,15 +273,16 @@
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);
             this.txtMail.TabIndex = 61;
+            this.txtMail.Tag = "Mail";
             // 
-            // label3
+            // lblApellido
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 46);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 56;
-            this.label3.Text = "Apellido:";
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new System.Drawing.Point(21, 46);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(47, 13);
+            this.lblApellido.TabIndex = 56;
+            this.lblApellido.Text = "Apellido:";
             // 
             // txtApellido
             // 
@@ -282,15 +292,16 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(160, 20);
             this.txtApellido.TabIndex = 57;
+            this.txtApellido.Tag = "Apellido";
             // 
-            // label1
+            // lblNombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 13);
-            this.label1.TabIndex = 54;
-            this.label1.Text = "Nombre:";
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(21, 20);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(47, 13);
+            this.lblNombre.TabIndex = 54;
+            this.lblNombre.Text = "Nombre:";
             // 
             // txtNombre
             // 
@@ -300,6 +311,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
             this.txtNombre.TabIndex = 55;
+            this.txtNombre.Tag = "Nombre";
             // 
             // frmAltaCliente
             // 
@@ -327,9 +339,9 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbTipoDoc);
             this.Controls.Add(this.txtMail);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.txtApellido);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblNombre);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnGuardar);
@@ -366,9 +378,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbTipoDoc;
         private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.TextBox txtApellido;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.TextBox txtNombre;
     }
 }

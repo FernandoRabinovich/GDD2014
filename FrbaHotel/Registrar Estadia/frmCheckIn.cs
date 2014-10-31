@@ -36,12 +36,14 @@ namespace FrbaHotel
                 SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
                 SqlCommand cmd = null;
 
+                cn.Open();
+                SqlTransaction sqlTran = cn.BeginTransaction();
+                cmd = cn.CreateCommand();
+                cmd.Transaction = sqlTran;
+                cmd.CommandType = CommandType.StoredProcedure;
+
                 try
                 {
-                    cn.Open();
-                    cmd = new SqlCommand();
-                    cmd.Connection = cn;
-                    cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "GRAFO_LOCO.IngresarEstadia";
 
                     SqlParameter reserva = new SqlParameter("@codigoReserva", this.reserva.Codigo);
@@ -57,14 +59,46 @@ namespace FrbaHotel
                     usuario.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(usuario);
 
-                    cmd.ExecuteNonQuery();
+                    int idEstadia = (Int32)cmd.ExecuteScalar();
 
                     /*DE FORMA TRANSACCIONAL DEBERIA INGRESAR A TODOS LOS CLIENTES CARGARDOS EN LA GRILLA CORRESPONDIENTE A LA ESTADIA, SOLO AQUELLOS QUE
-                    NO EXISTAN*/
+                    NO EXISTAN. ADEMAS LOS RELACIONO CON LA ESTADIA DIRECTAMENTE*/
+                    int idCliente = 0;
+                    foreach(Cliente c in clientesEstadia)
+                    {
+                        if (c.Id != 0) // Ver que pasa acá cuando es nuevo
+                        {
+                            cmd.CommandText = "GRAFO_LOCO.IngresarCliente";
+                            this.CargarParametrosCliente(ref cmd, c);
+                            idCliente = (Int32)cmd.ExecuteScalar();
+                        }
+                        else idCliente = c.Id;
+
+                        cmd.Parameters.Clear();
+                        cmd.CommandText = "GRAFO_LOCO.IngresarClientePorEstadia";
+                        SqlParameter cliente = new SqlParameter("@idCliente", idCliente);
+                        cliente.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(cliente);
+                        SqlParameter estadia = new SqlParameter("@idEstadia", idEstadia);
+                        estadia.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(estadia);
+                        cmd.ExecuteNonQuery();
+                    }
+                    
+                    sqlTran.Commit();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    try
+                    {
+                        sqlTran.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 finally
                 {
@@ -165,6 +199,58 @@ namespace FrbaHotel
             }
             else
                 MessageBox.Show("El cliente seleccionado se encuentra inactivo.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void CargarParametrosCliente(ref SqlCommand cmd, Cliente c)
+        {
+            cmd.Parameters.Clear();
+            SqlParameter nombre = new SqlParameter("@nombre", c.Nonbre);
+            nombre.SqlDbType = SqlDbType.VarChar;
+            nombre.Size = 30;
+            cmd.Parameters.Add(nombre);
+            SqlParameter apellido = new SqlParameter("@apellido", c.Apellido);
+            apellido.SqlDbType = SqlDbType.VarChar;
+            apellido.Size = 30;
+            cmd.Parameters.Add(apellido);
+            SqlParameter tipoDoc = new SqlParameter("@idTipoDocumento", c.TipoDoc);
+            tipoDoc.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(tipoDoc);
+            SqlParameter nroDoc = new SqlParameter("@nroDocumento", c.NumeroDoc);
+            nroDoc.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(nroDoc);
+            SqlParameter mail = new SqlParameter("@mail", c.Mail);
+            mail.SqlDbType = SqlDbType.VarChar;
+            mail.Size = 30;
+            cmd.Parameters.Add(mail);
+            SqlParameter telefono = new SqlParameter("@telefono", c.Telefono);
+            telefono.SqlDbType = SqlDbType.VarChar;
+            telefono.Size = 15;
+            cmd.Parameters.Add(telefono);
+            SqlParameter direccion = new SqlParameter("@direccion", c.Direccion);
+            direccion.SqlDbType = SqlDbType.VarChar;
+            direccion.Size = 40;
+            cmd.Parameters.Add(direccion);
+            SqlParameter fechaNac = new SqlParameter("@fechaNacimiento", c.FechaNacimiento);
+            fechaNac.SqlDbType = SqlDbType.DateTime;
+            cmd.Parameters.Add(fechaNac);
+            SqlParameter numero = new SqlParameter("@nroCalle", c.Numero);
+            numero.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(numero);
+            SqlParameter piso = new SqlParameter("@piso", c.Piso);
+            piso.SqlDbType = SqlDbType.Int;
+            cmd.Parameters.Add(piso);
+            SqlParameter nacionalidad = new SqlParameter("@nacionalidad", c.Nacionalidad);
+            nacionalidad.SqlDbType = SqlDbType.VarChar;
+            nacionalidad.Size = 255;
+            cmd.Parameters.Add(nacionalidad);
+            SqlParameter localidad = new SqlParameter("@localidad", c.Localidad);
+            localidad.SqlDbType = SqlDbType.VarChar;
+            localidad.Size = 100;
+            cmd.Parameters.Add(localidad);
+            SqlParameter dpto = new SqlParameter("@departamento", c.Departamento);
+            dpto.SqlDbType = SqlDbType.VarChar;
+            dpto.Size = 1;
+            cmd.Parameters.Add(dpto);
         }
     }
 }

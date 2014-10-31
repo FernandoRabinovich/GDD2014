@@ -21,48 +21,71 @@ namespace FrbaHotel
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-             
-            try
+            if (this.ValidarCamposRequeridos())
             {
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.ModificarReserva";
+                SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                SqlCommand cmd = null;
 
-                SqlParameter fDesde = new SqlParameter("@fechaDesde", fechaDesde.Value);
-                fDesde.SqlDbType = SqlDbType.DateTime;
-                cmd.Parameters.Add(fDesde);
-                SqlParameter fHasta = new SqlParameter("@fechaHasta", fechaHasta.Value);
-                fHasta.SqlDbType = SqlDbType.DateTime;
-                cmd.Parameters.Add(fHasta);
-                SqlParameter hotel = new SqlParameter("@idHotel", ((Hotel)cmbHotel.SelectedItem).Id);
-                hotel.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(hotel);
-                SqlParameter fechaCreacion = new SqlParameter("@fechaCreacion", DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString()));
-                fechaCreacion.SqlDbType = SqlDbType.DateTime;
-                cmd.Parameters.Add(fechaCreacion);
-                SqlParameter regimen = new SqlParameter("@idRegimen", ((Regimen)cmbRegimenHotel.SelectedItem).Id);
-                regimen.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(regimen);
-                SqlParameter usuario = new SqlParameter("@idUsuario", frmPrincipal.idUsuario);
-                usuario.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(usuario);
+                try
+                {
+                    cn.Open();
+                    cmd = new SqlCommand();
+                    cmd.Connection = cn;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "GRAFO_LOCO.ModificarReserva";
 
-                cmd.ExecuteNonQuery();
+                    SqlParameter fDesde = new SqlParameter("@fechaDesde", fechaDesde.Value);
+                    fDesde.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(fDesde);
+                    SqlParameter fHasta = new SqlParameter("@fechaHasta", fechaHasta.Value);
+                    fHasta.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(fHasta);
+                    SqlParameter hotel = new SqlParameter("@idHotel", ((Hotel)cmbHotel.SelectedItem).Id);
+                    hotel.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(hotel);
+                    SqlParameter fechaCreacion = new SqlParameter("@fechaCreacion", DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString()));
+                    fechaCreacion.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(fechaCreacion);
+                    SqlParameter regimen = new SqlParameter("@idRegimen", ((Regimen)cmbRegimenHotel.SelectedItem).Id);
+                    regimen.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(regimen);
+                    SqlParameter usuario = new SqlParameter("@idUsuario", frmPrincipal.idUsuario);
+                    usuario.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(usuario);
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    cn.Close();
+                    if (cmd != null)
+                        cmd.Dispose();
+                }
             }
-            catch (Exception ex)
+        }
+
+        private bool ValidarCamposRequeridos()
+        {
+            string campo = string.Empty;
+
+            if (cmbHotel.SelectedItem == null)
+                campo = cmbHotel.Tag.ToString();
+            if (cmbTipoHabitacion.SelectedItem == null)
+                campo = cmbTipoHabitacion.Tag.ToString();
+            if (cmbRegimenHotel.SelectedItem == null)
+                campo = cmbRegimenHotel.Tag.ToString();
+
+            if (campo.Length > 0)
             {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El campo " + campo + " es requerido.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
-            finally
-            {
-                cn.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            }
+
+            return true;
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -72,56 +95,60 @@ namespace FrbaHotel
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            // Aca tengo que buscar la reserva y cargar los datos
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-
-            try
+            if (txtNumero.Text.Length != 0)
             {
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.BuscarReservaPorCodigo";
+                // Aca tengo que buscar la reserva y cargar los datos
+                SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                SqlCommand cmd = null;
 
-                SqlParameter codigo = new SqlParameter("@codigoReserva", Int32.Parse(txtNumero.Text));
-                codigo.SqlDbType = SqlDbType.DateTime;
-                cmd.Parameters.Add(codigo);
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                DataSet dataSet = new DataSet();
-                adapter.SelectCommand = cmd;
-
-                adapter.Fill(dataSet);
-                
-
-                if (dataSet.Tables.Count > 0)
+                try
                 {
-                    fechaDesde.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaDesde"].ToString());
-                    fechaHasta.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaHasta"].ToString());
-                    cmbHotel.SelectedValue = Int32.Parse(dataSet.Tables[0].Rows[0]["IdHotel"].ToString());
-                    cmbRegimenHotel.SelectedValue = Int32.Parse(dataSet.Tables[0].Rows[0]["IdTipoRegimen"].ToString());
-                    grdHabitaciones.DataSource = dataSet.Tables[1];
+                    cn.Open();
+                    cmd = new SqlCommand();
+                    cmd.Connection = cn;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "GRAFO_LOCO.BuscarReservaPorCodigo";
 
-                    foreach(DataRow r in dataSet.Tables[1].Rows)
+                    SqlParameter codigo = new SqlParameter("@codigoReserva", Int32.Parse(txtNumero.Text));
+                    codigo.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(codigo);
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+                    DataSet dataSet = new DataSet();
+                    adapter.SelectCommand = cmd;
+
+                    adapter.Fill(dataSet);
+
+
+                    if (dataSet.Tables.Count > 0)
                     {
-                        lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + decimal.Parse(r["costo"].ToString())).ToString();
-                        habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion,  r["tipoHabitacion"].ToString(), ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, Int32.Parse(r["idHabitacion"].ToString()), decimal.Parse(r["costo"].ToString())));
-                    }
-                }
-                else
-                    MessageBox.Show("No se encontró la reserva solicitada o la misma ha sido cancelada.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        fechaDesde.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaDesde"].ToString());
+                        fechaHasta.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaHasta"].ToString());
+                        cmbHotel.SelectedValue = Int32.Parse(dataSet.Tables[0].Rows[0]["IdHotel"].ToString());
+                        cmbRegimenHotel.SelectedValue = Int32.Parse(dataSet.Tables[0].Rows[0]["IdTipoRegimen"].ToString());
+                        grdHabitaciones.DataSource = dataSet.Tables[1];
 
+                        foreach (DataRow r in dataSet.Tables[1].Rows)
+                        {
+                            lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + decimal.Parse(r["costo"].ToString())).ToString();
+                            habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion, r["tipoHabitacion"].ToString(), ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, Int32.Parse(r["idHabitacion"].ToString()), decimal.Parse(r["costo"].ToString())));
+                        }
+                    }
+                    else
+                        MessageBox.Show("No se encontró la reserva solicitada o la misma ha sido cancelada.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    cn.Close();
+                    if (cmd != null)
+                        cmd.Dispose();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                cn.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            }
+            else MessageBox.Show("Debe ingresar un código de reserva.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void frmModificarReserva_Load(object sender, EventArgs e)

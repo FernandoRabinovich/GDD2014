@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.habitacion = new System.Windows.Forms.GroupBox();
+            this.lblCostoTotal = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.grdHabitaciones = new System.Windows.Forms.DataGridView();
             this.cmbHotel = new System.Windows.Forms.ComboBox();
@@ -61,8 +63,6 @@
             this.btnFiltro = new System.Windows.Forms.Button();
             this.menuCliente = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mSeleccionar = new System.Windows.Forms.ToolStripMenuItem();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblCostoTotal = new System.Windows.Forms.Label();
             this.habitacion.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdHabitaciones)).BeginInit();
             this.menuGrid.SuspendLayout();
@@ -97,6 +97,26 @@
             this.habitacion.TabStop = false;
             this.habitacion.Text = "Reserva";
             // 
+            // lblCostoTotal
+            // 
+            this.lblCostoTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCostoTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCostoTotal.Location = new System.Drawing.Point(91, 182);
+            this.lblCostoTotal.Name = "lblCostoTotal";
+            this.lblCostoTotal.Size = new System.Drawing.Size(106, 19);
+            this.lblCostoTotal.TabIndex = 35;
+            this.lblCostoTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(9, 185);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(76, 13);
+            this.label9.TabIndex = 34;
+            this.label9.Text = "Costo Total:";
+            // 
             // btnAgregar
             // 
             this.btnAgregar.Location = new System.Drawing.Point(213, 175);
@@ -120,6 +140,7 @@
             this.grdHabitaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdHabitaciones.Size = new System.Drawing.Size(320, 109);
             this.grdHabitaciones.TabIndex = 32;
+            this.grdHabitaciones.Tag = "Habitaciones";
             // 
             // cmbHotel
             // 
@@ -129,6 +150,7 @@
             this.cmbHotel.Name = "cmbHotel";
             this.cmbHotel.Size = new System.Drawing.Size(177, 21);
             this.cmbHotel.TabIndex = 29;
+            this.cmbHotel.Tag = "Hotel";
             this.cmbHotel.ValueMember = "id";
             this.cmbHotel.SelectedIndexChanged += new System.EventHandler(this.cmbHotel_SelectedIndexChanged);
             // 
@@ -160,6 +182,7 @@
             this.cmbRegimenHotel.Name = "cmbRegimenHotel";
             this.cmbRegimenHotel.Size = new System.Drawing.Size(177, 21);
             this.cmbRegimenHotel.TabIndex = 27;
+            this.cmbRegimenHotel.Tag = "Régimen";
             this.cmbRegimenHotel.ValueMember = "id";
             // 
             // cmbTipoHabitacion
@@ -170,6 +193,7 @@
             this.cmbTipoHabitacion.Name = "cmbTipoHabitacion";
             this.cmbTipoHabitacion.Size = new System.Drawing.Size(177, 21);
             this.cmbTipoHabitacion.TabIndex = 26;
+            this.cmbTipoHabitacion.Tag = "Tipo Habitación";
             this.cmbTipoHabitacion.ValueMember = "id";
             // 
             // fechaHasta
@@ -265,6 +289,7 @@
             this.grdClientes.Name = "grdClientes";
             this.grdClientes.Size = new System.Drawing.Size(560, 193);
             this.grdClientes.TabIndex = 4;
+            this.grdClientes.Tag = "Cliente";
             // 
             // groupBox2
             // 
@@ -381,26 +406,6 @@
             this.mSeleccionar.Size = new System.Drawing.Size(134, 22);
             this.mSeleccionar.Text = "Seleccionar";
             this.mSeleccionar.Click += new System.EventHandler(this.mSeleccionar_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(9, 185);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(76, 13);
-            this.label9.TabIndex = 34;
-            this.label9.Text = "Costo Total:";
-            // 
-            // lblCostoTotal
-            // 
-            this.lblCostoTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCostoTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCostoTotal.Location = new System.Drawing.Point(91, 182);
-            this.lblCostoTotal.Name = "lblCostoTotal";
-            this.lblCostoTotal.Size = new System.Drawing.Size(106, 19);
-            this.lblCostoTotal.TabIndex = 35;
-            this.lblCostoTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmGenerarReserva
             // 

@@ -85,133 +85,176 @@ namespace FrbaHotel
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Tengo que cargar la lista de rol y de hoteles (solo puede modificar los hoteles a los que pertenece el administrador).
-
-            #region Generar password
-            SHA256 mySHA256 = SHA256Managed.Create();            
-            byte[] byteArray = Encoding.UTF8.GetBytes(txtPassword.Text);
-            MemoryStream stream = new MemoryStream(byteArray);            
-            string pass = Convert.ToBase64String(mySHA256.ComputeHash(stream));
-            #endregion
-
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-
-            cn.Open();
-            SqlTransaction sqlTran = cn.BeginTransaction();
-            cmd = cn.CreateCommand();
-            cmd.Transaction = sqlTran;
-
-            try
+            if (this.ValidarCamposRequeridos())
             {
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.IngresarUsuario";
+                // Tengo que cargar la lista de rol y de hoteles (solo puede modificar los hoteles a los que pertenece el administrador).
 
-                SqlParameter userName = new SqlParameter("@userName", txtUsername.Text);
-                userName.SqlDbType = SqlDbType.VarChar;
-                userName.Size = 20;
-                cmd.Parameters.Add(userName);
-                SqlParameter password = new SqlParameter("@password", pass);
-                password.SqlDbType = SqlDbType.VarChar;
-                password.Size = 65;
-                cmd.Parameters.Add(password);
-                SqlParameter nombre = new SqlParameter("@nombre", txtNombre.Text);
-                nombre.SqlDbType = SqlDbType.VarChar;
-                nombre.Size = 30;
-                cmd.Parameters.Add(nombre);
-                SqlParameter apellido = new SqlParameter("@apellido", txtApellido.Text);
-                apellido.SqlDbType = SqlDbType.VarChar;
-                apellido.Size = 30;
-                cmd.Parameters.Add(apellido);
-                SqlParameter tipoDoc = new SqlParameter("@tipoDoc", ((TipoDoc)cmbTipoDoc.SelectedItem).Id);
-                tipoDoc.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(tipoDoc);
-                SqlParameter nroDoc = new SqlParameter("@nroDoc", txtNroDocumento.Text);
-                nroDoc.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(nroDoc);
-                SqlParameter mail = new SqlParameter("@mail", txtMail.Text);
-                mail.SqlDbType = SqlDbType.VarChar;
-                mail.Size = 30;
-                cmd.Parameters.Add(mail);
-                SqlParameter telefono = new SqlParameter("@telefono", txtTelefono.Text);
-                telefono.SqlDbType = SqlDbType.VarChar;
-                telefono.Size = 15;
-                cmd.Parameters.Add(telefono);
-                SqlParameter direccion = new SqlParameter("@direccion", txtDireccion.Text);
-                direccion.SqlDbType = SqlDbType.VarChar;
-                direccion.Size = 40;
-                cmd.Parameters.Add(direccion);
-                SqlParameter fechaNac = new SqlParameter("@fechaNac", fechaNacimiento.Value);
-                fechaNac.SqlDbType = SqlDbType.DateTime;
-                cmd.Parameters.Add(fechaNac);
-                SqlParameter estado = new SqlParameter("@estado", chkEstado.Checked);
-                estado.SqlDbType = SqlDbType.Bit;
-                cmd.Parameters.Add(estado);
-                SqlParameter numero = new SqlParameter("@numero", Int32.Parse(txtNumero.Text));
-                numero.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(numero);
-                SqlParameter piso = new SqlParameter("@piso", Int32.Parse(txtPiso.Text));
-                piso.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(piso);
+                #region Generar password
+                SHA256 mySHA256 = SHA256Managed.Create();
+                byte[] byteArray = Encoding.UTF8.GetBytes(txtPassword.Text);
+                MemoryStream stream = new MemoryStream(byteArray);
+                string pass = Convert.ToBase64String(mySHA256.ComputeHash(stream));
+                #endregion
 
-                Int32 idUsuario = (Int32)cmd.ExecuteScalar();
+                SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                SqlCommand cmd = null;
 
-                /* Inserto los roles que tendrá el usuario*/
-                cmd.Parameters.Clear();
-                SqlParameter usuario = new SqlParameter("@idUsuario", idUsuario);
-                usuario.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(usuario);
-
-                foreach (Rol r in lstRol.CheckedItems)
-                {
-                    SqlParameter rol = new SqlParameter("@idRol", r.Id);
-                    rol.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(rol);
-
-                    cmd.ExecuteNonQuery();
-
-                    cmd.Parameters.RemoveAt("@idRol");
-                }
-
-                /* Inserto los hoteles a los que pertenecerá el usuario*/
-                cmd.Parameters.Clear();
-                cmd.Parameters.Add(usuario);
-
-                foreach (Hotel h in lstHoteles.CheckedItems)
-                {
-                    SqlParameter hotel = new SqlParameter("@idHotel", h.Id);
-                    hotel.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(hotel);
-
-                    cmd.ExecuteNonQuery();
-
-                    cmd.Parameters.RemoveAt("@idHotel");
-                }
-
-                sqlTran.Commit();
-
-                MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cn.Open();
+                SqlTransaction sqlTran = cn.BeginTransaction();
+                cmd = cn.CreateCommand();
+                cmd.Transaction = sqlTran;
 
                 try
                 {
-                    sqlTran.Rollback();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "GRAFO_LOCO.IngresarUsuario";
+
+                    SqlParameter userName = new SqlParameter("@userName", txtUsername.Text);
+                    userName.SqlDbType = SqlDbType.VarChar;
+                    userName.Size = 20;
+                    cmd.Parameters.Add(userName);
+                    SqlParameter password = new SqlParameter("@password", pass);
+                    password.SqlDbType = SqlDbType.VarChar;
+                    password.Size = 65;
+                    cmd.Parameters.Add(password);
+                    SqlParameter nombre = new SqlParameter("@nombre", txtNombre.Text);
+                    nombre.SqlDbType = SqlDbType.VarChar;
+                    nombre.Size = 30;
+                    cmd.Parameters.Add(nombre);
+                    SqlParameter apellido = new SqlParameter("@apellido", txtApellido.Text);
+                    apellido.SqlDbType = SqlDbType.VarChar;
+                    apellido.Size = 30;
+                    cmd.Parameters.Add(apellido);
+                    SqlParameter tipoDoc = new SqlParameter("@tipoDoc", ((TipoDoc)cmbTipoDoc.SelectedItem).Id);
+                    tipoDoc.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(tipoDoc);
+                    SqlParameter nroDoc = new SqlParameter("@nroDoc", txtNroDocumento.Text);
+                    nroDoc.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(nroDoc);
+                    SqlParameter mail = new SqlParameter("@mail", txtMail.Text);
+                    mail.SqlDbType = SqlDbType.VarChar;
+                    mail.Size = 30;
+                    cmd.Parameters.Add(mail);
+                    SqlParameter telefono = new SqlParameter("@telefono", txtTelefono.Text);
+                    telefono.SqlDbType = SqlDbType.VarChar;
+                    telefono.Size = 15;
+                    cmd.Parameters.Add(telefono);
+                    SqlParameter direccion = new SqlParameter("@direccion", txtDireccion.Text);
+                    direccion.SqlDbType = SqlDbType.VarChar;
+                    direccion.Size = 40;
+                    cmd.Parameters.Add(direccion);
+                    SqlParameter fechaNac = new SqlParameter("@fechaNac", fechaNacimiento.Value);
+                    fechaNac.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(fechaNac);
+                    SqlParameter estado = new SqlParameter("@estado", chkEstado.Checked);
+                    estado.SqlDbType = SqlDbType.Bit;
+                    cmd.Parameters.Add(estado);
+                    SqlParameter numero = new SqlParameter("@numero", Int32.Parse(txtNumero.Text));
+                    numero.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(numero);
+                    SqlParameter piso = new SqlParameter("@piso", Int32.Parse(txtPiso.Text));
+                    piso.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(piso);
+
+                    Int32 idUsuario = (Int32)cmd.ExecuteScalar();
+
+                    /* Inserto los roles que tendrá el usuario*/
+                    cmd.Parameters.Clear();
+                    SqlParameter usuario = new SqlParameter("@idUsuario", idUsuario);
+                    usuario.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(usuario);
+
+                    foreach (Rol r in lstRol.CheckedItems)
+                    {
+                        SqlParameter rol = new SqlParameter("@idRol", r.Id);
+                        rol.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(rol);
+
+                        cmd.ExecuteNonQuery();
+
+                        cmd.Parameters.RemoveAt("@idRol");
+                    }
+
+                    /* Inserto los hoteles a los que pertenecerá el usuario*/
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.Add(usuario);
+
+                    foreach (Hotel h in lstHoteles.CheckedItems)
+                    {
+                        SqlParameter hotel = new SqlParameter("@idHotel", h.Id);
+                        hotel.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(hotel);
+
+                        cmd.ExecuteNonQuery();
+
+                        cmd.Parameters.RemoveAt("@idHotel");
+                    }
+
+                    sqlTran.Commit();
+
+                    MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                catch (Exception ex2)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    try
+                    {
+                        sqlTran.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                finally
+                {
+                    cn.Close();
+
+                    if (cmd != null)
+                        cmd.Dispose();
                 }
             }
-            finally
-            {
-                cn.Close();
+        }
 
-                if (cmd != null)
-                    cmd.Dispose();
-            }  
+        private bool ValidarCamposRequeridos()
+        {
+            string campo = string.Empty;
+
+            if (txtUsername.Text.Length == 0)
+                campo = txtUsername.Tag.ToString();
+            if (txtPassword.Text.Length == 0)
+                campo = txtPassword.Tag.ToString();
+            if (txtNombre.Text.Length == 0)
+                campo = txtNombre.Tag.ToString();
+            if (txtApellido.Text.Length == 0)
+                campo = txtApellido.Tag.ToString();
+            if (txtNroDocumento.Text.Length == 0)
+                campo = txtNroDocumento.Tag.ToString();
+            if (cmbTipoDoc.SelectedItem == null)
+                campo = cmbTipoDoc.Tag.ToString();
+            if (txtMail.Text.Length == 0)
+                campo = txtMail.Tag.ToString();
+            if (txtTelefono.Text.Length == 0)
+                campo = txtTelefono.Tag.ToString();
+            if (txtDireccion.Text.Length == 0)
+                campo = txtDireccion.Tag.ToString();
+            if (txtNumero.Text.Length == 0)
+                campo = txtNumero.Tag.ToString();
+            if (txtPiso.Text.Length == 0)
+                campo = txtPiso.Tag.ToString();
+            if (lstRol.Items.Count == 0)
+                campo = lstRol.Tag.ToString();
+            if (lstHoteles.Items.Count == 0)
+                campo = lstHoteles.Tag.ToString();
+
+            if (campo.Length > 0)
+            {
+                MessageBox.Show("El campo " + campo + " es requerido.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
     }
 }

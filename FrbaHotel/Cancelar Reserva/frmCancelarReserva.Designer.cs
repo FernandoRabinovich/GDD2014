@@ -61,6 +61,7 @@
             this.txtCodigoReserva.Name = "txtCodigoReserva";
             this.txtCodigoReserva.Size = new System.Drawing.Size(116, 20);
             this.txtCodigoReserva.TabIndex = 37;
+            this.txtCodigoReserva.Tag = "Número";
             // 
             // botonGuardar
             // 
@@ -99,6 +100,7 @@
             this.txtMotivo.Name = "txtMotivo";
             this.txtMotivo.Size = new System.Drawing.Size(221, 90);
             this.txtMotivo.TabIndex = 1;
+            this.txtMotivo.Tag = "Motivo";
             // 
             // lblMotivo
             // 
@@ -109,14 +111,14 @@
             this.lblMotivo.TabIndex = 3;
             this.lblMotivo.Text = "Motivo:";
             // 
-            // CancelarReserva
+            // frmCancelarReserva
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(327, 221);
             this.Controls.Add(this.habitacion);
             this.MaximizeBox = false;
-            this.Name = "CancelarReserva";
+            this.Name = "frmCancelarReserva";
             this.Text = "Cancerlar Reserva";
             this.Load += new System.EventHandler(this.CancelarReserva_Load);
             this.habitacion.ResumeLayout(false);

@@ -71,6 +71,7 @@
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(220, 68);
             this.txtDescripcion.TabIndex = 3;
+            this.txtDescripcion.Tag = "Descripcion";
             // 
             // label2
             // 
@@ -88,6 +89,7 @@
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 20);
             this.txtPrecio.TabIndex = 5;
+            this.txtPrecio.Tag = "Precio";
             // 
             // frmAltaRegimen
             // 

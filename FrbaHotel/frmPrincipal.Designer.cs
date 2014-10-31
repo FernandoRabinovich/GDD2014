@@ -56,6 +56,7 @@
             this.mEstadistico = new System.Windows.Forms.ToolStripMenuItem();
             this.mClientesErroneos = new System.Windows.Forms.ToolStripMenuItem();
             this.mCambiarPass = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAltaCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,9 +91,10 @@
             // mCliente
             // 
             this.mCliente.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mBajaCliente});
+            this.mBajaCliente,
+            this.mAltaCliente});
             this.mCliente.Name = "mCliente";
-            this.mCliente.Size = new System.Drawing.Size(132, 22);
+            this.mCliente.Size = new System.Drawing.Size(152, 22);
             this.mCliente.Tag = "3";
             this.mCliente.Text = "Cliente";
             this.mCliente.Visible = false;
@@ -101,6 +103,7 @@
             // 
             this.mBajaCliente.Name = "mBajaCliente";
             this.mBajaCliente.Size = new System.Drawing.Size(171, 22);
+            this.mBajaCliente.Tag = "";
             this.mBajaCliente.Text = "Baja/Modificación";
             this.mBajaCliente.Click += new System.EventHandler(this.mBajaCliente_Click);
             // 
@@ -110,7 +113,7 @@
             this.mAltaHabitacion,
             this.mModifHabitacion});
             this.mHabitacion.Name = "mHabitacion";
-            this.mHabitacion.Size = new System.Drawing.Size(132, 22);
+            this.mHabitacion.Size = new System.Drawing.Size(152, 22);
             this.mHabitacion.Tag = "5";
             this.mHabitacion.Text = "Habitación";
             this.mHabitacion.Visible = false;
@@ -135,7 +138,7 @@
             this.mAltaRol,
             this.mBajaRol});
             this.mRol.Name = "mRol";
-            this.mRol.Size = new System.Drawing.Size(132, 22);
+            this.mRol.Size = new System.Drawing.Size(152, 22);
             this.mRol.Tag = "1";
             this.mRol.Text = "Rol";
             this.mRol.Visible = false;
@@ -160,7 +163,7 @@
             this.mAltaUsuario,
             this.mBajaUsuario});
             this.mUsuario.Name = "mUsuario";
-            this.mUsuario.Size = new System.Drawing.Size(132, 22);
+            this.mUsuario.Size = new System.Drawing.Size(152, 22);
             this.mUsuario.Tag = "2";
             this.mUsuario.Text = "Usuario";
             this.mUsuario.Visible = false;
@@ -184,7 +187,7 @@
             this.mRegimen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mAltaRegimen});
             this.mRegimen.Name = "mRegimen";
-            this.mRegimen.Size = new System.Drawing.Size(132, 22);
+            this.mRegimen.Size = new System.Drawing.Size(152, 22);
             this.mRegimen.Tag = "6";
             this.mRegimen.Text = "Regimen";
             this.mRegimen.Visible = false;
@@ -202,7 +205,7 @@
             this.mAltaHotel,
             this.mBajaHotel});
             this.mHotel.Name = "mHotel";
-            this.mHotel.Size = new System.Drawing.Size(132, 22);
+            this.mHotel.Size = new System.Drawing.Size(152, 22);
             this.mHotel.Tag = "4";
             this.mHotel.Text = "Hotel";
             this.mHotel.Visible = false;
@@ -271,7 +274,7 @@
             // mRegistrarEstadia
             // 
             this.mRegistrarEstadia.Name = "mRegistrarEstadia";
-            this.mRegistrarEstadia.Size = new System.Drawing.Size(152, 22);
+            this.mRegistrarEstadia.Size = new System.Drawing.Size(120, 22);
             this.mRegistrarEstadia.Tag = "9";
             this.mRegistrarEstadia.Text = "Registrar";
             this.mRegistrarEstadia.Visible = false;
@@ -311,6 +314,14 @@
             this.mCambiarPass.Size = new System.Drawing.Size(127, 20);
             this.mCambiarPass.Text = "Cambiar Contraseña";
             this.mCambiarPass.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
+            // 
+            // mAltaCliente
+            // 
+            this.mAltaCliente.Name = "mAltaCliente";
+            this.mAltaCliente.Size = new System.Drawing.Size(171, 22);
+            this.mAltaCliente.Tag = "";
+            this.mAltaCliente.Text = "Alta";
+            this.mAltaCliente.Click += new System.EventHandler(this.mAltaCliente_Click);
             // 
             // frmPrincipal
             // 
@@ -361,6 +372,7 @@
         private System.Windows.Forms.ToolStripMenuItem mAltaHotel;
         private System.Windows.Forms.ToolStripMenuItem mBajaHotel;
         private System.Windows.Forms.ToolStripMenuItem mCambiarPass;
+        private System.Windows.Forms.ToolStripMenuItem mAltaCliente;
     }
 }
 

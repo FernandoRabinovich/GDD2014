@@ -88,6 +88,7 @@
             this.lstRol.Name = "lstRol";
             this.lstRol.Size = new System.Drawing.Size(248, 64);
             this.lstRol.TabIndex = 21;
+            this.lstRol.Tag = "Rol";
             // 
             // label3
             // 
@@ -108,6 +109,7 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(160, 20);
             this.txtPassword.TabIndex = 20;
+            this.txtPassword.Tag = "Password";
             // 
             // label1
             // 
@@ -137,6 +139,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(160, 20);
             this.txtUsername.TabIndex = 16;
+            this.txtUsername.Tag = "UserName";
             // 
             // groupBox2
             // 
@@ -178,6 +181,7 @@
             this.lstHoteles.Name = "lstHoteles";
             this.lstHoteles.Size = new System.Drawing.Size(269, 259);
             this.lstHoteles.TabIndex = 41;
+            this.lstHoteles.Tag = "Hotel";
             // 
             // label14
             // 
@@ -195,6 +199,7 @@
             this.txtPiso.Name = "txtPiso";
             this.txtPiso.Size = new System.Drawing.Size(100, 20);
             this.txtPiso.TabIndex = 39;
+            this.txtPiso.Tag = "Piso";
             // 
             // txtNumero
             // 
@@ -203,6 +208,7 @@
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(100, 20);
             this.txtNumero.TabIndex = 38;
+            this.txtNumero.Tag = "Número";
             // 
             // label13
             // 
@@ -245,6 +251,7 @@
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(75, 20);
             this.txtNroDocumento.TabIndex = 32;
+            this.txtNroDocumento.Tag = "Nro. Documento";
             // 
             // cmbTipoDoc
             // 
@@ -254,6 +261,7 @@
             this.cmbTipoDoc.Name = "cmbTipoDoc";
             this.cmbTipoDoc.Size = new System.Drawing.Size(79, 21);
             this.cmbTipoDoc.TabIndex = 31;
+            this.cmbTipoDoc.Tag = "Tipo Documento";
             this.cmbTipoDoc.ValueMember = "id";
             // 
             // txtApellido
@@ -262,6 +270,7 @@
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(160, 20);
             this.txtApellido.TabIndex = 30;
+            this.txtApellido.Tag = "Apellido";
             // 
             // label5
             // 
@@ -289,6 +298,7 @@
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(193, 20);
             this.txtDireccion.TabIndex = 26;
+            this.txtDireccion.Tag = "Dirección";
             // 
             // label8
             // 
@@ -307,6 +317,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(159, 20);
             this.txtTelefono.TabIndex = 24;
+            this.txtTelefono.Tag = "Teléfono";
             // 
             // label10
             // 
@@ -361,6 +372,7 @@
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
             this.txtNombre.TabIndex = 16;
+            this.txtNombre.Tag = "Nombre";
             // 
             // txtMail
             // 
@@ -370,6 +382,7 @@
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);
             this.txtMail.TabIndex = 14;
+            this.txtMail.Tag = "Mail";
             // 
             // btnLimpiar
             // 

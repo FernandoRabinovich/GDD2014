@@ -81,9 +81,10 @@ namespace FrbaHotel
                     }
                     else
                     {
-                        IngresarConsumible frmConsumible = new IngresarConsumible(reserva, habitaciones);
-                        frmConsumible.StartPosition = FormStartPosition.CenterScreen;
-                        frmConsumible.Show();
+                        //frmFacturarPublicacion frmFacturar = new frmFacturarPublicacion(reserva, habitaciones);
+                        frmFacturarPublicacion frmFacturar = new frmFacturarPublicacion(1, 1);
+                        frmFacturar.StartPosition = FormStartPosition.CenterScreen;
+                        frmFacturar.Show();
                     }
 
                     this.Close();

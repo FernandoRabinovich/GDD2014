@@ -156,6 +156,7 @@
             this.grdClientes.Location = new System.Drawing.Point(12, 113);
             this.grdClientes.MultiSelect = false;
             this.grdClientes.Name = "grdClientes";
+            this.grdClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdClientes.Size = new System.Drawing.Size(560, 233);
             this.grdClientes.TabIndex = 2;
             // 
@@ -164,12 +165,12 @@
             this.mGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mEditar});
             this.mGrid.Name = "mGrid";
-            this.mGrid.Size = new System.Drawing.Size(153, 48);
+            this.mGrid.Size = new System.Drawing.Size(105, 26);
             // 
             // mEditar
             // 
             this.mEditar.Name = "mEditar";
-            this.mEditar.Size = new System.Drawing.Size(152, 22);
+            this.mEditar.Size = new System.Drawing.Size(104, 22);
             this.mEditar.Text = "Editar";
             this.mEditar.Click += new System.EventHandler(this.mEditar_Click);
             // 
