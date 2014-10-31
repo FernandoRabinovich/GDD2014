@@ -40,8 +40,8 @@
             this.NombreCliente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.NombreHotel = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.LineasFactura = new System.Windows.Forms.DataGridView();
+            this.TotalAPagar = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.MedioPago = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -51,7 +51,7 @@
             this.NumeroTarjeta = new System.Windows.Forms.TextBox();
             this.Guardar = new System.Windows.Forms.Button();
             this.Limpiar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LineasFactura)).BeginInit();
             this.SuspendLayout();
             // 
             // NroDeFactura
@@ -159,21 +159,23 @@
             this.NombreHotel.Size = new System.Drawing.Size(198, 20);
             this.NombreHotel.TabIndex = 11;
             // 
-            // dataGridView1
+            // LineasFactura
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 155);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(595, 150);
-            this.dataGridView1.TabIndex = 12;
+            this.LineasFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.LineasFactura.Enabled = false;
+            this.LineasFactura.Location = new System.Drawing.Point(12, 155);
+            this.LineasFactura.Name = "LineasFactura";
+            this.LineasFactura.Size = new System.Drawing.Size(595, 150);
+            this.LineasFactura.TabIndex = 12;
             // 
-            // textBox4
+            // TotalAPagar
             // 
-            this.textBox4.Location = new System.Drawing.Point(496, 330);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(111, 20);
-            this.textBox4.TabIndex = 13;
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.TotalAPagar.Enabled = false;
+            this.TotalAPagar.Location = new System.Drawing.Point(496, 330);
+            this.TotalAPagar.Name = "TotalAPagar";
+            this.TotalAPagar.Size = new System.Drawing.Size(111, 20);
+            this.TotalAPagar.TabIndex = 13;
+            this.TotalAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
@@ -268,8 +270,8 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.MedioPago);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.TotalAPagar);
+            this.Controls.Add(this.LineasFactura);
             this.Controls.Add(this.NombreHotel);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.NombreCliente);
@@ -285,7 +287,7 @@
             this.Name = "frmFacturarPublicacion";
             this.Text = "Facturar Publicación";
             this.Load += new System.EventHandler(this.frmFacturarPublicacion_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LineasFactura)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,8 +307,8 @@
         private System.Windows.Forms.TextBox NombreCliente;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox NombreHotel;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.DataGridView LineasFactura;
+        private System.Windows.Forms.TextBox TotalAPagar;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox MedioPago;
         private System.Windows.Forms.Label label7;

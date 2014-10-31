@@ -30,8 +30,85 @@ namespace FrbaHotel
             ObtenerInformacionEstadia (nroDeEstadia);
             FechaFactura.Text = (System.Configuration.ConfigurationSettings.AppSettings["fechasistema"].ToString());
             ObtenerMediosPago();
+            CargarLineasFactura();
+            CalcularTotalAPagar();
+            
                    }
 
+               private void CargarLineasFactura()
+               {
+                   SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                   SqlCommand cmd = null;
+
+                   try
+                   {
+                       cn.Open();
+                       cmd = new SqlCommand();
+                       cmd.Connection = cn;
+                       cmd.CommandType = CommandType.StoredProcedure;
+                       cmd.CommandText = "GRAFO_LOCO.ObtencionLineasFactura";
+
+                       SqlParameter nroEstadia = new SqlParameter("@nroEstadia", NroDeEstadia.Text);
+                       //nroEstadia.SqlDbType = SqlDbType.Int;
+                       cmd.Parameters.Add(nroEstadia);
+                                              
+                       SqlDataAdapter adapter = new SqlDataAdapter();
+                       adapter.SelectCommand = cmd;
+
+                       DataTable table = new DataTable();
+                       adapter.Fill(table);
+                                             
+
+                       LineasFactura.DataSource = table;
+                      if (LineasFactura[0, 0].Value.ToString() == "3")
+                       {
+                           CargarDescuentoPorEstadia();
+                           }
+                        //Oculto columnas
+                       LineasFactura.Columns["idTipoRegimen"].Visible = false;
+                       LineasFactura.Columns["idConsumible"].Visible = false;
+                       
+                   }
+                   catch (Exception ex)
+                   {
+                       MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   }
+                   finally
+                   {
+                       cn.Close();
+                       if (cmd != null)
+                           cmd.Dispose();
+                   }
+               }
+        private void CargarDescuentoPorEstadia()
+            {
+                int counter;
+                decimal total = 0.00m;
+                DataTable dt = LineasFactura.DataSource as DataTable;
+                DataRow row = dt.NewRow();
+                row["Descripcion"] = "Descuento por Estadia";
+                row["Cantidad"] = "1";
+                for (counter = 0; counter < (LineasFactura.Rows.Count);
+        counter++)
+                { total = Convert.ToInt16(LineasFactura.Rows[counter].Cells[4].Value) + total; }
+                row["Precio"] = -1*total;
+                row["Precio Total"] = -1*total;
+                
+
+                dt.Rows.Add(row);
+
+                LineasFactura.DataSource = dt;
+                }
+        
+        private void CalcularTotalAPagar()
+          {
+        decimal total1 = 0.00m;
+            foreach(DataGridViewRow row in LineasFactura.Rows){
+
+   total1 = Convert.ToInt16(row.Cells[4].Value) + total1;
+   TotalAPagar.Text = "$" + total1.ToString();
+}
+           }
                private void ObtenerMediosPago()
                {
                                         
