@@ -246,6 +246,7 @@
             this.Guardar.TabIndex = 21;
             this.Guardar.Text = "Guardar";
             this.Guardar.UseVisualStyleBackColor = true;
+            this.Guardar.Click += new System.EventHandler(this.Guardar_Click);
             // 
             // Limpiar
             // 

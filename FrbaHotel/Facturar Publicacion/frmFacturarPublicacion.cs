@@ -106,7 +106,7 @@ namespace FrbaHotel
             foreach(DataGridViewRow row in LineasFactura.Rows){
 
    total1 = Convert.ToInt16(row.Cells[4].Value) + total1;
-   TotalAPagar.Text = "$" + total1.ToString();
+   TotalAPagar.Text = total1.ToString();
 }
            }
                private void ObtenerMediosPago()
@@ -282,5 +282,101 @@ namespace FrbaHotel
                     cmd.Dispose();
             }
             }
+
+        private void Guardar_Click(object sender, EventArgs e)
+        {
+            GuardarFactura();
+            GuardarLineas();
+        }
+
+        private void GuardarFactura()
+        {
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
+
+            try
+            {
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.CargarFactura";
+                SqlParameter factura = new SqlParameter("@IdFactura", Int32.Parse(NroDeFactura.Text));
+                cmd.Parameters.Add(factura);
+                SqlParameter fecha = new SqlParameter("@FechaCreacion", FechaFactura.Text);
+                cmd.Parameters.Add(fecha);
+                SqlParameter subtotal = new SqlParameter("@Monto", double.Parse(TotalAPagar.Text));
+                cmd.Parameters.Add(subtotal);
+                SqlParameter estadia = new SqlParameter("@IdEstadia", nroDeEstadia);
+                estadia.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(estadia);
+                SqlParameter mediopago = new SqlParameter("@IdTipoPago", MedioPago.SelectedValue);
+                cmd.Parameters.Add(mediopago);
+                SqlParameter nombreTarjeta = new SqlParameter("@NombreTarjeta", NombreTarjeta.Text);
+                cmd.Parameters.Add(nombreTarjeta);
+                SqlParameter numeroTarjeta = new SqlParameter("@NumeroTarjeta", NumeroTarjeta.Text);
+                cmd.Parameters.Add(numeroTarjeta);
+                reader = cmd.ExecuteReader();
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cn.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }
+            }
+
+        private void GuardarLineas(){
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
+
+            try
+            {   int counter;
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.CargarLineasFactura";
+                for (counter = 0; counter < (LineasFactura.Rows.Count);
+        counter++)
+                {  
+                SqlParameter factura = new SqlParameter("@IdFactura", Int32.Parse(NroDeFactura.Text));
+                cmd.Parameters.Add(factura);
+                SqlParameter consumible = new SqlParameter("@IdConsumible", Convert.ToInt16(LineasFactura.Rows[counter].Cells[1].Value));
+                cmd.Parameters.Add(consumible);
+                SqlParameter cantidad = new SqlParameter("@Cantidad", Convert.ToInt16(LineasFactura.Rows[counter].Cells[3].Value));
+                cmd.Parameters.Add(cantidad);
+                SqlParameter precioUni = new SqlParameter("@PrecioUnitario", Convert.ToInt16(LineasFactura.Rows[counter].Cells[4].Value));
+                cmd.Parameters.Add(precioUni);
+                SqlParameter precioTot = new SqlParameter("@PrecioTotal", Convert.ToInt16(LineasFactura.Rows[counter].Cells[5].Value));
+                cmd.Parameters.Add(precioTot);
+                reader = cmd.ExecuteReader();
+                
+
+            }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cn.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }
+        }
+
+        }
+
   }
-}
+
+
+
