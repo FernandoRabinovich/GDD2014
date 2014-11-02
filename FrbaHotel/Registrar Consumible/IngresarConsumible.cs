@@ -8,23 +8,13 @@ using System.Text;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace FrbaHotel
+namespace FrbaHotel.Registrar_Consumible
 {
     public partial class IngresarConsumible : Form
     {
-        Reserva reserva = new Reserva();
-        List<HabitacionesPorReserva> habitaciones = new List<HabitacionesPorReserva>();
-
         public IngresarConsumible()
         {
             InitializeComponent();
-        }
-
-        public IngresarConsumible(Reserva reserva, List<HabitacionesPorReserva> habitaciones)
-        {
-            InitializeComponent();
-            this.reserva = reserva;
-            this.habitaciones = habitaciones;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -32,10 +22,18 @@ namespace FrbaHotel
 
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private void btnBorrar_Click(object sender, EventArgs e)
         {
-            SqlParameter consumible;
-             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+
+            idHabitacion.Clear();
+        }
+
+        private void btnAceptar_Click_1(object sender, EventArgs e)
+        {
+            SqlParameter idConsumibleIngresado;
+            SqlParameter idHabitacionIngresada;
+            SqlParameter fecha;
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
             SqlDataReader reader = null;
 
@@ -45,12 +43,20 @@ namespace FrbaHotel
                 cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.IngresarConsumible";
+                cmd.CommandText = "GRAFO_LOCO.RegistrarConsumible";
 
-                consumible = new SqlParameter("@consumible", DescripcionDelConsumible.Text); //consumible pero con el servicio
-                consumible.SqlDbType = SqlDbType.VarChar;
-                consumible.Size = 255;
-                cmd.Parameters.Add(consumible);
+                idHabitacionIngresada = new SqlParameter("@idHabitacion", idHabitacion.Text); 
+                idHabitacionIngresada.SqlDbType = SqlDbType.Int;
+                idHabitacionIngresada.Size = 255;
+                cmd.Parameters.Add(idHabitacionIngresada);
+
+                idConsumibleIngresado = new SqlParameter("@idConsumible", idConsumible.Text); 
+                idConsumibleIngresado.SqlDbType = SqlDbType.Int;
+                idConsumibleIngresado.Size = 255;
+                cmd.Parameters.Add(idConsumibleIngresado);
+                fecha = new SqlParameter("@fecha", System.DateTime.Today);
+                fecha.SqlDbType = SqlDbType.DateTime;
+                cmd.Parameters.Add(fecha);
 
 
                 cmd.ExecuteNonQuery();
@@ -65,14 +71,11 @@ namespace FrbaHotel
                 reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
-            }  
+            }
         }
 
-        private void btnBorrar_Click(object sender, EventArgs e)
-        {
-            cmbTipoDeConsumible.Text = "";
-            DescripcionDelConsumible.Clear();
-        }
+
+
 
 
     }
