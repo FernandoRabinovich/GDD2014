@@ -1,16 +1,16 @@
 ﻿namespace FrbaHotel
 {
-    partial class FrmHotel
+    partial class frmModificarHotel
     {
         /// <summary>
-        /// Required designer variable.
+        /// Variable del diseñador requerida.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Limpiar los recursos que se estén utilizando.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true si los recursos administrados se deben eliminar; false en caso contrario, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,50 +20,60 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Código generado por el Diseñador de Windows Forms
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido del método con el editor de código.
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkRegimenes = new System.Windows.Forms.CheckedListBox();
             this.txtNumeroCalle = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbCiudad = new System.Windows.Forms.ComboBox();
             this.txtPais = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbTipoRegimen = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtMail = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cantEstrellas = new System.Windows.Forms.NumericUpDown();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnLimpiar = new System.Windows.Forms.Button();
-            this.btnGuardar = new System.Windows.Forms.Button();
+            this.txtMail = new System.Windows.Forms.TextBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cantEstrellas)).BeginInit();
             this.SuspendLayout();
             // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGuardar.Location = new System.Drawing.Point(224, 416);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(100, 30);
+            this.btnGuardar.TabIndex = 29;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
+            // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkRegimenes);
             this.groupBox2.Controls.Add(this.txtNumeroCalle);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.cmbCiudad);
             this.groupBox2.Controls.Add(this.txtPais);
             this.groupBox2.Controls.Add(this.txtTelefono);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.cmbTipoRegimen);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.txtDireccion);
@@ -71,10 +81,19 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Location = new System.Drawing.Point(12, 134);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(312, 210);
-            this.groupBox2.TabIndex = 24;
+            this.groupBox2.Size = new System.Drawing.Size(312, 269);
+            this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos locatarios";
+            // 
+            // chkRegimenes
+            // 
+            this.chkRegimenes.FormattingEnabled = true;
+            this.chkRegimenes.Location = new System.Drawing.Point(111, 159);
+            this.chkRegimenes.Name = "chkRegimenes";
+            this.chkRegimenes.Size = new System.Drawing.Size(160, 94);
+            this.chkRegimenes.TabIndex = 38;
+            this.chkRegimenes.Tag = "Tipo Regimen";
             // 
             // txtNumeroCalle
             // 
@@ -131,19 +150,6 @@
             this.label2.TabIndex = 31;
             this.label2.Text = "Tipo de regímen:";
             // 
-            // cmbTipoRegimen
-            // 
-            this.cmbTipoRegimen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbTipoRegimen.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbTipoRegimen.DisplayMember = "descripcion";
-            this.cmbTipoRegimen.FormattingEnabled = true;
-            this.cmbTipoRegimen.Location = new System.Drawing.Point(111, 156);
-            this.cmbTipoRegimen.Name = "cmbTipoRegimen";
-            this.cmbTipoRegimen.Size = new System.Drawing.Size(160, 21);
-            this.cmbTipoRegimen.TabIndex = 32;
-            this.cmbTipoRegimen.Tag = "Regimen";
-            this.cmbTipoRegimen.ValueMember = "id";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -190,16 +196,6 @@
             this.label10.TabIndex = 23;
             this.label10.Text = "Teléfono:";
             // 
-            // txtMail
-            // 
-            this.txtMail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMail.Enabled = false;
-            this.txtMail.Location = new System.Drawing.Point(118, 58);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(160, 20);
-            this.txtMail.TabIndex = 14;
-            this.txtMail.Tag = "Mail";
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -212,7 +208,7 @@
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(312, 116);
-            this.groupBox1.TabIndex = 23;
+            this.groupBox1.TabIndex = 27;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos identificatorios";
             // 
@@ -277,42 +273,29 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Cant. de estrellas:";
             // 
-            // btnLimpiar
+            // txtMail
             // 
-            this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpiar.Location = new System.Drawing.Point(12, 361);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(100, 30);
-            this.btnLimpiar.TabIndex = 26;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            this.txtMail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtMail.Enabled = false;
+            this.txtMail.Location = new System.Drawing.Point(118, 58);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(160, 20);
+            this.txtMail.TabIndex = 14;
+            this.txtMail.Tag = "Mail";
             // 
-            // btnGuardar
-            // 
-            this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.Location = new System.Drawing.Point(224, 361);
-            this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(100, 30);
-            this.btnGuardar.TabIndex = 25;
-            this.btnGuardar.Text = "Guardar";
-            this.btnGuardar.UseVisualStyleBackColor = true;
-            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
-            // 
-            // FrmHotel
+            // frmModificarHotel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 400);
-            this.Controls.Add(this.btnLimpiar);
+            this.ClientSize = new System.Drawing.Size(336, 449);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "FrmHotel";
-            this.Text = "Alta Hotel";
-            this.Load += new System.EventHandler(this.FrmHotel_Load);
+            this.Name = "frmModificarHotel";
+            this.Text = "Modificar Hotel";
+            this.Load += new System.EventHandler(this.frmModificarHotel_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -324,27 +307,26 @@
 
         #endregion
 
+        private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.MaskedTextBox txtNumeroCalle;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cmbCiudad;
+        private System.Windows.Forms.TextBox txtPais;
+        private System.Windows.Forms.MaskedTextBox txtTelefono;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtMail;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown cantEstrellas;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.Button btnGuardar;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbTipoRegimen;
-        private System.Windows.Forms.MaskedTextBox txtTelefono;
-        private System.Windows.Forms.TextBox txtPais;
-        private System.Windows.Forms.ComboBox cmbCiudad;
-        private System.Windows.Forms.MaskedTextBox txtNumeroCalle;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtMail;
+        private System.Windows.Forms.CheckedListBox chkRegimenes;
     }
 }

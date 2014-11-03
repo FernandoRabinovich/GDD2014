@@ -91,6 +91,30 @@
     <Compile Include="ABM de Habitacion\alta.Designer.cs">
       <DependentUpon>alta.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM de Hotel\frmBajaHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\frmBajaHotel.Designer.cs">
+      <DependentUpon>frmBajaHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\FrmHotel.Designer.cs">
+      <DependentUpon>FrmHotel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Hotel\frmHoteles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\frmHoteles.Designer.cs">
+      <DependentUpon>frmHoteles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABM de Hotel\frmModificarHotel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM de Hotel\frmModificarHotel.Designer.cs">
+      <DependentUpon>frmModificarHotel.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM de Regimen\frmAltaRegimen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +169,7 @@
     <Compile Include="Cancelar Reserva\frmReservas.Designer.cs">
       <DependentUpon>frmReservas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clases\Ciudad.cs" />
     <Compile Include="Clases\Cliente.cs" />
     <Compile Include="Clases\Funcionalidad.cs" />
     <Compile Include="Clases\Habitacion.cs" />
@@ -234,6 +259,15 @@
     <EmbeddedResource Include="ABM de Habitacion\alta.resx">
       <DependentUpon>alta.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\FrmHotel.resx">
+      <DependentUpon>FrmHotel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\frmHoteles.resx">
+      <DependentUpon>frmHoteles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\frmModificarHotel.resx">
+      <DependentUpon>frmModificarHotel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM de Regimen\frmAltaRegimen.resx">
       <DependentUpon>frmAltaRegimen.cs</DependentUpon>

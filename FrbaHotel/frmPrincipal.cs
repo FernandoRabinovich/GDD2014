@@ -217,5 +217,21 @@ namespace FrbaHotel
             frmCliente.StartPosition = FormStartPosition.CenterScreen;
             frmCliente.Show();
         }
+
+        private void mAltaHotel_Click(object sender, EventArgs e)
+        {
+            FrmHotel frmHotel = new FrmHotel();
+            frmHotel.MdiParent = this;
+            frmHotel.StartPosition = FormStartPosition.CenterScreen;
+            frmHotel.Show();
+        }
+
+        private void mBajaHotel_Click(object sender, EventArgs e)
+        {
+            frmHoteles frmHoteles = new frmHoteles();
+            frmHoteles.MdiParent = this;
+            frmHoteles.StartPosition = FormStartPosition.CenterScreen;
+            frmHoteles.Show();
+        }
     }
 }

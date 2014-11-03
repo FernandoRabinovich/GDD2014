@@ -32,6 +32,7 @@
             this.mABM = new System.Windows.Forms.ToolStripMenuItem();
             this.mCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.mBajaCliente = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAltaCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.mHabitacion = new System.Windows.Forms.ToolStripMenuItem();
             this.mAltaHabitacion = new System.Windows.Forms.ToolStripMenuItem();
             this.mModifHabitacion = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,7 +57,6 @@
             this.mEstadistico = new System.Windows.Forms.ToolStripMenuItem();
             this.mClientesErroneos = new System.Windows.Forms.ToolStripMenuItem();
             this.mCambiarPass = new System.Windows.Forms.ToolStripMenuItem();
-            this.mAltaCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,6 +106,14 @@
             this.mBajaCliente.Tag = "";
             this.mBajaCliente.Text = "Baja/Modificación";
             this.mBajaCliente.Click += new System.EventHandler(this.mBajaCliente_Click);
+            // 
+            // mAltaCliente
+            // 
+            this.mAltaCliente.Name = "mAltaCliente";
+            this.mAltaCliente.Size = new System.Drawing.Size(171, 22);
+            this.mAltaCliente.Tag = "";
+            this.mAltaCliente.Text = "Alta";
+            this.mAltaCliente.Click += new System.EventHandler(this.mAltaCliente_Click);
             // 
             // mHabitacion
             // 
@@ -216,6 +224,7 @@
             this.mAltaHotel.Size = new System.Drawing.Size(171, 22);
             this.mAltaHotel.Text = "Alta";
             this.mAltaHotel.Visible = false;
+            this.mAltaHotel.Click += new System.EventHandler(this.mAltaHotel_Click);
             // 
             // mBajaHotel
             // 
@@ -223,6 +232,7 @@
             this.mBajaHotel.Size = new System.Drawing.Size(171, 22);
             this.mBajaHotel.Text = "Baja/Modificación";
             this.mBajaHotel.Visible = false;
+            this.mBajaHotel.Click += new System.EventHandler(this.mBajaHotel_Click);
             // 
             // mReserva
             // 
@@ -314,14 +324,6 @@
             this.mCambiarPass.Size = new System.Drawing.Size(127, 20);
             this.mCambiarPass.Text = "Cambiar Contraseña";
             this.mCambiarPass.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
-            // 
-            // mAltaCliente
-            // 
-            this.mAltaCliente.Name = "mAltaCliente";
-            this.mAltaCliente.Size = new System.Drawing.Size(171, 22);
-            this.mAltaCliente.Tag = "";
-            this.mAltaCliente.Text = "Alta";
-            this.mAltaCliente.Click += new System.EventHandler(this.mAltaCliente_Click);
             // 
             // frmPrincipal
             // 
