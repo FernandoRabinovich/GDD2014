@@ -194,7 +194,8 @@ namespace FrbaHotel
                     grdClientes.SelectedRows[0].Cells["Nombre"].Value.ToString(), Int32.Parse(grdClientes.SelectedRows[0].Cells["NumeroCalle"].Value.ToString()),
                     Int32.Parse(grdClientes.SelectedRows[0].Cells["NroDocumento"].Value.ToString()), Int32.Parse(grdClientes.SelectedRows[0].Cells["Piso"].Value.ToString()),
                     grdClientes.SelectedRows[0].Cells["TipoDocumento"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(),
-                    grdClientes.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Departamento"].Value.ToString()));
+                    grdClientes.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Departamento"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Telefono"].Value.ToString()));
                 grdClientesEstadia.DataSource = clientesEstadia;
             }
             else

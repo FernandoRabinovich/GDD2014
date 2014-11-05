@@ -110,6 +110,7 @@
             // cmbTipoHabitacion
             // 
             this.cmbTipoHabitacion.DisplayMember = "descripcion";
+            this.cmbTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoHabitacion.FormattingEnabled = true;
             this.cmbTipoHabitacion.Location = new System.Drawing.Point(87, 107);
             this.cmbTipoHabitacion.Name = "cmbTipoHabitacion";

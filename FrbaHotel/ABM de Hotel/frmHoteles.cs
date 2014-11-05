@@ -18,19 +18,12 @@ namespace FrbaHotel
         }
 
         private void mEditar_Click(object sender, EventArgs e)
-        {   /*
-            Hotel holte = new Hotel(Int32.Parse(grdHoteles.SelectedRows[0].Cells["id"].Value.ToString()));
-            frmModificarHotel frmModifHotel = new frmModificarHotel();
-            frmModifHotel.StartPosition = FormStartPosition.CenterScreen;
-            frmModifHotel.ShowDialog();
-            */
-        }
-
-        private void frmHoteles_Load(object sender, EventArgs e)
         {
+            Ciudad ciudad = new Ciudad(Int32.Parse(grdHoteles.SelectedRows[0].Cells["IdCiudad"].Value.ToString()), grdHoteles.SelectedRows[0].Cells["Ciudad"].Value.ToString());
+            List<Regimen> regimenes = new List<Regimen>();
+
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
-            SqlDataAdapter adapter = null;
 
             try
             {
@@ -38,13 +31,20 @@ namespace FrbaHotel
                 cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.ObtenerCiudades";
-                adapter = new SqlDataAdapter();
+                cmd.CommandText = "GRAFO_LOCO.ObtenerRegimenPorHotel";
+                SqlParameter IdHotel = new SqlParameter("@idHotel", Int32.Parse(grdHoteles.SelectedRows[0].Cells["id"].Value.ToString()));
+                IdHotel.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(IdHotel);
+
+                SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = cmd;
                 DataTable table = new DataTable();
                 adapter.Fill(table);
 
-                cmbCiudad.DataSource = table;
+                foreach (DataRow r in table.Rows)
+                {
+                    regimenes.Add(new Regimen(Int32.Parse(r["id"].ToString()), r["descripcion"].ToString(), decimal.Parse(r["precio"].ToString())));
+                }
             }
             catch (Exception ex)
             {
@@ -53,6 +53,46 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }
+
+            Hotel hotel = new Hotel(Int32.Parse(grdHoteles.SelectedRows[0].Cells["id"].Value.ToString()), grdHoteles.SelectedRows[0].Cells["descripcion"].Value.ToString(),
+                grdHoteles.SelectedRows[0].Cells["Mail"].Value.ToString(), Int32.Parse(grdHoteles.SelectedRows[0].Cells["Estrellas"].Value.ToString()),
+                grdHoteles.SelectedRows[0].Cells["Telefono"].Value.ToString(), grdHoteles.SelectedRows[0].Cells["Direccion"].Value.ToString(),
+                Int32.Parse(grdHoteles.SelectedRows[0].Cells["Numero"].Value.ToString()), ciudad, grdHoteles.SelectedRows[0].Cells["Pais"].Value.ToString(), regimenes);
+            frmModificarHotel frmModifHotel = new frmModificarHotel(hotel);
+            frmModifHotel.StartPosition = FormStartPosition.CenterScreen;
+            frmModifHotel.ShowDialog();
+            
+        }
+
+        private void frmHoteles_Load(object sender, EventArgs e)
+        {
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
+
+            try
+            {
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.ObtenerCiudades";
+                reader = cmd.ExecuteReader();
+
+                while(reader.Read())
+                    cmbCiudad.Items.Add(new Ciudad(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cn.Close();
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }

@@ -103,17 +103,14 @@
             // 
             // cmbTipoDoc
             // 
-            this.cmbTipoDoc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbTipoDoc.DisplayMember = "descripcion";
+            this.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDoc.FormattingEnabled = true;
-            this.cmbTipoDoc.Items.AddRange(new object[] {
-            "DNI",
-            "Pasaporte"});
             this.cmbTipoDoc.Location = new System.Drawing.Point(191, 18);
             this.cmbTipoDoc.Name = "cmbTipoDoc";
             this.cmbTipoDoc.Size = new System.Drawing.Size(66, 21);
             this.cmbTipoDoc.TabIndex = 1;
-            this.cmbTipoDoc.ValueMember = "idTipoDocumento";
+            this.cmbTipoDoc.ValueMember = "id";
             // 
             // txtMail
             // 

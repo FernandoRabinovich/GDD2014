@@ -146,7 +146,7 @@
             // cmbHotel
             // 
             this.cmbHotel.DisplayMember = "descripcion";
-            this.cmbHotel.Enabled = false;
+            this.cmbHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHotel.FormattingEnabled = true;
             this.cmbHotel.Location = new System.Drawing.Point(94, 154);
             this.cmbHotel.Name = "cmbHotel";
@@ -209,7 +209,7 @@
             // cmbRegimenHotel
             // 
             this.cmbRegimenHotel.DisplayMember = "descripcion";
-            this.cmbRegimenHotel.Enabled = false;
+            this.cmbRegimenHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRegimenHotel.FormattingEnabled = true;
             this.cmbRegimenHotel.Location = new System.Drawing.Point(117, 220);
             this.cmbRegimenHotel.Name = "cmbRegimenHotel";
@@ -221,7 +221,7 @@
             // cmbTipoHabitacion
             // 
             this.cmbTipoHabitacion.DisplayMember = "descripcion";
-            this.cmbTipoHabitacion.Enabled = false;
+            this.cmbTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoHabitacion.FormattingEnabled = true;
             this.cmbTipoHabitacion.Location = new System.Drawing.Point(117, 186);
             this.cmbTipoHabitacion.Name = "cmbTipoHabitacion";
@@ -232,7 +232,6 @@
             // 
             // fechaHasta
             // 
-            this.fechaHasta.Enabled = false;
             this.fechaHasta.Location = new System.Drawing.Point(94, 122);
             this.fechaHasta.Name = "fechaHasta";
             this.fechaHasta.Size = new System.Drawing.Size(200, 20);
@@ -240,7 +239,6 @@
             // 
             // fechaDesde
             // 
-            this.fechaDesde.Enabled = false;
             this.fechaDesde.Location = new System.Drawing.Point(94, 90);
             this.fechaDesde.Name = "fechaDesde";
             this.fechaDesde.Size = new System.Drawing.Size(200, 20);

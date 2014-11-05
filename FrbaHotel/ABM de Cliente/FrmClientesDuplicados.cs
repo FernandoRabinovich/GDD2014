@@ -26,7 +26,6 @@ namespace FrbaHotel
 
             rdbtnMail.Checked = false;
             txtMail.Text = "";
-            CargarGrilla();
         }
 
         private void FrmClientesDuplicados_Load(object sender, EventArgs e)
@@ -35,6 +34,7 @@ namespace FrbaHotel
 
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -43,12 +43,13 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
-                SqlDataAdapter adapter = new SqlDataAdapter();
+                reader = cmd.ExecuteReader();
+                /*SqlDataAdapter adapter = new SqlDataAdapter();
                 DataTable table = new DataTable();
                 adapter.SelectCommand = cmd;
-                adapter.Fill(table);
-
-                cmbTipoDoc.DataSource = table;
+                adapter.Fill(table);*/
+                while (reader.Read())
+                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
             }
             catch (Exception ex)
             {
@@ -57,9 +58,12 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }
+
+            CargarGrilla();
         }
 
         private void CargarGrilla()
@@ -79,7 +83,7 @@ namespace FrbaHotel
                 documentoDuplicado.SqlDbType = SqlDbType.Bit;
                 cmd.Parameters.Add(documentoDuplicado);
 
-                SqlParameter IdTipoDocumento = new SqlParameter("@IdTipoDocumento", ((TipoDoc)cmbTipoDoc.SelectedItem).Id);
+                SqlParameter IdTipoDocumento = new SqlParameter("@IdTipoDocumento", cmbTipoDoc.SelectedValue == null ? -1:((TipoDoc)cmbTipoDoc.SelectedItem).Id);
                 IdTipoDocumento.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(IdTipoDocumento);
 
@@ -170,11 +174,11 @@ namespace FrbaHotel
                     grdResultado.SelectedRows[0].Cells["Nombre"].Value.ToString(), Int32.Parse(grdResultado.SelectedRows[0].Cells["NumeroCalle"].Value.ToString()),
                     Int32.Parse(grdResultado.SelectedRows[0].Cells["NroDocumento"].Value.ToString()), Int32.Parse(grdResultado.SelectedRows[0].Cells["Piso"].Value.ToString()),
                     grdResultado.SelectedRows[0].Cells["IdTipoDocumento"].Value.ToString(), grdResultado.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(),
-                    grdResultado.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdResultado.SelectedRows[0].Cells["Departamento"].Value.ToString()));
+                    grdResultado.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdResultado.SelectedRows[0].Cells["Departamento"].Value.ToString(),
+                    grdResultado.SelectedRows[0].Cells["Telefono"].Value.ToString()));
                 frmModifCliente.StartPosition = FormStartPosition.CenterScreen;
                 frmModifCliente.ShowDialog();
             }
         }
-
     }
 }

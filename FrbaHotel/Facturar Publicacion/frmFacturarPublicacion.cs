@@ -13,107 +13,87 @@ namespace FrbaHotel
 {
     public partial class frmFacturarPublicacion : Form
     {
-        int IdHotel;
-        int nroDeEstadia;
-        public frmFacturarPublicacion(int idDeHotel, int nroEstadia)
+        int codigoReserva;
+
+        public frmFacturarPublicacion()
         {
-            
             InitializeComponent();
-            IdHotel = idDeHotel;
-            nroDeEstadia = nroEstadia;
         }
 
-               private void frmFacturarPublicacion_Load(object sender, EventArgs e)
+        public frmFacturarPublicacion(int codigoReserva)
+        {            
+            InitializeComponent();
+            this.codigoReserva = codigoReserva;
+        }
+
+        private void frmFacturarPublicacion_Load(object sender, EventArgs e)
         {
-            ObtenerNroFactura();
-            ObtenerNombreHotel();
-            ObtenerInformacionEstadia (nroDeEstadia);
-            FechaFactura.Text = (System.Configuration.ConfigurationSettings.AppSettings["fechasistema"].ToString());
-            ObtenerMediosPago();
-            CargarLineasFactura();
-            CalcularTotalAPagar();
-            
-                   }
-
-               private void CargarLineasFactura()
-               {
-                   SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-                   SqlCommand cmd = null;
-
-                   try
-                   {
-                       cn.Open();
-                       cmd = new SqlCommand();
-                       cmd.Connection = cn;
-                       cmd.CommandType = CommandType.StoredProcedure;
-                       cmd.CommandText = "GRAFO_LOCO.ObtencionLineasFactura";
-
-                       SqlParameter nroEstadia = new SqlParameter("@nroEstadia", NroDeEstadia.Text);
-                       //nroEstadia.SqlDbType = SqlDbType.Int;
-                       cmd.Parameters.Add(nroEstadia);
-                                              
-                       SqlDataAdapter adapter = new SqlDataAdapter();
-                       adapter.SelectCommand = cmd;
-
-                       DataTable table = new DataTable();
-                       adapter.Fill(table);
-                                             
-
-                       LineasFactura.DataSource = table;
-                      if (LineasFactura[0, 0].Value.ToString() == "3")
-                       {
-                           CargarDescuentoPorEstadia();
-                           }
-                        //Oculto columnas
-                       LineasFactura.Columns["idTipoRegimen"].Visible = false;
-                       LineasFactura.Columns["idConsumible"].Visible = false;
-                       
-                   }
-                   catch (Exception ex)
-                   {
-                       MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                   }
-                   finally
-                   {
-                       cn.Close();
-                       if (cmd != null)
-                           cmd.Dispose();
-                   }
-               }
-        private void CargarDescuentoPorEstadia()
+            try
             {
-                int counter;
-                decimal total = 0.00m;
-                DataTable dt = LineasFactura.DataSource as DataTable;
-                DataRow row = dt.NewRow();
-                row["Descripcion"] = "Descuento por Estadia";
-                row["Cantidad"] = "1";
-                for (counter = 0; counter < (LineasFactura.Rows.Count);
-        counter++)
-                { total = Convert.ToInt16(LineasFactura.Rows[counter].Cells[4].Value) + total; }
-                row["Precio"] = -1*total;
-                row["Precio Total"] = -1*total;
-                
+                ObtenerInformacionEstadia(this.codigoReserva);
+                lblFechaFacturacion.Text = (System.Configuration.ConfigurationSettings.AppSettings["fechasistema"].ToString());
+                ObtenerMediosPago();
+                CargarLineasFactura();
+                CalcularTotalAPagar();
+                lblHotel.Text = frmPrincipal.hotel;
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("No se pudo cargar los datos de la facturación de la estadía. (" + ex.Message + ")", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
-                dt.Rows.Add(row);
+        private void CargarLineasFactura()
+        {
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
 
-                LineasFactura.DataSource = dt;
-                }
-        
+            try
+            {
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.ObtencionLineasFactura";
+
+                SqlParameter reserva = new SqlParameter("@codigoReserva", this.codigoReserva);
+                reserva.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(reserva);                                      
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                                     
+                grdLineasFactura.DataSource = table;
+
+                grdLineasFactura.Columns["Tipo"].Visible = false;
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+               throw ex;
+            }
+            finally
+            {
+               cn.Close();
+               if (cmd != null)
+                   cmd.Dispose();
+            }
+        }
+       
         private void CalcularTotalAPagar()
-          {
-        decimal total1 = 0.00m;
-            foreach(DataGridViewRow row in LineasFactura.Rows){
+        {
+            foreach(DataGridViewRow row in grdLineasFactura.Rows)
+            {
+                lblTotal.Text = (decimal.Parse(lblTotal.Text) + decimal.Parse(row.Cells["Total"].ToString())).ToString();
+            }
+        }
 
-   total1 = Convert.ToInt16(row.Cells[4].Value) + total1;
-   TotalAPagar.Text = total1.ToString();
-}
-           }
-               private void ObtenerMediosPago()
-               {
-                                        
+        private void ObtenerMediosPago()
+        {                                        
             SqlConnection cn1 = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd1 = null;            
+            SqlCommand cmd1 = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -122,18 +102,15 @@ namespace FrbaHotel
                 cmd1.Connection = cn1;
                 cmd1.CommandType = CommandType.StoredProcedure;
                 cmd1.CommandText = "GRAFO_LOCO.ObtenerMediosPago";
-            SqlDataAdapter da = new SqlDataAdapter(cmd1);
-            DataTable dt = new DataTable("MediosPago");
-            da.Fill(dt);
-            MedioPago.DataSource = dt;
-            MedioPago.DisplayMember = "DESCRIPCION";
-            MedioPago.ValueMember = "IDTIPOPAGO";
-            MedioPago.SelectedIndex = -1;
+                reader = cmd1.ExecuteReader();
 
-        }
-                catch (Exception ex)
+                while(reader.Read())
+                    cmbMedioPago.Items.Add(new TipoPago(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw ex;
             }
             finally
             {
@@ -141,112 +118,10 @@ namespace FrbaHotel
                 if (cmd1 != null)
                     cmd1.Dispose();
             }
-                    }
-
-        
-
-        
-        private void NroDeFactura_TextChanged(object sender, EventArgs e)
+        }                   
+              
+        private void ObtenerInformacionEstadia (int estadia)
         {
-
-        }
-
-        private void FechaFactura_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        
-      
-        private void NroDeEstadia_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-      
-        private void MedioDePago_Leave(object sender, EventArgs e)
-        {
-            if (MedioPago.Text == "Tarjeta")
-            {
-                NombreTarjeta.Enabled = true;
-                NumeroTarjeta.Enabled = true;
-            }
-            else
-            {
-                NombreTarjeta.Enabled = false;
-                NumeroTarjeta.Enabled = false;
-            }
-          }
-
-        private void ObtenerNroFactura()
-        {
-             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-            SqlDataReader reader = null;
-            
-            try
-            {
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.ObtenerNúmeroDeFacturaSiguiente";
-                reader = cmd.ExecuteReader();
-                while (reader.Read())
-                    NroDeFactura.Text = reader["Número Factura"].ToString();
-                }
-                catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                cn.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            }
-        }
-        
-
-        private void ObtenerNombreHotel()          
-            {
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-            SqlDataReader reader = null;
-
-            try
-            {
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.ObtenerNombreHotel";
-                SqlParameter idHotel = new SqlParameter("@IdHotel", IdHotel);
-                cmd.Parameters.Add(idHotel);
-                reader = cmd.ExecuteReader();
-                if (reader.Read()){
-                    NombreHotel.Text = reader["Nombre"].ToString();
-                    NombreHotel.Enabled = false;                    
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                cn.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-
-                 
-
-
-
-        }
-    }
-
-        private void ObtenerInformacionEstadia (int estadia){
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
             SqlDataReader reader = null;
@@ -258,22 +133,20 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerDatosEstadia";
-                SqlParameter idestadia = new SqlParameter("@idestadia", nroDeEstadia);
-                cmd.Parameters.Add(idestadia);
+                SqlParameter reserva = new SqlParameter("@codigoReserva", this.codigoReserva);
+                reserva.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(reserva);
                 reader = cmd.ExecuteReader();
-                if (reader.Read()){
-                    NroPasaporte.Text = reader["Numero Pasaporte"].ToString();
-                    NroPasaporte.Enabled = false;
-                    NombreCliente.Text = reader["Nombre Cliente"].ToString();
-                    NombreCliente.Enabled = false;
-                    NroDeEstadia.Enabled = false;
-                    NroDeEstadia.Text = estadia.ToString();
-
+                if (reader.Read())
+                {                    
+                    lblEstadia.Text = reader["idEstadia"].ToString();
+                    lblCliente.Text = reader["cliente"].ToString();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw ex;
             }
             finally
             {
@@ -281,101 +154,107 @@ namespace FrbaHotel
                 if (cmd != null)
                     cmd.Dispose();
             }
-            }
+        }
 
         private void Guardar_Click(object sender, EventArgs e)
         {
-            GuardarFactura();
-            GuardarLineas();
-        }
-
-        private void GuardarFactura()
-        {
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
-            SqlDataReader reader = null;
+            SqlTransaction sqlTran = null;
 
             try
             {
                 cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
+                sqlTran = cn.BeginTransaction();
+                cmd = cn.CreateCommand();
+                cmd.Transaction = sqlTran;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.CargarFactura";
-                SqlParameter factura = new SqlParameter("@IdFactura", Int32.Parse(NroDeFactura.Text));
-                cmd.Parameters.Add(factura);
-                SqlParameter fecha = new SqlParameter("@FechaCreacion", FechaFactura.Text);
+
+                SqlParameter fecha = new SqlParameter("@FechaCreacion", DateTime.Parse(lblFechaFacturacion.Text));
+                fecha.SqlDbType = SqlDbType.DateTime;
                 cmd.Parameters.Add(fecha);
-                SqlParameter subtotal = new SqlParameter("@Monto", double.Parse(TotalAPagar.Text));
-                cmd.Parameters.Add(subtotal);
-                SqlParameter estadia = new SqlParameter("@IdEstadia", nroDeEstadia);
+                SqlParameter total = new SqlParameter("@Monto", decimal.Parse(lblTotal.Text));
+                total.SqlDbType = SqlDbType.Decimal;
+                cmd.Parameters.Add(total);
+                SqlParameter estadia = new SqlParameter("@IdEstadia", Int32.Parse(lblEstadia.Text));
                 estadia.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(estadia);
-                SqlParameter mediopago = new SqlParameter("@IdTipoPago", MedioPago.SelectedValue);
+                SqlParameter mediopago = new SqlParameter("@IdTipoPago", ((TipoPago)cmbMedioPago.SelectedItem).Id);
+                mediopago.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(mediopago);
-                SqlParameter nombreTarjeta = new SqlParameter("@NombreTarjeta", NombreTarjeta.Text);
-                cmd.Parameters.Add(nombreTarjeta);
-                SqlParameter numeroTarjeta = new SqlParameter("@NumeroTarjeta", NumeroTarjeta.Text);
-                cmd.Parameters.Add(numeroTarjeta);
-                reader = cmd.ExecuteReader();
-                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                cn.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            }
-            }
+                if (grpTarjeta.Enabled)
+                {
+                    SqlParameter nombreTarjeta = new SqlParameter("@NombreTarjeta", txtNombreTarjeta.Text);
+                    nombreTarjeta.SqlDbType = SqlDbType.VarChar;
+                    nombreTarjeta.Size = 50;
+                    cmd.Parameters.Add(nombreTarjeta);
+                    SqlParameter numeroTarjeta = new SqlParameter("@NumeroTarjeta", txtNumeroTarjeta.Text);
+                    numeroTarjeta.SqlDbType = SqlDbType.BigInt;
+                    cmd.Parameters.Add(numeroTarjeta);
+                }
 
-        private void GuardarLineas(){
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-            SqlDataReader reader = null;
+                int idFactura = (Int32)cmd.ExecuteScalar();
 
-            try
-            {   int counter;
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
                 cmd.CommandText = "GRAFO_LOCO.CargarLineasFactura";
-                for (counter = 0; counter < (LineasFactura.Rows.Count);
-        counter++)
-                {  
-                SqlParameter factura = new SqlParameter("@IdFactura", Int32.Parse(NroDeFactura.Text));
-                cmd.Parameters.Add(factura);
-                SqlParameter consumible = new SqlParameter("@IdConsumible", Convert.ToInt16(LineasFactura.Rows[counter].Cells[1].Value));
-                cmd.Parameters.Add(consumible);
-                SqlParameter cantidad = new SqlParameter("@Cantidad", Convert.ToInt16(LineasFactura.Rows[counter].Cells[3].Value));
-                cmd.Parameters.Add(cantidad);
-                SqlParameter precioUni = new SqlParameter("@PrecioUnitario", Convert.ToInt16(LineasFactura.Rows[counter].Cells[4].Value));
-                cmd.Parameters.Add(precioUni);
-                SqlParameter precioTot = new SqlParameter("@PrecioTotal", Convert.ToInt16(LineasFactura.Rows[counter].Cells[5].Value));
-                cmd.Parameters.Add(precioTot);
-                reader = cmd.ExecuteReader();
-                
 
-            }
+                foreach(DataRow r in grdLineasFactura.Rows)
+                {
+                    if (r["Tipo"].ToString().Equals("consumible"))
+                    {
+                        SqlParameter factura = new SqlParameter("@IdFactura", idFactura);
+                        factura.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(factura);
+                        SqlParameter consumible = new SqlParameter("@IdConsumible", decimal.Parse(r["Item"].ToString()));
+                        consumible.SqlDbType = SqlDbType.Decimal;
+                        cmd.Parameters.Add(consumible);
+                        SqlParameter cantidad = new SqlParameter("@Cantidad", decimal.Parse(r["Cantidad"].ToString()));
+                        cantidad.SqlDbType = SqlDbType.Decimal;
+                        cmd.Parameters.Add(cantidad);
+                        SqlParameter precioUni = new SqlParameter("@PrecioUnitario", decimal.Parse(r["Total"].ToString()) / decimal.Parse(r["Cantidad"].ToString()));
+                        precioUni.SqlDbType = SqlDbType.Decimal;
+                        cmd.Parameters.Add(precioUni);
+                        SqlParameter precioTot = new SqlParameter("@PrecioTotal", decimal.Parse(r["Total"].ToString()));
+                        precioTot.SqlDbType = SqlDbType.Decimal;
+                        cmd.Parameters.Add(precioTot);
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
+                    }
+                }
+
+                sqlTran.Commit();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                try
+                {
+                    sqlTran.Rollback();
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             finally
             {
                 cn.Close();
                 if (cmd != null)
                     cmd.Dispose();
-            }
+            } 
         }
 
+        private void cmbMedioPago_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((TipoPago)cmbMedioPago.SelectedItem).Descripcion.Equals("Efectivo")) // Efectivo
+                grdLineasFactura.Enabled = false;
+            else
+                grdLineasFactura.Enabled = true; // Tarjeta
         }
-
+    }
   }
 
 

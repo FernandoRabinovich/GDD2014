@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FrbaHotel
 {
-    public class Regimen
+    public class Consumible
     {
         private int id;
         public int Id
@@ -28,19 +28,13 @@ namespace FrbaHotel
             set { this.precio = value; }
         }
 
-        public Regimen(int id, string descripcion, decimal precio)
+        public Consumible(int id, string descripcion, decimal precio)
         {
             this.id = id;
             this.precio = precio;
-            this.descripcion = descripcion;
         }
 
-        public Regimen()
+        public Consumible()
         { }
-
-        public override string ToString()
-        {
-            return descripcion;
-        }
     }
 }

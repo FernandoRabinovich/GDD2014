@@ -122,7 +122,7 @@ namespace FrbaHotel
         }
 
         public Cliente(int idCliente, string apellido, string direccion, string estado, DateTime fechaNac, string mail, string nombre, int numero, 
-                            int numeroDoc, int piso, string tipoDoc, string nacionalidad, string localidad, string departamento)
+                            int numeroDoc, int piso, string tipoDoc, string nacionalidad, string localidad, string departamento, string telefono)
         {
             this.Apellido = apellido;
             this.Direccion = direccion;
@@ -138,10 +138,11 @@ namespace FrbaHotel
             this.nacionalidad = nacionalidad;
             this.departamento = departamento;
             this.localidad = localidad;
+            this.telefono = telefono;
         }
 
         public Cliente(string apellido, string direccion, DateTime fechaNac, string mail, string nombre, int numero,
-                    int numeroDoc, int piso, string tipoDoc, string nacionalidad, string localidad, string departamento)
+                    int numeroDoc, int piso, string tipoDoc, string nacionalidad, string localidad, string departamento, string telefono)
         {
             this.Apellido = apellido;
             this.Direccion = direccion;
@@ -155,6 +156,7 @@ namespace FrbaHotel
             this.nacionalidad = nacionalidad;
             this.departamento = departamento;
             this.localidad = localidad;
+            this.telefono = telefono;
         }
 
         public Cliente() { }

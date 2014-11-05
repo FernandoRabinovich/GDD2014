@@ -233,5 +233,13 @@ namespace FrbaHotel
             frmHoteles.StartPosition = FormStartPosition.CenterScreen;
             frmHoteles.Show();
         }
+
+        private void mConsumibles_Click(object sender, EventArgs e)
+        {
+            frmIngresarConsumible frmConsumible = new frmIngresarConsumible();
+            frmConsumible.MdiParent = this;
+            frmConsumible.StartPosition = FormStartPosition.CenterScreen;
+            frmConsumible.Show();
+        }
     }
 }

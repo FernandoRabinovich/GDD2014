@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FrbaHotel
 {
-    public class TipoHabitacion
+    public class TipoPago
     {
         private int id;
         public int Id
@@ -21,27 +21,12 @@ namespace FrbaHotel
             set { this.descripcion = value; }
         }
 
-        private decimal porcentaje;
-        public decimal Porcentaje
-        {
-            get { return this.porcentaje; }
-            set { this.porcentaje = value; }
-        }
-
-        public TipoHabitacion(int id, string descripcion, decimal porcentaje)
-        {
-            this.id = id;
-            this.descripcion = descripcion;
-            this.porcentaje = porcentaje;
-        }
-
-        public TipoHabitacion(int id, string descripcion)
+        public TipoPago(int id, string descripcion)
         {
             this.id = id;
             this.descripcion = descripcion;
         }
 
-        public TipoHabitacion()
-        { }
+        public TipoPago() { }
     }
 }

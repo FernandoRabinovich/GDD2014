@@ -31,6 +31,7 @@ namespace FrbaHotel
             lblCostoTotal.Text = "0";
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             #region Cargar Hoteles
 
@@ -47,12 +48,10 @@ namespace FrbaHotel
                     SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
                     usuario.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(usuario);
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    DataTable table = new DataTable();
-                    adapter.SelectCommand = cmd;
-                    adapter.Fill(table);
+                    reader = cmd.ExecuteReader();
 
-                    cmbHotel.DataSource = table;
+                    while(reader.Read())
+                        cmbHotel.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
                 }
                 catch (Exception ex)
                 {
@@ -61,6 +60,7 @@ namespace FrbaHotel
                 finally
                 {
                     cn.Close();
+                    reader.Close();
                     if (cmd != null)
                         cmd.Dispose();
                 }
@@ -68,10 +68,39 @@ namespace FrbaHotel
             else
             {
                 cmbHotel.Items.Add(new Hotel(frmPrincipal.idHotel, frmPrincipal.hotel));
+                cmbHotel.SelectedIndex = 0;
                 cmbHotel.Enabled = false;
             }
 
             #endregion Cargar Hoteles
+
+            #region Cargar Otros combos
+
+            try
+            {
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";                
+                reader = cmd.ExecuteReader();
+                
+                while (reader.Read())
+                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cn.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }
+
+            #endregion Cargar Otros combos
 
             #region Cancelar NO SHOW
 
@@ -197,6 +226,7 @@ namespace FrbaHotel
             // Cargar los hoteles (según usuario).
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -209,18 +239,17 @@ namespace FrbaHotel
                 SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
                 hotel.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(hotel);
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                DataTable table = new DataTable();
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader = cmd.ExecuteReader();
 
-                cmbRegimenHotel.DataSource = table;
+                while(reader.Read())
+                    cmbRegimenHotel.Items.Add(new Regimen(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString(), decimal.Parse(reader["precio"].ToString())));
 
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoHabitacionPorHotel";
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader.Close();
+                reader = cmd.ExecuteReader();
 
-                cmbTipoHabitacion.DataSource = table;
+                while (reader.Read())
+                    cmbTipoHabitacion.Items.Add(new TipoHabitacion(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
             }
             catch (Exception ex)
             {
@@ -229,6 +258,7 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }

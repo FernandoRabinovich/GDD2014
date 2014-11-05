@@ -171,15 +171,18 @@
     </Compile>
     <Compile Include="Clases\Ciudad.cs" />
     <Compile Include="Clases\Cliente.cs" />
+    <Compile Include="Clases\Consumible.cs" />
     <Compile Include="Clases\Funcionalidad.cs" />
     <Compile Include="Clases\Habitacion.cs" />
     <Compile Include="Clases\HabitacionesPorReserva.cs" />
     <Compile Include="Clases\Hotel.cs" />
+    <Compile Include="Clases\Motivo.cs" />
     <Compile Include="Clases\Regimen.cs" />
     <Compile Include="Clases\Reserva.cs" />
     <Compile Include="Clases\Rol.cs" />
     <Compile Include="Clases\TipoDoc.cs" />
     <Compile Include="Clases\TipoHabitacion.cs" />
+    <Compile Include="Clases\TipoPago.cs" />
     <Compile Include="Clases\Usuario.cs" />
     <Compile Include="Facturar Publicacion\frmFacturarPublicacion.cs">
       <SubType>Form</SubType>
@@ -260,6 +263,9 @@
       <DependentUpon>alta.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABM de Hotel\frmBajaHotel.resx">
+      <DependentUpon>frmBajaHotel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABM de Hotel\FrmHotel.resx">
       <DependentUpon>FrmHotel.cs</DependentUpon>
     </EmbeddedResource>
@@ -332,11 +338,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registrar Consumible\IngresarConsumible.resx">
-      <DependentUpon>IngresarConsumible.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Registrar Consumible\ListadoDeConsumibles.resx">
-      <DependentUpon>ListadoDeConsumibles.cs</DependentUpon>
+    <EmbeddedResource Include="Registrar Consumible\frmIngresarConsumible.resx">
+      <DependentUpon>frmIngresarConsumible.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registrar Estadia\frmCheckIn.resx">
       <DependentUpon>frmCheckIn.cs</DependentUpon>
@@ -360,17 +363,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Registrar Consumible\IngresarConsumible.cs">
+    <Compile Include="Registrar Consumible\frmIngresarConsumible.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registrar Consumible\IngresarConsumible.Designer.cs">
-      <DependentUpon>IngresarConsumible.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registrar Consumible\ListadoDeConsumibles.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registrar Consumible\ListadoDeConsumibles.Designer.cs">
-      <DependentUpon>ListadoDeConsumibles.cs</DependentUpon>
+    <Compile Include="Registrar Consumible\frmIngresarConsumible.Designer.cs">
+      <DependentUpon>frmIngresarConsumible.cs</DependentUpon>
     </Compile>
     <Compile Include="Registrar Estadia\frmCheckIn.cs">
       <SubType>Form</SubType>

@@ -27,9 +27,98 @@ namespace FrbaHotel
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
+            // Cargo los regimenes nuevos para el hotel
+            List<Regimen> regimenesNuevos = new List<Regimen>();
+            foreach(Regimen r in chkRegimenes.CheckedItems)
+                regimenesNuevos.Add(r);
+
             if (this.ValidarCamposRequeridos())
             { 
-            
+                /* Tengo que validar que si borra un regimen, no hay reservas hechas o huespedes actualmente bajo dicho regimen.*/
+                /* Voy a eliminar las que destilta e insertar las nuevas que tilda */
+                SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                SqlCommand cmd = null;
+
+                cn.Open();
+                SqlTransaction sqlTran = cn.BeginTransaction();
+                cmd = cn.CreateCommand();
+                cmd.Transaction = sqlTran;
+
+                try
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "GRAFO_LOCO.ActualizarHotel";
+
+                    SqlParameter IdHotel = new SqlParameter("@idHotel", hotel.Id);
+                    IdHotel.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(IdHotel);
+                    SqlParameter nombre = new SqlParameter("@nombre", txtNombre.Text);
+                    nombre.SqlDbType = SqlDbType.VarChar;
+                    nombre.Size = 50;
+                    cmd.Parameters.Add(nombre);
+                    SqlParameter mail = new SqlParameter("@mail", txtMail.Text);
+                    mail.SqlDbType = SqlDbType.VarChar;
+                    mail.Size = 50;
+                    cmd.Parameters.Add(mail);
+                    SqlParameter estrellas = new SqlParameter("@estrellas", cantEstrellas.Value);
+                    estrellas.SqlDbType = SqlDbType.Decimal;
+                    cmd.Parameters.Add(estrellas);
+                    SqlParameter telefono = new SqlParameter("@telefono", txtTelefono.Text);
+                    telefono.SqlDbType = SqlDbType.VarChar;
+                    telefono.Size = 15;
+                    cmd.Parameters.Add(telefono);
+                    SqlParameter direccion = new SqlParameter("@direccion", txtDireccion.Text);
+                    direccion.SqlDbType = SqlDbType.VarChar;
+                    direccion.Size = 255;
+                    cmd.Parameters.Add(direccion);
+                    SqlParameter ciudad = new SqlParameter("@ciudad", ((Ciudad)cmbCiudad.SelectedItem).Id);
+                    ciudad.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(ciudad);
+                    SqlParameter pais = new SqlParameter("@pais", txtPais.Text);
+                    pais.SqlDbType = SqlDbType.VarChar;
+                    pais.Size = 50;
+                    cmd.Parameters.Add(pais);
+                    SqlParameter numeroCalle = new SqlParameter("@numeroCalle", Int32.Parse(txtNumeroCalle.Text));
+                    numeroCalle.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(numeroCalle);
+
+                    cmd.ExecuteNonQuery();
+                    
+                    cmd.Parameters.Clear();
+                    cmd.CommandText = "GRAFO_LOCO.ActualizarRegimenPorHotel";
+                    cmd.Parameters.Add(hotel);
+                    SqlParameter fechaSistema = new SqlParameter("@fechaSistema", DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString()));
+                    fechaSistema.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(fechaSistema);
+                    SqlParameter regimenes = new SqlParameter("@regimenes", regimenesNuevos);
+                    regimenes.SqlDbType = SqlDbType.Structured;
+                    cmd.Parameters.Add(regimenes);
+
+                    cmd.ExecuteNonQuery();
+
+                    sqlTran.Commit();
+
+                    MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    try
+                    {
+                        sqlTran.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                finally
+                {
+                    cn.Close();
+                    if (cmd != null)
+                        cmd.Dispose();
+                }
             }
         }
 
@@ -48,21 +137,25 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerRegimen";
-
-                reader =  cmd.ExecuteReader();
-
-                while (reader.Read())
+                SqlDataAdapter adapter = new SqlDataAdapter();
+                adapter.SelectCommand = cmd;
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                foreach (DataRow r in table.Rows)
                 {
-                    chkRegimenes.Items.Add(new Regimen(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString(), decimal.Parse(reader["precio"].ToString())));
+                    chkRegimenes.Items.Add(new Regimen(Int32.Parse(r["id"].ToString()), r["descripcion"].ToString(), decimal.Parse(r["precio"].ToString())));
+                }
+
+                foreach(Regimen r in hotel.Regimenes)
+                {
+                    chkRegimenes.SetItemChecked(chkRegimenes.Items.IndexOf(r), true);
                 }
 
                 cmd.CommandText = "GRAFO_LOCO.ObtenerCiudades";
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                DataTable table = new DataTable();
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader = cmd.ExecuteReader();
 
-                cmbCiudad.DataSource = table;
+                while(reader.Read())
+                    cmbCiudad.Items.Add(new Ciudad(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
             }
             catch (Exception ex)
             {
@@ -92,7 +185,6 @@ namespace FrbaHotel
 
             #endregion CARGAR DATOS
         }
-
 
         private bool ValidarCamposRequeridos()
         {

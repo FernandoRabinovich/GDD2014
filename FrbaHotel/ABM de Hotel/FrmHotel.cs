@@ -12,8 +12,6 @@ namespace FrbaHotel
 {
     public partial class FrmHotel : Form
     {
-        System.Data.SqlClient.SqlConnection conexion;
-
         public FrmHotel()
         {
             InitializeComponent();
@@ -23,7 +21,6 @@ namespace FrbaHotel
         {
             txtNombre.Text = "";
             cantEstrellas.Value = 0;
-            cmbTipoRegimen.Text = "";
             txtDireccion.Text = ""; 
             txtTelefono.Text = "";
             txtMail.Text = "";
@@ -33,7 +30,7 @@ namespace FrbaHotel
         {
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
-            SqlDataAdapter adapter = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -42,18 +39,17 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerRegimen";
-                adapter = new SqlDataAdapter();
-                adapter.SelectCommand = cmd;
-                DataTable table = new DataTable();
-                adapter.Fill(table);
+                reader = cmd.ExecuteReader();
 
-                cmbTipoRegimen.DataSource = table;
+                while (reader.Read())
+                    chkRegimenes.Items.Add(new Regimen(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString(), decimal.Parse(reader["precio"].ToString())));
 
                 cmd.CommandText = "GRAFO_LOCO.ObtenerCiudades";
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader.Close();
+                reader = cmd.ExecuteReader();
 
-                cmbCiudad.DataSource = table;
+                while(reader.Read())
+                    cmbCiudad.Items.Add(new Ciudad(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
             }
             catch (Exception ex)
             {
@@ -62,6 +58,7 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }
@@ -111,9 +108,6 @@ namespace FrbaHotel
                     pais.SqlDbType = SqlDbType.VarChar;
                     pais.Size = 50;
                     cmd.Parameters.Add(pais);
-                    SqlParameter regimen = new SqlParameter("@regimen", ((Regimen)cmbTipoRegimen.SelectedItem).Id);
-                    regimen.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(regimen);
                     SqlParameter numeroCalle = new SqlParameter("@numeroCalle", Int32.Parse(txtNumeroCalle.Text));
                     numeroCalle.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(numeroCalle);
@@ -124,12 +118,25 @@ namespace FrbaHotel
                     int idHotel = (Int32)cmd.ExecuteScalar();
 
                     cmd.Parameters.Clear();
+                    cmd.CommandText = "GRAFO_LOCO.IngresarRegimenPorHotel";
+                    SqlParameter hotel = new SqlParameter("@idHotel", idHotel);
+                    hotel.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(hotel);
+                    foreach (Regimen r in chkRegimenes.CheckedItems)
+                    {
+                        SqlParameter regimen = new SqlParameter("@idRegimen", r.Id);
+                        regimen.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(regimen);
+
+                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.RemoveAt("@regimen");
+                    }
+
+                    cmd.Parameters.Clear();
                     cmd.CommandText = "GRAFO_LOCO.IngresarHotelesPorUsuario";
                     SqlParameter usuario = new SqlParameter("@idUsuario", frmPrincipal.idUsuario);
                     usuario.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(usuario);
-                    SqlParameter hotel = new SqlParameter("@idHotel", idHotel);
-                    hotel.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(hotel);
 
                     cmd.ExecuteNonQuery();
@@ -176,8 +183,8 @@ namespace FrbaHotel
                 campo = txtPais.Tag.ToString();
             if (cmbCiudad.SelectedItem == null)
                 campo = cmbCiudad.Tag.ToString();
-            if (cmbTipoRegimen.SelectedItem == null)
-                campo = cmbTipoRegimen.Tag.ToString();
+            if (chkRegimenes.Items.Count == 0)
+                campo = chkRegimenes.Tag.ToString();
 
             if (campo.Length > 0)
             {
@@ -191,9 +198,6 @@ namespace FrbaHotel
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
-            conexion.Close();//cierro la conexion a la base de datos
-            this.Close(); //al cerrar esta pantalla, vuelvo a la pantalla principal
-
         }
     }
 }

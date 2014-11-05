@@ -78,6 +78,7 @@ namespace FrbaHotel
         {
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -86,12 +87,10 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                DataTable table = new DataTable();
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader = cmd.ExecuteReader();
 
-                cmbTipoDoc.DataSource = table;
+                while(reader.Read())
+                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
 
                 this.ConfigurarGrilla();
             }
@@ -102,6 +101,7 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }
@@ -120,7 +120,8 @@ namespace FrbaHotel
                     grdClientes.SelectedRows[0].Cells["Nombre"].Value.ToString(), Int32.Parse(grdClientes.SelectedRows[0].Cells["NumeroCalle"].Value.ToString()),
                     Int32.Parse(grdClientes.SelectedRows[0].Cells["NroDocumento"].Value.ToString()), Int32.Parse(grdClientes.SelectedRows[0].Cells["Piso"].Value.ToString()),
                     grdClientes.SelectedRows[0].Cells["IdTipoDocumento"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(),
-                    grdClientes.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Departamento"].Value.ToString()));
+                    grdClientes.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Departamento"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Telefono"].Value.ToString()));
             frmModif.StartPosition = FormStartPosition.CenterScreen;
             frmModif.ShowDialog();
         }

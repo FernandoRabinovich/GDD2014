@@ -28,267 +28,237 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.NroDeFactura = new System.Windows.Forms.TextBox();
-            this.NroFactura = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.FechaFactura = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.NroDeEstadia = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.NroPasaporte = new System.Windows.Forms.TextBox();
-            this.NombreCliente = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.NombreHotel = new System.Windows.Forms.TextBox();
-            this.LineasFactura = new System.Windows.Forms.DataGridView();
-            this.TotalAPagar = new System.Windows.Forms.TextBox();
+            this.grdLineasFactura = new System.Windows.Forms.DataGridView();
             this.label6 = new System.Windows.Forms.Label();
-            this.MedioPago = new System.Windows.Forms.ComboBox();
+            this.cmbMedioPago = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.NombreTarjeta = new System.Windows.Forms.TextBox();
-            this.NumeroTarjeta = new System.Windows.Forms.TextBox();
-            this.Guardar = new System.Windows.Forms.Button();
-            this.Limpiar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.LineasFactura)).BeginInit();
+            this.txtNombreTarjeta = new System.Windows.Forms.TextBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.lblFechaFacturacion = new System.Windows.Forms.Label();
+            this.lblEstadia = new System.Windows.Forms.Label();
+            this.lblHotel = new System.Windows.Forms.Label();
+            this.lblCliente = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
+            this.txtNumeroTarjeta = new System.Windows.Forms.MaskedTextBox();
+            this.grpTarjeta = new System.Windows.Forms.GroupBox();
+            ((System.ComponentModel.ISupportInitialize)(this.grdLineasFactura)).BeginInit();
+            this.grpTarjeta.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // NroDeFactura
-            // 
-            this.NroDeFactura.Enabled = false;
-            this.NroDeFactura.Location = new System.Drawing.Point(107, 37);
-            this.NroDeFactura.Name = "NroDeFactura";
-            this.NroDeFactura.Size = new System.Drawing.Size(129, 20);
-            this.NroDeFactura.TabIndex = 0;
-            this.NroDeFactura.TextChanged += new System.EventHandler(this.NroDeFactura_TextChanged);
-            // 
-            // NroFactura
-            // 
-            this.NroFactura.AutoSize = true;
-            this.NroFactura.Location = new System.Drawing.Point(12, 44);
-            this.NroFactura.Name = "NroFactura";
-            this.NroFactura.Size = new System.Drawing.Size(81, 13);
-            this.NroFactura.TabIndex = 1;
-            this.NroFactura.Text = "Nro. de Factura";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(392, 44);
+            this.label1.Location = new System.Drawing.Point(326, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.Size = new System.Drawing.Size(40, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Fecha";
-            // 
-            // FechaFactura
-            // 
-            this.FechaFactura.Enabled = false;
-            this.FechaFactura.Location = new System.Drawing.Point(445, 37);
-            this.FechaFactura.Name = "FechaFactura";
-            this.FechaFactura.Size = new System.Drawing.Size(99, 20);
-            this.FechaFactura.TabIndex = 3;
-            this.FechaFactura.TextChanged += new System.EventHandler(this.FechaFactura_TextChanged);
+            this.label1.Text = "Fecha:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 80);
+            this.label2.Location = new System.Drawing.Point(11, 16);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 13);
+            this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 4;
-            this.label2.Text = "Nro. de Estadia";
-            // 
-            // NroDeEstadia
-            // 
-            this.NroDeEstadia.Enabled = false;
-            this.NroDeEstadia.Location = new System.Drawing.Point(107, 73);
-            this.NroDeEstadia.Name = "NroDeEstadia";
-            this.NroDeEstadia.Size = new System.Drawing.Size(129, 20);
-            this.NroDeEstadia.TabIndex = 5;
-            this.NroDeEstadia.TextChanged += new System.EventHandler(this.NroDeEstadia_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(354, 80);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Nro Pasaporte";
+            this.label2.Text = "Nro. de Estadia:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(354, 118);
+            this.label4.Location = new System.Drawing.Point(326, 42);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Nombre Cliente";
-            // 
-            // NroPasaporte
-            // 
-            this.NroPasaporte.Enabled = false;
-            this.NroPasaporte.Location = new System.Drawing.Point(445, 73);
-            this.NroPasaporte.Name = "NroPasaporte";
-            this.NroPasaporte.Size = new System.Drawing.Size(162, 20);
-            this.NroPasaporte.TabIndex = 8;
-            // 
-            // NombreCliente
-            // 
-            this.NombreCliente.Enabled = false;
-            this.NombreCliente.Location = new System.Drawing.Point(445, 111);
-            this.NombreCliente.Name = "NombreCliente";
-            this.NombreCliente.Size = new System.Drawing.Size(162, 20);
-            this.NombreCliente.TabIndex = 9;
+            this.label4.Text = "Cliente:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 118);
+            this.label5.Location = new System.Drawing.Point(11, 42);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(72, 13);
+            this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Nombre Hotel";
+            this.label5.Text = "Hotel:";
             // 
-            // NombreHotel
+            // grdLineasFactura
             // 
-            this.NombreHotel.Enabled = false;
-            this.NombreHotel.Location = new System.Drawing.Point(107, 111);
-            this.NombreHotel.Name = "NombreHotel";
-            this.NombreHotel.Size = new System.Drawing.Size(198, 20);
-            this.NombreHotel.TabIndex = 11;
-            // 
-            // LineasFactura
-            // 
-            this.LineasFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.LineasFactura.Enabled = false;
-            this.LineasFactura.Location = new System.Drawing.Point(12, 155);
-            this.LineasFactura.Name = "LineasFactura";
-            this.LineasFactura.Size = new System.Drawing.Size(595, 150);
-            this.LineasFactura.TabIndex = 12;
-            // 
-            // TotalAPagar
-            // 
-            this.TotalAPagar.Enabled = false;
-            this.TotalAPagar.Location = new System.Drawing.Point(496, 330);
-            this.TotalAPagar.Name = "TotalAPagar";
-            this.TotalAPagar.Size = new System.Drawing.Size(111, 20);
-            this.TotalAPagar.TabIndex = 13;
-            this.TotalAPagar.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.grdLineasFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdLineasFactura.Enabled = false;
+            this.grdLineasFactura.Location = new System.Drawing.Point(12, 79);
+            this.grdLineasFactura.Name = "grdLineasFactura";
+            this.grdLineasFactura.Size = new System.Drawing.Size(595, 150);
+            this.grdLineasFactura.TabIndex = 12;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(408, 333);
+            this.label6.Location = new System.Drawing.Point(419, 249);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 13);
+            this.label6.Size = new System.Drawing.Size(74, 13);
             this.label6.TabIndex = 14;
-            this.label6.Text = "Total a Pagar";
+            this.label6.Text = "Total a Pagar:";
             // 
-            // MedioPago
+            // cmbMedioPago
             // 
-            this.MedioPago.FormattingEnabled = true;
-            this.MedioPago.Location = new System.Drawing.Point(115, 329);
-            this.MedioPago.Name = "MedioPago";
-            this.MedioPago.Size = new System.Drawing.Size(121, 21);
-            this.MedioPago.TabIndex = 15;
-            this.MedioPago.Leave += new System.EventHandler(this.MedioDePago_Leave);
+            this.cmbMedioPago.DisplayMember = "descripcion";
+            this.cmbMedioPago.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMedioPago.FormattingEnabled = true;
+            this.cmbMedioPago.Location = new System.Drawing.Point(100, 245);
+            this.cmbMedioPago.Name = "cmbMedioPago";
+            this.cmbMedioPago.Size = new System.Drawing.Size(121, 21);
+            this.cmbMedioPago.TabIndex = 15;
+            this.cmbMedioPago.ValueMember = "id";
+            this.cmbMedioPago.SelectedIndexChanged += new System.EventHandler(this.cmbMedioPago_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 333);
+            this.label7.Location = new System.Drawing.Point(13, 249);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 13);
+            this.label7.Size = new System.Drawing.Size(82, 13);
             this.label7.TabIndex = 16;
-            this.label7.Text = "Medio de Pago";
+            this.label7.Text = "Medio de Pago:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(28, 370);
+            this.label8.Location = new System.Drawing.Point(0, 30);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 13);
+            this.label8.Size = new System.Drawing.Size(83, 13);
             this.label8.TabIndex = 17;
-            this.label8.Text = "Nombre Tarjeta";
+            this.label8.Text = "Nombre Tarjeta:";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(28, 406);
+            this.label9.Location = new System.Drawing.Point(0, 66);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 13);
+            this.label9.Size = new System.Drawing.Size(83, 13);
             this.label9.TabIndex = 18;
-            this.label9.Text = "Número Tarjeta";
+            this.label9.Text = "Número Tarjeta:";
             // 
-            // NombreTarjeta
+            // txtNombreTarjeta
             // 
-            this.NombreTarjeta.Enabled = false;
-            this.NombreTarjeta.Location = new System.Drawing.Point(115, 363);
-            this.NombreTarjeta.Name = "NombreTarjeta";
-            this.NombreTarjeta.Size = new System.Drawing.Size(121, 20);
-            this.NombreTarjeta.TabIndex = 19;
+            this.txtNombreTarjeta.Enabled = false;
+            this.txtNombreTarjeta.Location = new System.Drawing.Point(87, 23);
+            this.txtNombreTarjeta.Name = "txtNombreTarjeta";
+            this.txtNombreTarjeta.Size = new System.Drawing.Size(162, 20);
+            this.txtNombreTarjeta.TabIndex = 19;
             // 
-            // NumeroTarjeta
+            // btnGuardar
             // 
-            this.NumeroTarjeta.Enabled = false;
-            this.NumeroTarjeta.Location = new System.Drawing.Point(115, 399);
-            this.NumeroTarjeta.Name = "NumeroTarjeta";
-            this.NumeroTarjeta.Size = new System.Drawing.Size(121, 20);
-            this.NumeroTarjeta.TabIndex = 20;
+            this.btnGuardar.Location = new System.Drawing.Point(511, 322);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(96, 43);
+            this.btnGuardar.TabIndex = 21;
+            this.btnGuardar.Text = "Facturar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.Guardar_Click);
             // 
-            // Guardar
+            // lblFechaFacturacion
             // 
-            this.Guardar.Location = new System.Drawing.Point(511, 459);
-            this.Guardar.Name = "Guardar";
-            this.Guardar.Size = new System.Drawing.Size(96, 23);
-            this.Guardar.TabIndex = 21;
-            this.Guardar.Text = "Guardar";
-            this.Guardar.UseVisualStyleBackColor = true;
-            this.Guardar.Click += new System.EventHandler(this.Guardar_Click);
+            this.lblFechaFacturacion.BackColor = System.Drawing.Color.White;
+            this.lblFechaFacturacion.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblFechaFacturacion.Location = new System.Drawing.Point(369, 10);
+            this.lblFechaFacturacion.Name = "lblFechaFacturacion";
+            this.lblFechaFacturacion.Size = new System.Drawing.Size(162, 20);
+            this.lblFechaFacturacion.TabIndex = 23;
+            this.lblFechaFacturacion.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Limpiar
+            // lblEstadia
             // 
-            this.Limpiar.Location = new System.Drawing.Point(31, 459);
-            this.Limpiar.Name = "Limpiar";
-            this.Limpiar.Size = new System.Drawing.Size(75, 23);
-            this.Limpiar.TabIndex = 22;
-            this.Limpiar.Text = "Limpiar";
-            this.Limpiar.UseVisualStyleBackColor = true;
+            this.lblEstadia.BackColor = System.Drawing.Color.White;
+            this.lblEstadia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblEstadia.Location = new System.Drawing.Point(100, 12);
+            this.lblEstadia.Name = "lblEstadia";
+            this.lblEstadia.Size = new System.Drawing.Size(79, 20);
+            this.lblEstadia.TabIndex = 24;
+            this.lblEstadia.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblHotel
+            // 
+            this.lblHotel.BackColor = System.Drawing.Color.White;
+            this.lblHotel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblHotel.Location = new System.Drawing.Point(99, 38);
+            this.lblHotel.Name = "lblHotel";
+            this.lblHotel.Size = new System.Drawing.Size(162, 20);
+            this.lblHotel.TabIndex = 25;
+            this.lblHotel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblCliente
+            // 
+            this.lblCliente.BackColor = System.Drawing.Color.White;
+            this.lblCliente.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCliente.Location = new System.Drawing.Point(369, 38);
+            this.lblCliente.Name = "lblCliente";
+            this.lblCliente.Size = new System.Drawing.Size(162, 20);
+            this.lblCliente.TabIndex = 26;
+            this.lblCliente.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.BackColor = System.Drawing.Color.White;
+            this.lblTotal.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTotal.Location = new System.Drawing.Point(499, 244);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(108, 20);
+            this.lblTotal.TabIndex = 27;
+            this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtNumeroTarjeta
+            // 
+            this.txtNumeroTarjeta.Location = new System.Drawing.Point(87, 63);
+            this.txtNumeroTarjeta.Mask = "9999999999999999";
+            this.txtNumeroTarjeta.Name = "txtNumeroTarjeta";
+            this.txtNumeroTarjeta.Size = new System.Drawing.Size(162, 20);
+            this.txtNumeroTarjeta.TabIndex = 28;
+            // 
+            // grpTarjeta
+            // 
+            this.grpTarjeta.Controls.Add(this.txtNombreTarjeta);
+            this.grpTarjeta.Controls.Add(this.txtNumeroTarjeta);
+            this.grpTarjeta.Controls.Add(this.label8);
+            this.grpTarjeta.Controls.Add(this.label9);
+            this.grpTarjeta.Location = new System.Drawing.Point(12, 272);
+            this.grpTarjeta.Name = "grpTarjeta";
+            this.grpTarjeta.Size = new System.Drawing.Size(257, 93);
+            this.grpTarjeta.TabIndex = 29;
+            this.grpTarjeta.TabStop = false;
+            this.grpTarjeta.Text = "Tarjeta";
             // 
             // frmFacturarPublicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 494);
-            this.Controls.Add(this.Limpiar);
-            this.Controls.Add(this.Guardar);
-            this.Controls.Add(this.NumeroTarjeta);
-            this.Controls.Add(this.NombreTarjeta);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
+            this.ClientSize = new System.Drawing.Size(622, 375);
+            this.Controls.Add(this.grpTarjeta);
+            this.Controls.Add(this.lblTotal);
+            this.Controls.Add(this.lblCliente);
+            this.Controls.Add(this.lblHotel);
+            this.Controls.Add(this.lblEstadia);
+            this.Controls.Add(this.lblFechaFacturacion);
+            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.MedioPago);
+            this.Controls.Add(this.cmbMedioPago);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.TotalAPagar);
-            this.Controls.Add(this.LineasFactura);
-            this.Controls.Add(this.NombreHotel);
+            this.Controls.Add(this.grdLineasFactura);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.NombreCliente);
-            this.Controls.Add(this.NroPasaporte);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.NroDeEstadia);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.FechaFactura);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.NroFactura);
-            this.Controls.Add(this.NroDeFactura);
             this.Name = "frmFacturarPublicacion";
             this.Text = "Facturar Publicación";
             this.Load += new System.EventHandler(this.frmFacturarPublicacion_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.LineasFactura)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.grdLineasFactura)).EndInit();
+            this.grpTarjeta.ResumeLayout(false);
+            this.grpTarjeta.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,28 +266,24 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox NroDeFactura;
-        private System.Windows.Forms.Label NroFactura;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox FechaFactura;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox NroDeEstadia;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox NroPasaporte;
-        private System.Windows.Forms.TextBox NombreCliente;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox NombreHotel;
-        private System.Windows.Forms.DataGridView LineasFactura;
-        private System.Windows.Forms.TextBox TotalAPagar;
+        private System.Windows.Forms.DataGridView grdLineasFactura;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox MedioPago;
+        private System.Windows.Forms.ComboBox cmbMedioPago;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox NombreTarjeta;
-        private System.Windows.Forms.TextBox NumeroTarjeta;
-        private System.Windows.Forms.Button Guardar;
-        private System.Windows.Forms.Button Limpiar;
+        private System.Windows.Forms.TextBox txtNombreTarjeta;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Label lblFechaFacturacion;
+        private System.Windows.Forms.Label lblEstadia;
+        private System.Windows.Forms.Label lblHotel;
+        private System.Windows.Forms.Label lblCliente;
+        private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.MaskedTextBox txtNumeroTarjeta;
+        private System.Windows.Forms.GroupBox grpTarjeta;
     }
 }

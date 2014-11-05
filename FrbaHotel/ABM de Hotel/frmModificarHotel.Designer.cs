@@ -116,6 +116,7 @@
             // cmbCiudad
             // 
             this.cmbCiudad.DisplayMember = "descripcion";
+            this.cmbCiudad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCiudad.FormattingEnabled = true;
             this.cmbCiudad.Location = new System.Drawing.Point(111, 103);
             this.cmbCiudad.Name = "cmbCiudad";
@@ -171,7 +172,6 @@
             // txtDireccion
             // 
             this.txtDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDireccion.Enabled = false;
             this.txtDireccion.Location = new System.Drawing.Point(111, 49);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(160, 20);
@@ -257,7 +257,6 @@
             // txtNombre
             // 
             this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombre.Enabled = false;
             this.txtNombre.Location = new System.Drawing.Point(118, 32);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
@@ -276,7 +275,6 @@
             // txtMail
             // 
             this.txtMail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMail.Enabled = false;
             this.txtMail.Location = new System.Drawing.Point(118, 58);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);

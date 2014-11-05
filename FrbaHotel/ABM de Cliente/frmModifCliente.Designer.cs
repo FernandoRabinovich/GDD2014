@@ -135,7 +135,6 @@
             // txtLocalidad
             // 
             this.txtLocalidad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLocalidad.Enabled = false;
             this.txtLocalidad.Location = new System.Drawing.Point(101, 259);
             this.txtLocalidad.Name = "txtLocalidad";
             this.txtLocalidad.Size = new System.Drawing.Size(160, 20);
@@ -153,7 +152,6 @@
             // txtDireccion
             // 
             this.txtDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDireccion.Enabled = false;
             this.txtDireccion.Location = new System.Drawing.Point(101, 156);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(160, 20);
@@ -171,7 +169,6 @@
             // txtTelefono
             // 
             this.txtTelefono.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTelefono.Enabled = false;
             this.txtTelefono.Location = new System.Drawing.Point(101, 130);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(93, 20);
@@ -198,8 +195,7 @@
             // txtNroDocumento
             // 
             this.txtNroDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNroDocumento.Enabled = false;
-            this.txtNroDocumento.Location = new System.Drawing.Point(168, 75);
+            this.txtNroDocumento.Location = new System.Drawing.Point(201, 76);
             this.txtNroDocumento.Name = "txtNroDocumento";
             this.txtNroDocumento.Size = new System.Drawing.Size(93, 20);
             this.txtNroDocumento.TabIndex = 89;
@@ -225,19 +221,18 @@
             // cmbTipoDoc
             // 
             this.cmbTipoDoc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbTipoDoc.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cmbTipoDoc.DisplayMember = "descripcion";
+            this.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDoc.FormattingEnabled = true;
             this.cmbTipoDoc.Location = new System.Drawing.Point(101, 75);
             this.cmbTipoDoc.Name = "cmbTipoDoc";
-            this.cmbTipoDoc.Size = new System.Drawing.Size(66, 21);
+            this.cmbTipoDoc.Size = new System.Drawing.Size(100, 21);
             this.cmbTipoDoc.TabIndex = 87;
             this.cmbTipoDoc.ValueMember = "id";
             // 
             // txtMail
             // 
             this.txtMail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMail.Enabled = false;
             this.txtMail.Location = new System.Drawing.Point(101, 104);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);
@@ -255,7 +250,6 @@
             // txtApellido
             // 
             this.txtApellido.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtApellido.Enabled = false;
             this.txtApellido.Location = new System.Drawing.Point(101, 49);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(160, 20);
@@ -273,7 +267,6 @@
             // txtNombre
             // 
             this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombre.Enabled = false;
             this.txtNombre.Location = new System.Drawing.Point(101, 23);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);

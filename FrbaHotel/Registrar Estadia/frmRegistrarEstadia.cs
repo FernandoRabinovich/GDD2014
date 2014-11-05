@@ -81,8 +81,7 @@ namespace FrbaHotel
                     }
                     else
                     {
-                        //frmFacturarPublicacion frmFacturar = new frmFacturarPublicacion(reserva, habitaciones);
-                        frmFacturarPublicacion frmFacturar = new frmFacturarPublicacion(1, 1);
+                        frmFacturarPublicacion frmFacturar = new frmFacturarPublicacion(reserva.Codigo);
                         frmFacturar.StartPosition = FormStartPosition.CenterScreen;
                         frmFacturar.Show();
                     }

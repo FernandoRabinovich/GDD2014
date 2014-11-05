@@ -44,6 +44,7 @@
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(132, 20);
             this.txtUsuario.TabIndex = 0;
+            this.txtUsuario.Text = "admin";
             // 
             // txtPass
             // 
@@ -53,6 +54,7 @@
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(132, 20);
             this.txtPass.TabIndex = 1;
+            this.txtPass.Text = "w23e";
             // 
             // Usuario
             // 
@@ -117,6 +119,7 @@
             this.Controls.Add(this.Usuario);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.txtUsuario);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

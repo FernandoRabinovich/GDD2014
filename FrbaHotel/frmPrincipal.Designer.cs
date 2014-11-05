@@ -53,6 +53,7 @@
             this.mModifReserva = new System.Windows.Forms.ToolStripMenuItem();
             this.mEstadia = new System.Windows.Forms.ToolStripMenuItem();
             this.mRegistrarEstadia = new System.Windows.Forms.ToolStripMenuItem();
+            this.mConsumibles = new System.Windows.Forms.ToolStripMenuItem();
             this.mReportes = new System.Windows.Forms.ToolStripMenuItem();
             this.mEstadistico = new System.Windows.Forms.ToolStripMenuItem();
             this.mClientesErroneos = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,7 +95,7 @@
             this.mBajaCliente,
             this.mAltaCliente});
             this.mCliente.Name = "mCliente";
-            this.mCliente.Size = new System.Drawing.Size(152, 22);
+            this.mCliente.Size = new System.Drawing.Size(132, 22);
             this.mCliente.Tag = "3";
             this.mCliente.Text = "Cliente";
             this.mCliente.Visible = false;
@@ -121,7 +122,7 @@
             this.mAltaHabitacion,
             this.mModifHabitacion});
             this.mHabitacion.Name = "mHabitacion";
-            this.mHabitacion.Size = new System.Drawing.Size(152, 22);
+            this.mHabitacion.Size = new System.Drawing.Size(132, 22);
             this.mHabitacion.Tag = "5";
             this.mHabitacion.Text = "Habitación";
             this.mHabitacion.Visible = false;
@@ -146,7 +147,7 @@
             this.mAltaRol,
             this.mBajaRol});
             this.mRol.Name = "mRol";
-            this.mRol.Size = new System.Drawing.Size(152, 22);
+            this.mRol.Size = new System.Drawing.Size(132, 22);
             this.mRol.Tag = "1";
             this.mRol.Text = "Rol";
             this.mRol.Visible = false;
@@ -171,7 +172,7 @@
             this.mAltaUsuario,
             this.mBajaUsuario});
             this.mUsuario.Name = "mUsuario";
-            this.mUsuario.Size = new System.Drawing.Size(152, 22);
+            this.mUsuario.Size = new System.Drawing.Size(132, 22);
             this.mUsuario.Tag = "2";
             this.mUsuario.Text = "Usuario";
             this.mUsuario.Visible = false;
@@ -195,7 +196,7 @@
             this.mRegimen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mAltaRegimen});
             this.mRegimen.Name = "mRegimen";
-            this.mRegimen.Size = new System.Drawing.Size(152, 22);
+            this.mRegimen.Size = new System.Drawing.Size(132, 22);
             this.mRegimen.Tag = "6";
             this.mRegimen.Text = "Regimen";
             this.mRegimen.Visible = false;
@@ -223,7 +224,6 @@
             this.mAltaHotel.Name = "mAltaHotel";
             this.mAltaHotel.Size = new System.Drawing.Size(171, 22);
             this.mAltaHotel.Text = "Alta";
-            this.mAltaHotel.Visible = false;
             this.mAltaHotel.Click += new System.EventHandler(this.mAltaHotel_Click);
             // 
             // mBajaHotel
@@ -231,7 +231,6 @@
             this.mBajaHotel.Name = "mBajaHotel";
             this.mBajaHotel.Size = new System.Drawing.Size(171, 22);
             this.mBajaHotel.Text = "Baja/Modificación";
-            this.mBajaHotel.Visible = false;
             this.mBajaHotel.Click += new System.EventHandler(this.mBajaHotel_Click);
             // 
             // mReserva
@@ -275,7 +274,8 @@
             // mEstadia
             // 
             this.mEstadia.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mRegistrarEstadia});
+            this.mRegistrarEstadia,
+            this.mConsumibles});
             this.mEstadia.Name = "mEstadia";
             this.mEstadia.Size = new System.Drawing.Size(56, 20);
             this.mEstadia.Text = "&Estadía";
@@ -284,11 +284,18 @@
             // mRegistrarEstadia
             // 
             this.mRegistrarEstadia.Name = "mRegistrarEstadia";
-            this.mRegistrarEstadia.Size = new System.Drawing.Size(120, 22);
+            this.mRegistrarEstadia.Size = new System.Drawing.Size(143, 22);
             this.mRegistrarEstadia.Tag = "9";
             this.mRegistrarEstadia.Text = "Registrar";
             this.mRegistrarEstadia.Visible = false;
             this.mRegistrarEstadia.Click += new System.EventHandler(this.mRegistrarEstadia_Click);
+            // 
+            // mConsumibles
+            // 
+            this.mConsumibles.Name = "mConsumibles";
+            this.mConsumibles.Size = new System.Drawing.Size(143, 22);
+            this.mConsumibles.Text = "Consumibles";
+            this.mConsumibles.Click += new System.EventHandler(this.mConsumibles_Click);
             // 
             // mReportes
             // 
@@ -323,6 +330,7 @@
             this.mCambiarPass.Name = "mCambiarPass";
             this.mCambiarPass.Size = new System.Drawing.Size(127, 20);
             this.mCambiarPass.Text = "Cambiar Contraseña";
+            this.mCambiarPass.Visible = false;
             this.mCambiarPass.Click += new System.EventHandler(this.cambiarContraseñaToolStripMenuItem_Click);
             // 
             // frmPrincipal
@@ -375,6 +383,7 @@
         private System.Windows.Forms.ToolStripMenuItem mBajaHotel;
         private System.Windows.Forms.ToolStripMenuItem mCambiarPass;
         private System.Windows.Forms.ToolStripMenuItem mAltaCliente;
+        private System.Windows.Forms.ToolStripMenuItem mConsumibles;
     }
 }
 

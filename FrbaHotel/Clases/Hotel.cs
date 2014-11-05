@@ -96,5 +96,10 @@ namespace FrbaHotel
             this.pais = pais;
             this.regimenes = regimenes;
         }
+
+        public override string ToString()
+        {
+            return this.descripcion;
+        }
     }
 }

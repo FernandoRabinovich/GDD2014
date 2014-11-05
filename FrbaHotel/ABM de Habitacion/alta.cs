@@ -32,11 +32,10 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoHabitacion";
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                adapter.SelectCommand = cmd;
-                DataTable table = new DataTable();
-                adapter.Fill(table);
-                cmbTipoHabitacion.DataSource = table;
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                    cmbTipoHabitacion.Items.Add(new TipoHabitacion(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
             }
             catch (Exception ex)
             {

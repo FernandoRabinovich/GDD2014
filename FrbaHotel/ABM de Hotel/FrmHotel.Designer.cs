@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkRegimenes = new System.Windows.Forms.CheckedListBox();
             this.txtNumeroCalle = new System.Windows.Forms.MaskedTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.cmbCiudad = new System.Windows.Forms.ComboBox();
             this.txtPais = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbTipoRegimen = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.txtDireccion = new System.Windows.Forms.TextBox();
@@ -57,13 +57,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.chkRegimenes);
             this.groupBox2.Controls.Add(this.txtNumeroCalle);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.cmbCiudad);
             this.groupBox2.Controls.Add(this.txtPais);
             this.groupBox2.Controls.Add(this.txtTelefono);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.cmbTipoRegimen);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.txtDireccion);
@@ -71,10 +71,19 @@
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Location = new System.Drawing.Point(12, 134);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(312, 210);
+            this.groupBox2.Size = new System.Drawing.Size(312, 264);
             this.groupBox2.TabIndex = 24;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos locatarios";
+            // 
+            // chkRegimenes
+            // 
+            this.chkRegimenes.FormattingEnabled = true;
+            this.chkRegimenes.Location = new System.Drawing.Point(111, 159);
+            this.chkRegimenes.Name = "chkRegimenes";
+            this.chkRegimenes.Size = new System.Drawing.Size(167, 94);
+            this.chkRegimenes.TabIndex = 39;
+            this.chkRegimenes.Tag = "Tipo Regimen";
             // 
             // txtNumeroCalle
             // 
@@ -97,6 +106,7 @@
             // cmbCiudad
             // 
             this.cmbCiudad.DisplayMember = "descripcion";
+            this.cmbCiudad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCiudad.FormattingEnabled = true;
             this.cmbCiudad.Location = new System.Drawing.Point(111, 103);
             this.cmbCiudad.Name = "cmbCiudad";
@@ -131,19 +141,6 @@
             this.label2.TabIndex = 31;
             this.label2.Text = "Tipo de regímen:";
             // 
-            // cmbTipoRegimen
-            // 
-            this.cmbTipoRegimen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbTipoRegimen.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cmbTipoRegimen.DisplayMember = "descripcion";
-            this.cmbTipoRegimen.FormattingEnabled = true;
-            this.cmbTipoRegimen.Location = new System.Drawing.Point(111, 156);
-            this.cmbTipoRegimen.Name = "cmbTipoRegimen";
-            this.cmbTipoRegimen.Size = new System.Drawing.Size(160, 21);
-            this.cmbTipoRegimen.TabIndex = 32;
-            this.cmbTipoRegimen.Tag = "Regimen";
-            this.cmbTipoRegimen.ValueMember = "id";
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -165,7 +162,6 @@
             // txtDireccion
             // 
             this.txtDireccion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDireccion.Enabled = false;
             this.txtDireccion.Location = new System.Drawing.Point(111, 49);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(160, 20);
@@ -193,7 +189,6 @@
             // txtMail
             // 
             this.txtMail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtMail.Enabled = false;
             this.txtMail.Location = new System.Drawing.Point(118, 58);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);
@@ -261,7 +256,6 @@
             // txtNombre
             // 
             this.txtNombre.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNombre.Enabled = false;
             this.txtNombre.Location = new System.Drawing.Point(118, 32);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
@@ -280,7 +274,7 @@
             // btnLimpiar
             // 
             this.btnLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpiar.Location = new System.Drawing.Point(12, 361);
+            this.btnLimpiar.Location = new System.Drawing.Point(12, 406);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(100, 30);
             this.btnLimpiar.TabIndex = 26;
@@ -291,7 +285,7 @@
             // btnGuardar
             // 
             this.btnGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGuardar.Location = new System.Drawing.Point(224, 361);
+            this.btnGuardar.Location = new System.Drawing.Point(224, 406);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(100, 30);
             this.btnGuardar.TabIndex = 25;
@@ -303,7 +297,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(343, 400);
+            this.ClientSize = new System.Drawing.Size(343, 445);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.groupBox2);
@@ -340,11 +334,11 @@
         private System.Windows.Forms.Button btnGuardar;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbTipoRegimen;
         private System.Windows.Forms.MaskedTextBox txtTelefono;
         private System.Windows.Forms.TextBox txtPais;
         private System.Windows.Forms.ComboBox cmbCiudad;
         private System.Windows.Forms.MaskedTextBox txtNumeroCalle;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.CheckedListBox chkRegimenes;
     }
 }

@@ -145,6 +145,7 @@
             // cmbHotel
             // 
             this.cmbHotel.DisplayMember = "descripcion";
+            this.cmbHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHotel.FormattingEnabled = true;
             this.cmbHotel.Location = new System.Drawing.Point(124, 85);
             this.cmbHotel.Name = "cmbHotel";
@@ -177,6 +178,7 @@
             // cmbRegimenHotel
             // 
             this.cmbRegimenHotel.DisplayMember = "descripcion";
+            this.cmbRegimenHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRegimenHotel.FormattingEnabled = true;
             this.cmbRegimenHotel.Location = new System.Drawing.Point(124, 141);
             this.cmbRegimenHotel.Name = "cmbRegimenHotel";
@@ -188,6 +190,7 @@
             // cmbTipoHabitacion
             // 
             this.cmbTipoHabitacion.DisplayMember = "descripcion";
+            this.cmbTipoHabitacion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoHabitacion.FormattingEnabled = true;
             this.cmbTipoHabitacion.Location = new System.Drawing.Point(124, 112);
             this.cmbTipoHabitacion.Name = "cmbTipoHabitacion";
@@ -320,11 +323,14 @@
             // 
             // cmbTipoDoc
             // 
+            this.cmbTipoDoc.DisplayMember = "descripcion";
+            this.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDoc.FormattingEnabled = true;
             this.cmbTipoDoc.Location = new System.Drawing.Point(317, 16);
             this.cmbTipoDoc.Name = "cmbTipoDoc";
             this.cmbTipoDoc.Size = new System.Drawing.Size(100, 21);
             this.cmbTipoDoc.TabIndex = 10;
+            this.cmbTipoDoc.ValueMember = "id";
             // 
             // label4
             // 

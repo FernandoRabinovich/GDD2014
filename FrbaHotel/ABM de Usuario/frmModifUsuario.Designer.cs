@@ -201,6 +201,7 @@
             // cmbTipoDoc
             // 
             this.cmbTipoDoc.DisplayMember = "descripcion";
+            this.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDoc.FormattingEnabled = true;
             this.cmbTipoDoc.Location = new System.Drawing.Point(106, 88);
             this.cmbTipoDoc.Name = "cmbTipoDoc";

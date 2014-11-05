@@ -30,6 +30,7 @@ namespace FrbaHotel
             // Cargar el combo y los datos del cliente
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -38,12 +39,10 @@ namespace FrbaHotel
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                DataTable table = new DataTable();
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader = cmd.ExecuteReader();
 
-                cmbTipoDoc.DataSource = table;
+                while(reader.Read())
+                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
             }
             catch (Exception ex)
             {
@@ -52,6 +51,7 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }
@@ -64,7 +64,7 @@ namespace FrbaHotel
             txtNombre.Text = cliente.Nonbre;
             txtApellido.Text = cliente.Apellido;
             txtNroDocumento.Text = cliente.NumeroDoc.ToString();
-            cmbTipoDoc.SelectedValue = cliente.TipoDoc;
+            cmbTipoDoc.SelectedText = cliente.TipoDoc;
             txtMail.Text = cliente.Mail;
             txtTelefono.Text = cliente.Telefono;
             txtDireccion.Text = cliente.Direccion;

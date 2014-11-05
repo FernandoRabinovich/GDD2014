@@ -103,6 +103,7 @@
             // cmbCiudad
             // 
             this.cmbCiudad.DisplayMember = "descripcion";
+            this.cmbCiudad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCiudad.FormattingEnabled = true;
             this.cmbCiudad.Location = new System.Drawing.Point(334, 26);
             this.cmbCiudad.Name = "cmbCiudad";
@@ -165,19 +166,19 @@
             this.mEditar,
             this.mBaja});
             this.menuHoteles.Name = "menuHoteles";
-            this.menuHoteles.Size = new System.Drawing.Size(153, 70);
+            this.menuHoteles.Size = new System.Drawing.Size(105, 48);
             // 
             // mEditar
             // 
             this.mEditar.Name = "mEditar";
-            this.mEditar.Size = new System.Drawing.Size(152, 22);
+            this.mEditar.Size = new System.Drawing.Size(104, 22);
             this.mEditar.Text = "Editar";
             this.mEditar.Click += new System.EventHandler(this.mEditar_Click);
             // 
             // mBaja
             // 
             this.mBaja.Name = "mBaja";
-            this.mBaja.Size = new System.Drawing.Size(152, 22);
+            this.mBaja.Size = new System.Drawing.Size(104, 22);
             this.mBaja.Text = "Baja";
             this.mBaja.Click += new System.EventHandler(this.mBaja_Click);
             // 

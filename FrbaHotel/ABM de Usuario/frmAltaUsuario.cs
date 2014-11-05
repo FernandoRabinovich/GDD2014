@@ -63,6 +63,13 @@ namespace FrbaHotel
                 while (reader.Read())
                     lstRol.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
 
+                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
+                reader.Close();
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString())); 
+
             }
             catch (Exception ex)
             {

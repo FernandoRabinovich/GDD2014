@@ -28,20 +28,6 @@ namespace FrbaHotel
 
         private void frmModifUsuario_Load(object sender, EventArgs e)
         {
-            //Acá tengo que cargar los datos del usuario para poder modificarlo.
-            txtApellido.Text = this.usuario.Apellido;
-            txtDireccion.Text = this.usuario.Direccion;
-            chkEstado.Checked = this.usuario.Estado.Equals("Activo") ? true:false;
-            fechaNacimiento.Value = this.usuario.FechaNacimiento;
-            txtMail.Text = this.usuario.Mail; ;
-            txtNombre.Text = this.usuario.Nonbre;
-            txtNumero.Text = this.usuario.Numero.ToString();
-            txtNroDocumento.Text = this.usuario.NumeroDoc.ToString();
-            txtPiso.Text = this.usuario.Piso.ToString();
-            txtTelefono.Text = this.usuario.Telefono;
-            cmbTipoDoc.SelectedValue = this.usuario.TipoDoc;
-            txtUsername.Text = this.usuario.UserName;
-
             /* Tengo que levantar los roles asignados a este usuario */
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
@@ -80,9 +66,28 @@ namespace FrbaHotel
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
-                {
                     lstHoteles.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()), Int32.Parse(reader["pertenece"].ToString()) == 1 ? true:false);
-                }
+
+                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
+                reader.Close();
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+
+                //Acá tengo que cargar los datos del usuario para poder modificarlo.
+                txtApellido.Text = this.usuario.Apellido;
+                txtDireccion.Text = this.usuario.Direccion;
+                chkEstado.Checked = this.usuario.Estado.Equals("Activo") ? true : false;
+                fechaNacimiento.Value = this.usuario.FechaNacimiento;
+                txtMail.Text = this.usuario.Mail; ;
+                txtNombre.Text = this.usuario.Nonbre;
+                txtNumero.Text = this.usuario.Numero.ToString();
+                txtNroDocumento.Text = this.usuario.NumeroDoc.ToString();
+                txtPiso.Text = this.usuario.Piso.ToString();
+                txtTelefono.Text = this.usuario.Telefono;
+                cmbTipoDoc.SelectedValue = this.usuario.TipoDoc;
+                txtUsername.Text = this.usuario.UserName;
             }
             catch (Exception ex)
             {
