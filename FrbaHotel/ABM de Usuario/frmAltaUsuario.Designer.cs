@@ -103,7 +103,6 @@
             // txtPassword
             // 
             this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtPassword.Enabled = false;
             this.txtPassword.Location = new System.Drawing.Point(105, 42);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
@@ -134,7 +133,6 @@
             // txtUsername
             // 
             this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtUsername.Enabled = false;
             this.txtUsername.Location = new System.Drawing.Point(105, 16);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Size = new System.Drawing.Size(160, 20);
@@ -294,7 +292,6 @@
             // txtDireccion
             // 
             this.txtDireccion.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtDireccion.Enabled = false;
             this.txtDireccion.Location = new System.Drawing.Point(106, 170);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(193, 20);
@@ -313,7 +310,6 @@
             // txtTelefono
             // 
             this.txtTelefono.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtTelefono.Enabled = false;
             this.txtTelefono.Location = new System.Drawing.Point(106, 141);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(159, 20);
@@ -368,7 +364,6 @@
             // txtNombre
             // 
             this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtNombre.Enabled = false;
             this.txtNombre.Location = new System.Drawing.Point(105, 36);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(160, 20);
@@ -378,7 +373,6 @@
             // txtMail
             // 
             this.txtMail.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txtMail.Enabled = false;
             this.txtMail.Location = new System.Drawing.Point(106, 115);
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(160, 20);

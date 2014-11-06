@@ -64,7 +64,7 @@ namespace FrbaHotel
             txtNombre.Text = cliente.Nonbre;
             txtApellido.Text = cliente.Apellido;
             txtNroDocumento.Text = cliente.NumeroDoc.ToString();
-            cmbTipoDoc.SelectedText = cliente.TipoDoc;
+            cmbTipoDoc.SelectedItem = cliente.TipoDoc;
             txtMail.Text = cliente.Mail;
             txtTelefono.Text = cliente.Telefono;
             txtDireccion.Text = cliente.Direccion;

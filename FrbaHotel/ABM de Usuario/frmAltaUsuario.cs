@@ -51,9 +51,10 @@ namespace FrbaHotel
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
-                    lstRol.Items.Add(new Rol(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+                    if(bool.Parse(reader["Estado"].ToString()))
+                        lstRol.Items.Add(new Rol(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
 
-
+                reader.Close();
                 cmd.CommandText = "GRAFO_LOCO.ObtenerHotelesPorUsuario";
                 SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
                 usuario.SqlDbType = SqlDbType.Int;
@@ -61,10 +62,11 @@ namespace FrbaHotel
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
-                    lstRol.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+                    lstHoteles.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
 
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
                 reader.Close();
+                cmd.Parameters.Clear();
                 reader = cmd.ExecuteReader();
 
                 while (reader.Read())
@@ -167,6 +169,7 @@ namespace FrbaHotel
 
                     /* Inserto los roles que tendrá el usuario*/
                     cmd.Parameters.Clear();
+                    cmd.CommandText = "GRAFO_LOCO.IngresarRolesPorUsuario";
                     SqlParameter usuario = new SqlParameter("@idUsuario", idUsuario);
                     usuario.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(usuario);
@@ -184,6 +187,7 @@ namespace FrbaHotel
 
                     /* Inserto los hoteles a los que pertenecerá el usuario*/
                     cmd.Parameters.Clear();
+                    cmd.CommandText = "GRAFO_LOCO.IngresarHotelesPorUsuario";
                     cmd.Parameters.Add(usuario);
 
                     foreach (Hotel h in lstHoteles.CheckedItems)

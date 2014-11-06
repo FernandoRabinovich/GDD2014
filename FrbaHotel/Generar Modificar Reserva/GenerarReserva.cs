@@ -476,7 +476,7 @@ namespace FrbaHotel
             apellido.SqlDbType = SqlDbType.VarChar;
             apellido.Size = 30;
             cmd.Parameters.Add(apellido);
-            SqlParameter tipoDoc = new SqlParameter("@idTipoDocumento", cliente.TipoDoc);
+            SqlParameter tipoDoc = new SqlParameter("@idTipoDocumento", cliente.TipoDoc.Id);
             tipoDoc.SqlDbType = SqlDbType.Int;
             cmd.Parameters.Add(tipoDoc);
             SqlParameter nroDoc = new SqlParameter("@nroDocumento", cliente.NumeroDoc);

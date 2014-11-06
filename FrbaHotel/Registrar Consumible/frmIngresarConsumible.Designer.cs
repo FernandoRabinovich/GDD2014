@@ -80,6 +80,7 @@
             // cmbConsumible
             // 
             this.cmbConsumible.DisplayMember = "descripcion";
+            this.cmbConsumible.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbConsumible.FormattingEnabled = true;
             this.cmbConsumible.Location = new System.Drawing.Point(79, 56);
             this.cmbConsumible.Name = "cmbConsumible";
@@ -118,7 +119,7 @@
             // mEliminar
             // 
             this.mEliminar.Name = "mEliminar";
-            this.mEliminar.Size = new System.Drawing.Size(152, 22);
+            this.mEliminar.Size = new System.Drawing.Size(117, 22);
             this.mEliminar.Text = "Eliminar";
             this.mEliminar.Click += new System.EventHandler(this.mEliminar_Click);
             // 

@@ -22,7 +22,7 @@ namespace FrbaHotel
         }
 
         private string nombre;
-        public string Nonbre
+        public string Nombre
         {
             get { return this.nombre; }
             set { this.nombre = value; }
@@ -92,11 +92,11 @@ namespace FrbaHotel
             set { this.mail = value; }
         }
 
-        private int tipoDoc;
-        public string TipoDoc
+        private TipoDoc tipoDoc;
+        public TipoDoc TipoDoc
         {
-            get { return this.tipoDoc == 1 ? "DNI":"Pasaporte"; }
-            set { this.tipoDoc = value.Equals("DNI") ? 1:2; }
+            get { return this.tipoDoc; }
+            set { this.tipoDoc = value; }
         }
 
         private int numeroDoc;
@@ -107,7 +107,7 @@ namespace FrbaHotel
         }
 
         public Usuario(string apellido, string direccion, string estado, DateTime fechaNac, string mail, int idUsuario, string nombre, int numero, 
-                            int numeroDoc, int piso, string tipoDoc, string userName)
+                            int numeroDoc, int piso, TipoDoc tipoDoc, string userName)
         {
             this.Apellido = apellido;
             this.Direccion = direccion;
@@ -115,7 +115,7 @@ namespace FrbaHotel
             this.FechaNacimiento = fechaNac;
             this.Mail = mail;
             this.Id = idUsuario;
-            this.Nonbre = nombre;
+            this.nombre = nombre;
             this.Numero = numero;
             this.NumeroDoc = numeroDoc;
             this.Piso = piso;

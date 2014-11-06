@@ -341,6 +341,7 @@
             this.MaximizeBox = false;
             this.Name = "frmAltaCliente";
             this.Text = "ABM de Cliente";
+            this.Load += new System.EventHandler(this.frmAltaCliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

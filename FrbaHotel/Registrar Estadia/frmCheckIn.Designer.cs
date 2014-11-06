@@ -131,15 +131,16 @@
             this.txtNumeroDoc.Location = new System.Drawing.Point(317, 39);
             this.txtNumeroDoc.Mask = "9999999999";
             this.txtNumeroDoc.Name = "txtNumeroDoc";
-            this.txtNumeroDoc.Size = new System.Drawing.Size(100, 20);
+            this.txtNumeroDoc.Size = new System.Drawing.Size(129, 20);
             this.txtNumeroDoc.TabIndex = 11;
             // 
             // cmbTipoDoc
             // 
+            this.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDoc.FormattingEnabled = true;
             this.cmbTipoDoc.Location = new System.Drawing.Point(317, 16);
             this.cmbTipoDoc.Name = "cmbTipoDoc";
-            this.cmbTipoDoc.Size = new System.Drawing.Size(100, 21);
+            this.cmbTipoDoc.Size = new System.Drawing.Size(129, 21);
             this.cmbTipoDoc.TabIndex = 10;
             // 
             // label4
@@ -275,6 +276,7 @@
             this.MaximizeBox = false;
             this.Name = "frmCheckIn";
             this.Text = "Check-In";
+            this.Load += new System.EventHandler(this.frmCheckIn_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdClientesEstadia)).EndInit();

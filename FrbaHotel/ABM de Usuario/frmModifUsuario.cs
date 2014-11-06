@@ -56,6 +56,7 @@ namespace FrbaHotel
                 /* Tengo que levantar los hoteles asignados a este usuario pero que pertenezcan al usuario logueado también (solo puede modificar los
                 hoteles a los que pertenece). */
                 cmd.Parameters.Clear();
+                reader.Close();
                 cmd.CommandText = "GRAFO_LOCO.ObtenerHotelesPorUsuarioPorAdministrador";
 
                 SqlParameter admin = new SqlParameter("@idAdmin", frmPrincipal.idUsuario);
@@ -68,6 +69,7 @@ namespace FrbaHotel
                 while (reader.Read())
                     lstHoteles.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()), Int32.Parse(reader["pertenece"].ToString()) == 1 ? true:false);
 
+                cmd.Parameters.Clear();
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
                 reader.Close();
                 reader = cmd.ExecuteReader();
@@ -80,8 +82,8 @@ namespace FrbaHotel
                 txtDireccion.Text = this.usuario.Direccion;
                 chkEstado.Checked = this.usuario.Estado.Equals("Activo") ? true : false;
                 fechaNacimiento.Value = this.usuario.FechaNacimiento;
-                txtMail.Text = this.usuario.Mail; ;
-                txtNombre.Text = this.usuario.Nonbre;
+                txtMail.Text = this.usuario.Mail;
+                txtNombre.Text = this.usuario.Nombre;
                 txtNumero.Text = this.usuario.Numero.ToString();
                 txtNroDocumento.Text = this.usuario.NumeroDoc.ToString();
                 txtPiso.Text = this.usuario.Piso.ToString();
@@ -246,8 +248,6 @@ namespace FrbaHotel
 
             if (txtUsername.Text.Length == 0)
                 campo = txtUsername.Tag.ToString();
-            if (txtPassword.Text.Length == 0)
-                campo = txtPassword.Tag.ToString();
             if (txtNombre.Text.Length == 0)
                 campo = txtNombre.Tag.ToString();
             if (txtApellido.Text.Length == 0)

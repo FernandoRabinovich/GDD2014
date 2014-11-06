@@ -87,12 +87,14 @@
             // 
             // cmbTipoDoc
             // 
+            this.cmbTipoDoc.DisplayMember = "descripcion";
             this.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDoc.FormattingEnabled = true;
             this.cmbTipoDoc.Location = new System.Drawing.Point(317, 16);
             this.cmbTipoDoc.Name = "cmbTipoDoc";
             this.cmbTipoDoc.Size = new System.Drawing.Size(100, 21);
             this.cmbTipoDoc.TabIndex = 10;
+            this.cmbTipoDoc.ValueMember = "id";
             // 
             // label4
             // 

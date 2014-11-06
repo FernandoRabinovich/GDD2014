@@ -81,12 +81,12 @@ namespace FrbaHotel
             this.usuarioSeleccionado.Estado = grdUsuarios.SelectedRows[0].Cells["Estado"].Value.ToString();
             this.usuarioSeleccionado.FechaNacimiento = DateTime.Parse(grdUsuarios.SelectedRows[0].Cells["FechaNacimiento"].Value.ToString());
             this.usuarioSeleccionado.Mail = grdUsuarios.SelectedRows[0].Cells["Mail"].Value.ToString();
-            this.usuarioSeleccionado.Nonbre = grdUsuarios.SelectedRows[0].Cells["Nonbre"].Value.ToString();
+            this.usuarioSeleccionado.Nombre = grdUsuarios.SelectedRows[0].Cells["Nombre"].Value.ToString();
             this.usuarioSeleccionado.Numero = Int32.Parse(grdUsuarios.SelectedRows[0].Cells["Numero"].Value.ToString());
-            this.usuarioSeleccionado.NumeroDoc = Int32.Parse(grdUsuarios.SelectedRows[0].Cells["NumeroDoc"].Value.ToString());
+            this.usuarioSeleccionado.NumeroDoc = Int32.Parse(grdUsuarios.SelectedRows[0].Cells["NroDocumento"].Value.ToString());
             this.usuarioSeleccionado.Piso = Int32.Parse(grdUsuarios.SelectedRows[0].Cells["Piso"].Value.ToString());
             this.usuarioSeleccionado.Telefono = grdUsuarios.SelectedRows[0].Cells["Telefono"].Value.ToString();
-            this.usuarioSeleccionado.TipoDoc = grdUsuarios.SelectedRows[0].Cells["TipoDoc"].Value.ToString();
+            this.usuarioSeleccionado.TipoDoc = new TipoDoc(Int32.Parse(grdUsuarios.SelectedRows[0].Cells["IdTipoDoc"].Value.ToString()), grdUsuarios.SelectedRows[0].Cells["TipoDoc"].Value.ToString());
             this.usuarioSeleccionado.UserName = grdUsuarios.SelectedRows[0].Cells["UserName"].Value.ToString();
         }
 

@@ -88,11 +88,6 @@ namespace FrbaHotel
             return true;
         }
 
-        private void botonLimpiar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             if (txtNumero.Text.Length != 0)
@@ -157,6 +152,7 @@ namespace FrbaHotel
             lblCostoTotal.Text = "0";
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             #region Cargar Hoteles
 
@@ -173,12 +169,10 @@ namespace FrbaHotel
                     SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
                     usuario.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(usuario);
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-                    DataTable table = new DataTable();
-                    adapter.SelectCommand = cmd;
-                    adapter.Fill(table);
+                    reader = cmd.ExecuteReader();
 
-                    cmbHotel.DataSource = table;
+                    while(reader.Read())
+                        cmbHotel.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
                 }
                 catch (Exception ex)
                 {
@@ -351,6 +345,7 @@ namespace FrbaHotel
             // Cargar los hoteles (según usuario).
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
+            SqlDataReader reader = null;
 
             try
             {
@@ -363,18 +358,16 @@ namespace FrbaHotel
                 SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
                 hotel.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(hotel);
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                DataTable table = new DataTable();
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader = cmd.ExecuteReader();
 
-                cmbRegimenHotel.DataSource = table;
+                while(reader.Read())
+                    cmbRegimenHotel.Items.Add(new Regimen(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString(), decimal.Parse(reader["precio"].ToString())));
 
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoHabitacionPorHotel";
-                adapter.SelectCommand = cmd;
-                adapter.Fill(table);
+                reader.Close();
 
-                cmbTipoHabitacion.DataSource = table;
+                while(reader.Read())
+                    cmbTipoHabitacion.Items.Add(new TipoHabitacion(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
             }
             catch (Exception ex)
             {

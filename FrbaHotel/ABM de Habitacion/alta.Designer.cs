@@ -149,7 +149,6 @@
             // txtComodidades
             // 
             this.txtComodidades.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtComodidades.Enabled = false;
             this.txtComodidades.Location = new System.Drawing.Point(87, 167);
             this.txtComodidades.Multiline = true;
             this.txtComodidades.Name = "txtComodidades";

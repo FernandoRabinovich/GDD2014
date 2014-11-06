@@ -86,11 +86,11 @@ namespace FrbaHotel
             set { this.mail = value; }
         }
 
-        private int tipoDoc;
-        public string TipoDoc
+        private TipoDoc tipoDoc;
+        public TipoDoc TipoDoc
         {
-            get { return this.tipoDoc == 1 ? "DNI":"Pasaporte"; }
-            set { this.tipoDoc = value.Equals("DNI") ? 1:2; }
+            get { return this.tipoDoc; }
+            set { this.tipoDoc = value; }
         }
 
         private int numeroDoc;
@@ -122,7 +122,7 @@ namespace FrbaHotel
         }
 
         public Cliente(int idCliente, string apellido, string direccion, string estado, DateTime fechaNac, string mail, string nombre, int numero, 
-                            int numeroDoc, int piso, string tipoDoc, string nacionalidad, string localidad, string departamento, string telefono)
+                            int numeroDoc, int piso, TipoDoc tipoDoc, string nacionalidad, string localidad, string departamento, string telefono)
         {
             this.Apellido = apellido;
             this.Direccion = direccion;
@@ -142,7 +142,7 @@ namespace FrbaHotel
         }
 
         public Cliente(string apellido, string direccion, DateTime fechaNac, string mail, string nombre, int numero,
-                    int numeroDoc, int piso, string tipoDoc, string nacionalidad, string localidad, string departamento, string telefono)
+                    int numeroDoc, int piso, TipoDoc tipoDoc, string nacionalidad, string localidad, string departamento, string telefono)
         {
             this.Apellido = apellido;
             this.Direccion = direccion;

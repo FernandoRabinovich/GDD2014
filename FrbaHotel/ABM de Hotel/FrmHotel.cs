@@ -45,6 +45,7 @@ namespace FrbaHotel
                     chkRegimenes.Items.Add(new Regimen(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString(), decimal.Parse(reader["precio"].ToString())));
 
                 cmd.CommandText = "GRAFO_LOCO.ObtenerCiudades";
+                cmd.Parameters.Clear();
                 reader.Close();
                 reader = cmd.ExecuteReader();
 
@@ -129,7 +130,7 @@ namespace FrbaHotel
                         cmd.Parameters.Add(regimen);
 
                         cmd.ExecuteNonQuery();
-                        cmd.Parameters.RemoveAt("@regimen");
+                        cmd.Parameters.RemoveAt("@idRegimen");
                     }
 
                     cmd.Parameters.Clear();

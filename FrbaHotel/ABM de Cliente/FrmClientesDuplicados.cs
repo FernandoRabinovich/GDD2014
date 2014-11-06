@@ -173,9 +173,9 @@ namespace FrbaHotel
                     DateTime.Parse(grdResultado.SelectedRows[0].Cells["FechaNacimiento"].Value.ToString()), grdResultado.SelectedRows[0].Cells["Mail"].Value.ToString(),
                     grdResultado.SelectedRows[0].Cells["Nombre"].Value.ToString(), Int32.Parse(grdResultado.SelectedRows[0].Cells["NumeroCalle"].Value.ToString()),
                     Int32.Parse(grdResultado.SelectedRows[0].Cells["NroDocumento"].Value.ToString()), Int32.Parse(grdResultado.SelectedRows[0].Cells["Piso"].Value.ToString()),
-                    grdResultado.SelectedRows[0].Cells["IdTipoDocumento"].Value.ToString(), grdResultado.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(),
-                    grdResultado.SelectedRows[0].Cells["Localidad"].Value.ToString(), grdResultado.SelectedRows[0].Cells["Departamento"].Value.ToString(),
-                    grdResultado.SelectedRows[0].Cells["Telefono"].Value.ToString()));
+                    new TipoDoc(Int32.Parse(grdResultado.SelectedRows[0].Cells["IdTipoDocumento"].Value.ToString()), grdResultado.SelectedRows[0].Cells["TipoDocumento"].Value.ToString()), 
+                    grdResultado.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(), grdResultado.SelectedRows[0].Cells["Localidad"].Value.ToString(), 
+                    grdResultado.SelectedRows[0].Cells["Departamento"].Value.ToString(), grdResultado.SelectedRows[0].Cells["Telefono"].Value.ToString()));
                 frmModifCliente.StartPosition = FormStartPosition.CenterScreen;
                 frmModifCliente.ShowDialog();
             }

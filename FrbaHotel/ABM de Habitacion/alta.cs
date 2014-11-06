@@ -57,7 +57,6 @@ namespace FrbaHotel
                 // Tengo que cargar el combo con los tipos de habitaccion
                 SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
                 SqlCommand cmd = null;
-                SqlDataReader reader = null;
 
                 try
                 {
@@ -92,6 +91,8 @@ namespace FrbaHotel
                     cmd.Parameters.Add(descripcion);
 
                     cmd.ExecuteNonQuery();
+
+                    MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -100,7 +101,6 @@ namespace FrbaHotel
                 finally
                 {
                     cn.Close();
-                    reader.Close();
                     if (cmd != null)
                         cmd.Dispose();
                 }

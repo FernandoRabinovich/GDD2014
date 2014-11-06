@@ -15,42 +15,12 @@ namespace FrbaHotel
     public partial class frmAltaCliente : Form
     {
         public static Cliente cliente;
+
         public frmAltaCliente()
         {
             InitializeComponent();
         }
        
-        private void AltaCliente_Load(object sender, EventArgs e)
-        {
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-            SqlDataReader reader = null;
-
-            try
-            {
-                cn.Open();
-                cmd = new SqlCommand();
-                cmd.Connection = cn;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
-                reader = cmd.ExecuteReader();
-
-                while(reader.Read())
-                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString())); 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                cn.Close();
-                reader.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            }
-        }
-
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             txtNombre.Text = string.Empty;
@@ -72,7 +42,7 @@ namespace FrbaHotel
             {
                 // Devuelvo el objeto creado con los datos ingresados para el nuevo cliente o, si el que lo llamo es el formulario principal, hago el ingreso.
                 cliente = new Cliente(txtApellido.Text, txtDireccion.Text, fechaNacimiento.Value, txtMail.Text, txtNombre.Text, Int32.Parse(txtNumeroCalle.Text),
-                                Int32.Parse(txtNroDocumento.Text), Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem).Descripcion, txtNacionalidad.Text,
+                                Int32.Parse(txtNroDocumento.Text), Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem), txtNacionalidad.Text,
                                 txtLocalidad.Text, txtDpto.Text, txtTelefono.Text);
 
                 if (this.MdiParent.Name.Equals("frmPrincipal"))
@@ -94,6 +64,8 @@ namespace FrbaHotel
                         cmd.ExecuteNonQuery();
 
                         MessageBox.Show("Los datos se ingresaron correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.Close();
                     }
                     catch (Exception ex)
                     {
@@ -106,8 +78,6 @@ namespace FrbaHotel
                             cmd.Dispose();
                     }
                 }
-
-                this.Close();
             }
         }
 
@@ -158,7 +128,7 @@ namespace FrbaHotel
             apellido.SqlDbType = SqlDbType.VarChar;
             apellido.Size = 30;
             cmd.Parameters.Add(apellido);
-            SqlParameter tipoDoc = new SqlParameter("@idTipoDocumento", cliente.TipoDoc);
+            SqlParameter tipoDoc = new SqlParameter("@idTipoDocumento", cliente.TipoDoc.Id);
             tipoDoc.SqlDbType = SqlDbType.Int;
             cmd.Parameters.Add(tipoDoc);
             SqlParameter nroDoc = new SqlParameter("@nroDocumento", cliente.NumeroDoc);
@@ -197,6 +167,37 @@ namespace FrbaHotel
             dpto.SqlDbType = SqlDbType.VarChar;
             dpto.Size = 1;
             cmd.Parameters.Add(dpto);
+        }
+
+        private void frmAltaCliente_Load(object sender, EventArgs e)
+        {
+            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+            SqlCommand cmd = null;
+            SqlDataReader reader = null;
+
+            try
+            {
+                cn.Open();
+                cmd = new SqlCommand();
+                cmd.Connection = cn;
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "GRAFO_LOCO.ObtenerTipoDocumento";
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                    cmbTipoDoc.Items.Add(new TipoDoc(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cn.Close();
+                reader.Close();
+                if (cmd != null)
+                    cmd.Dispose();
+            }
         }
     }
 }

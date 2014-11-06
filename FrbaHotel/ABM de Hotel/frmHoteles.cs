@@ -112,6 +112,9 @@ namespace FrbaHotel
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerHotelesPorUsuarioConFiltro";
 
+                SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
+                usuario.SqlDbType = SqlDbType.Int;
+                cmd.Parameters.Add(usuario);
                 SqlParameter nombre = new SqlParameter("@nombre", txtNombre.Text);
                 nombre.SqlDbType = SqlDbType.VarChar;
                 nombre.Size = 50;
@@ -138,7 +141,7 @@ namespace FrbaHotel
                 DataTable table = new DataTable();
                 adapter.Fill(table);
 
-                cmbCiudad.DataSource = table;
+                grdHoteles.DataSource = table;
             }
             catch (Exception ex)
             {
