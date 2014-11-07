@@ -214,7 +214,7 @@
             this.mAltaHotel,
             this.mBajaHotel});
             this.mHotel.Name = "mHotel";
-            this.mHotel.Size = new System.Drawing.Size(152, 22);
+            this.mHotel.Size = new System.Drawing.Size(132, 22);
             this.mHotel.Tag = "4";
             this.mHotel.Text = "Hotel";
             this.mHotel.Visible = false;
@@ -284,16 +284,16 @@
             // mRegistrarEstadia
             // 
             this.mRegistrarEstadia.Name = "mRegistrarEstadia";
-            this.mRegistrarEstadia.Size = new System.Drawing.Size(143, 22);
+            this.mRegistrarEstadia.Size = new System.Drawing.Size(191, 22);
             this.mRegistrarEstadia.Tag = "9";
-            this.mRegistrarEstadia.Text = "Registrar";
+            this.mRegistrarEstadia.Text = "Check-In / Check-Out";
             this.mRegistrarEstadia.Visible = false;
             this.mRegistrarEstadia.Click += new System.EventHandler(this.mRegistrarEstadia_Click);
             // 
             // mConsumibles
             // 
             this.mConsumibles.Name = "mConsumibles";
-            this.mConsumibles.Size = new System.Drawing.Size(143, 22);
+            this.mConsumibles.Size = new System.Drawing.Size(191, 22);
             this.mConsumibles.Text = "Consumibles";
             this.mConsumibles.Click += new System.EventHandler(this.mConsumibles_Click);
             // 

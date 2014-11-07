@@ -89,10 +89,15 @@
             // 
             // grdLineasFactura
             // 
+            this.grdLineasFactura.AllowUserToAddRows = false;
+            this.grdLineasFactura.AllowUserToDeleteRows = false;
+            this.grdLineasFactura.AllowUserToResizeRows = false;
             this.grdLineasFactura.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdLineasFactura.Enabled = false;
             this.grdLineasFactura.Location = new System.Drawing.Point(12, 79);
             this.grdLineasFactura.Name = "grdLineasFactura";
+            this.grdLineasFactura.ReadOnly = true;
+            this.grdLineasFactura.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdLineasFactura.Size = new System.Drawing.Size(595, 150);
             this.grdLineasFactura.TabIndex = 12;
             // 
@@ -210,6 +215,7 @@
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(108, 20);
             this.lblTotal.TabIndex = 27;
+            this.lblTotal.Text = "0";
             this.lblTotal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtNumeroTarjeta
@@ -226,6 +232,7 @@
             this.grpTarjeta.Controls.Add(this.txtNumeroTarjeta);
             this.grpTarjeta.Controls.Add(this.label8);
             this.grpTarjeta.Controls.Add(this.label9);
+            this.grpTarjeta.Enabled = false;
             this.grpTarjeta.Location = new System.Drawing.Point(12, 272);
             this.grpTarjeta.Name = "grpTarjeta";
             this.grpTarjeta.Size = new System.Drawing.Size(257, 93);

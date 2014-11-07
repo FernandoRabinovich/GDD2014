@@ -31,7 +31,6 @@ namespace FrbaHotel
             {
                 SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
                 SqlCommand cmd = null;
-                SqlDataReader reader = null;
 
                 try
                 {
@@ -58,6 +57,8 @@ namespace FrbaHotel
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
@@ -66,7 +67,6 @@ namespace FrbaHotel
                 finally
                 {
                     cn.Close();
-                    reader.Close();
                     if (cmd != null)
                         cmd.Dispose();
                 }

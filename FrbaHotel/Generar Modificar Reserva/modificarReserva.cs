@@ -43,9 +43,9 @@ namespace FrbaHotel
                     SqlParameter hotel = new SqlParameter("@idHotel", ((Hotel)cmbHotel.SelectedItem).Id);
                     hotel.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(hotel);
-                    SqlParameter fechaCreacion = new SqlParameter("@fechaCreacion", DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString()));
-                    fechaCreacion.SqlDbType = SqlDbType.DateTime;
-                    cmd.Parameters.Add(fechaCreacion);
+                    SqlParameter fecha = new SqlParameter("@fecha", DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString()));
+                    fecha.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(fecha);
                     SqlParameter regimen = new SqlParameter("@idRegimen", ((Regimen)cmbRegimenHotel.SelectedItem).Id);
                     regimen.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(regimen);
@@ -105,7 +105,7 @@ namespace FrbaHotel
                     cmd.CommandText = "GRAFO_LOCO.BuscarReservaPorCodigo";
 
                     SqlParameter codigo = new SqlParameter("@codigoReserva", Int32.Parse(txtNumero.Text));
-                    codigo.SqlDbType = SqlDbType.DateTime;
+                    codigo.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(codigo);
                     SqlDataAdapter adapter = new SqlDataAdapter();
                     DataSet dataSet = new DataSet();
@@ -119,13 +119,14 @@ namespace FrbaHotel
                         fechaDesde.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaDesde"].ToString());
                         fechaHasta.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaHasta"].ToString());
                         cmbHotel.SelectedValue = Int32.Parse(dataSet.Tables[0].Rows[0]["IdHotel"].ToString());
-                        cmbRegimenHotel.SelectedValue = Int32.Parse(dataSet.Tables[0].Rows[0]["IdTipoRegimen"].ToString());
+                        cmbRegimenHotel.SelectedIndex = Int32.Parse(dataSet.Tables[0].Rows[0]["IdTipoRegimen"].ToString());
                         grdHabitaciones.DataSource = dataSet.Tables[1];
-
+                        grdHabitaciones.Columns["IdTipoHabitacion"].Visible = false;
+                        grdHabitaciones.Columns["id"].Visible = false;
                         foreach (DataRow r in dataSet.Tables[1].Rows)
                         {
                             lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + decimal.Parse(r["costo"].ToString())).ToString();
-                            habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion, r["tipoHabitacion"].ToString(), ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, Int32.Parse(r["idHabitacion"].ToString()), decimal.Parse(r["costo"].ToString())));
+                            habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion, r["tipoHabitacion"].ToString(), ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, Int32.Parse(r["id"].ToString()), decimal.Parse(r["costo"].ToString())));
                         }
                     }
                     else
@@ -188,6 +189,7 @@ namespace FrbaHotel
             else
             {
                 cmbHotel.Items.Add(new Hotel(frmPrincipal.idHotel, frmPrincipal.hotel));
+                cmbHotel.SelectedIndex = 0;
                 cmbHotel.Enabled = false;
             }
 
@@ -365,6 +367,7 @@ namespace FrbaHotel
 
                 cmd.CommandText = "GRAFO_LOCO.ObtenerTipoHabitacionPorHotel";
                 reader.Close();
+                reader = cmd.ExecuteReader();
 
                 while(reader.Read())
                     cmbTipoHabitacion.Items.Add(new TipoHabitacion(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));

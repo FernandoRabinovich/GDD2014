@@ -21,12 +21,13 @@ namespace FrbaHotel
             InitializeComponent();
         }
 
-        public frmCheckIn(Reserva reserva, List<HabitacionesPorReserva> habitaciones)
+        public frmCheckIn(Reserva reserva, List<HabitacionesPorReserva> habitaciones, int cantidadClientes)
         {
             InitializeComponent();
             this.reserva = reserva;
             lblReserva.Text = reserva.Codigo.ToString();
             this.habitaciones = habitaciones;
+            lblIngresosRestantes.Text = cantidadClientes.ToString();
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -35,6 +36,8 @@ namespace FrbaHotel
             {
                 SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
                 SqlCommand cmd = null;
+                SqlParameter cliente = null;
+                SqlParameter estadia = null;
 
                 cn.Open();
                 SqlTransaction sqlTran = cn.BeginTransaction();
@@ -46,9 +49,9 @@ namespace FrbaHotel
                 {
                     cmd.CommandText = "GRAFO_LOCO.IngresarEstadia";
 
-                    SqlParameter reserva = new SqlParameter("@codigoReserva", this.reserva.Codigo);
-                    reserva.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(reserva);
+                    SqlParameter codigoReserva = new SqlParameter("@codigoReserva", this.reserva.Codigo);
+                    codigoReserva.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(codigoReserva);
                     SqlParameter fDesde = new SqlParameter("@fechaDesde", this.reserva.FechaDesde);
                     fDesde.SqlDbType = SqlDbType.DateTime;
                     cmd.Parameters.Add(fDesde);
@@ -66,7 +69,7 @@ namespace FrbaHotel
                     int idCliente = 0;
                     foreach(Cliente c in clientesEstadia)
                     {
-                        if (c.Id != 0) // Ver que pasa acá cuando es nuevo
+                        if (c.Id == 0) // Ver que pasa acá cuando es nuevo
                         {
                             cmd.CommandText = "GRAFO_LOCO.IngresarCliente";
                             this.CargarParametrosCliente(ref cmd, c);
@@ -76,16 +79,28 @@ namespace FrbaHotel
 
                         cmd.Parameters.Clear();
                         cmd.CommandText = "GRAFO_LOCO.IngresarClientePorEstadia";
-                        SqlParameter cliente = new SqlParameter("@idCliente", idCliente);
+                        cliente = new SqlParameter("@idCliente", idCliente);
                         cliente.SqlDbType = SqlDbType.Int;
                         cmd.Parameters.Add(cliente);
-                        SqlParameter estadia = new SqlParameter("@idEstadia", idEstadia);
+                        estadia = new SqlParameter("@idEstadia", idEstadia);
                         estadia.SqlDbType = SqlDbType.Int;
                         cmd.Parameters.Add(estadia);
                         cmd.ExecuteNonQuery();
                     }
+
+                    cmd.Parameters.Clear();
+                    cmd.CommandText = "GRAFO_LOCO.IngresarClientePorEstadia";
+                    cliente = new SqlParameter("@idCliente", reserva.IdCliente);
+                    cliente.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(cliente);
+                    estadia = new SqlParameter("@idEstadia", idEstadia);
+                    estadia.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(estadia);
+                    cmd.ExecuteNonQuery();
                     
                     sqlTran.Commit();
+
+                    MessageBox.Show("La operación se realizó correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -123,7 +138,6 @@ namespace FrbaHotel
         {
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
-            SqlDataReader reader = null;
 
             try
             {
@@ -141,12 +155,18 @@ namespace FrbaHotel
                 apellido.SqlDbType = SqlDbType.VarChar;
                 apellido.Size = 255;
                 cmd.Parameters.Add(apellido);
-                SqlParameter tipoDocumento = new SqlParameter("@idTipoDocumento", ((TipoDoc)cmbTipoDoc.SelectedItem).Id);
-                tipoDocumento.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(tipoDocumento);
-                SqlParameter nroDocumento = new SqlParameter("@nroDocumento", Int32.Parse(txtNumeroDoc.Text));
-                nroDocumento.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(nroDocumento);
+                if (cmbTipoDoc.SelectedItem != null)
+                {
+                    SqlParameter tipoDocumento = new SqlParameter("@idTipoDocumento", ((TipoDoc)cmbTipoDoc.SelectedItem).Id);
+                    tipoDocumento.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(tipoDocumento);
+                }
+                if (!string.IsNullOrEmpty(txtNumeroDoc.Text))
+                {
+                    SqlParameter nroDocumento = new SqlParameter("@nroDocumento", Int32.Parse(txtNumeroDoc.Text));
+                    nroDocumento.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(nroDocumento);
+                }
                 SqlParameter mail = new SqlParameter("@mail", txtMail.Text);
                 mail.SqlDbType = SqlDbType.VarChar;
                 mail.Size = 255;
@@ -168,7 +188,6 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
-                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }  
@@ -184,28 +203,10 @@ namespace FrbaHotel
             }
         }
 
-        private void mAgregar_Click(object sender, EventArgs e)
-        {
-            if (grdClientes.SelectedRows[0].Cells["Estado"].Value.ToString().Equals("1"))
-            {
-                clientesEstadia.Add(new Cliente(Int32.Parse(grdClientes.SelectedRows[0].Cells["id"].Value.ToString()), grdClientes.SelectedRows[0].Cells["Apellido"].Value.ToString(),
-                    grdClientes.SelectedRows[0].Cells["Direccion"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Estado"].Value.ToString(),
-                    DateTime.Parse(grdClientes.SelectedRows[0].Cells["FechaNacimiento"].Value.ToString()), grdClientes.SelectedRows[0].Cells["Mail"].Value.ToString(),
-                    grdClientes.SelectedRows[0].Cells["Nombre"].Value.ToString(), Int32.Parse(grdClientes.SelectedRows[0].Cells["NumeroCalle"].Value.ToString()),
-                    Int32.Parse(grdClientes.SelectedRows[0].Cells["NroDocumento"].Value.ToString()), Int32.Parse(grdClientes.SelectedRows[0].Cells["Piso"].Value.ToString()),
-                    new TipoDoc(Int32.Parse(grdClientes.SelectedRows[0].Cells["IdTipoDocumento"].Value.ToString()), grdClientes.SelectedRows[0].Cells["TipoDocumento"].Value.ToString()), 
-                    grdClientes.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Localidad"].Value.ToString(), 
-                    grdClientes.SelectedRows[0].Cells["Departamento"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Telefono"].Value.ToString()));
-                grdClientesEstadia.DataSource = clientesEstadia;
-            }
-            else
-                MessageBox.Show("El cliente seleccionado se encuentra inactivo.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
         private void CargarParametrosCliente(ref SqlCommand cmd, Cliente c)
         {
             cmd.Parameters.Clear();
-            SqlParameter nombre = new SqlParameter("@nombre", c.Nonbre);
+            SqlParameter nombre = new SqlParameter("@nombre", c.Nombre);
             nombre.SqlDbType = SqlDbType.VarChar;
             nombre.Size = 30;
             cmd.Parameters.Add(nombre);
@@ -283,6 +284,34 @@ namespace FrbaHotel
                 if (cmd != null)
                     cmd.Dispose();
             }
+        }
+
+        private void mAgregar_Click_1(object sender, EventArgs e)
+        {
+            if (bool.Parse(grdClientes.SelectedRows[0].Cells["Estado"].Value.ToString()))
+            {
+                clientesEstadia.Add(new Cliente(Int32.Parse(grdClientes.SelectedRows[0].Cells["id"].Value.ToString()), grdClientes.SelectedRows[0].Cells["Apellido"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Direccion"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Estado"].Value.ToString(),
+                    DateTime.Parse(grdClientes.SelectedRows[0].Cells["FechaNacimiento"].Value.ToString()), grdClientes.SelectedRows[0].Cells["Mail"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Nombre"].Value.ToString(), Int32.Parse(grdClientes.SelectedRows[0].Cells["NumeroCalle"].Value.ToString()),
+                    Int32.Parse(grdClientes.SelectedRows[0].Cells["NroDocumento"].Value.ToString()), Int32.Parse(grdClientes.SelectedRows[0].Cells["Piso"].Value.ToString()),
+                    new TipoDoc(Int32.Parse(grdClientes.SelectedRows[0].Cells["IdTipoDocumento"].Value.ToString()), grdClientes.SelectedRows[0].Cells["TipoDocumento"].Value.ToString()),
+                    grdClientes.SelectedRows[0].Cells["Nacionalidad"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Localidad"].Value.ToString(),
+                    grdClientes.SelectedRows[0].Cells["Departamento"].Value.ToString(), grdClientes.SelectedRows[0].Cells["Telefono"].Value.ToString()));
+                    grdClientesEstadia.DataSource = "";
+                    grdClientesEstadia.DataSource = clientesEstadia;
+                    grdClientesEstadia.Refresh();
+
+                lblIngresosRestantes.Text = (Int32.Parse(lblIngresosRestantes.Text) - 1).ToString();
+
+                if (lblIngresosRestantes.Text.Equals("0"))
+                {
+                    btnAltaCliente.Enabled = false;
+                    btnRegistrar.Enabled = true;
+                }
+            }
+            else
+                MessageBox.Show("El cliente seleccionado se encuentra inactivo.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

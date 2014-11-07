@@ -48,7 +48,14 @@ namespace FrbaHotel
                 numeroHabitacion.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(numeroHabitacion);
 
-                ConsumiblesIngresados = new SqlParameter("@consumibles", consumibles);
+                DataTable dtConsumibles = new DataTable();
+                dtConsumibles.Columns.Add("idConsumible");
+                foreach (Consumible c in consumibles)
+                {
+                    dtConsumibles.Rows.Add(c.Id);
+                }
+
+                ConsumiblesIngresados = new SqlParameter("@consumibles", dtConsumibles);
                 ConsumiblesIngresados.SqlDbType = SqlDbType.Structured;
                 cmd.Parameters.Add(ConsumiblesIngresados);
 
@@ -57,6 +64,8 @@ namespace FrbaHotel
                 cmd.Parameters.Add(fecha);
 
                 cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Los datos se ingresaron correctamente.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -96,8 +105,10 @@ namespace FrbaHotel
                 cmd.CommandText = "GRAFO_LOCO.ObtenerConsumibles";
                 reader = cmd.ExecuteReader();
 
-                while(reader.Read())
+                while (reader.Read())
+                {
                     cmbConsumible.Items.Add(new Consumible(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString(), decimal.Parse(reader["precio"].ToString())));
+                }
             }
             catch (Exception ex)
             {
@@ -106,6 +117,7 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
+                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }

@@ -16,7 +16,7 @@ namespace FrbaHotel
         }
 
         private string nombre;
-        public string Nonbre
+        public string Nombre
         {
             get { return this.nombre; }
             set { this.nombre = value; }
@@ -130,7 +130,7 @@ namespace FrbaHotel
             this.FechaNacimiento = fechaNac;
             this.Mail = mail;
             this.Id = idCliente;
-            this.Nonbre = nombre;
+            this.Nombre = nombre;
             this.Numero = numero;
             this.NumeroDoc = numeroDoc;
             this.Piso = piso;
@@ -148,7 +148,7 @@ namespace FrbaHotel
             this.Direccion = direccion;
             this.FechaNacimiento = fechaNac;
             this.Mail = mail;
-            this.Nonbre = nombre;
+            this.Nombre = nombre;
             this.Numero = numero;
             this.NumeroDoc = numeroDoc;
             this.Piso = piso;

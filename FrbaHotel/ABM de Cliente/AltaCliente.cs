@@ -45,7 +45,7 @@ namespace FrbaHotel
                                 Int32.Parse(txtNroDocumento.Text), Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem), txtNacionalidad.Text,
                                 txtLocalidad.Text, txtDpto.Text, txtTelefono.Text);
 
-                if (this.MdiParent.Name.Equals("frmPrincipal"))
+                if (this.MdiParent != null)
                 {
                     // Tengo que cargar el combo con los tipos de habitaccion
                     SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
@@ -78,6 +78,8 @@ namespace FrbaHotel
                             cmd.Dispose();
                     }
                 }
+                else
+                    this.Close();
             }
         }
 
@@ -120,7 +122,7 @@ namespace FrbaHotel
 
         private void CargarParametrosCliente(ref SqlCommand cmd, Cliente cliente)
         {
-            SqlParameter nombre = new SqlParameter("@nombre", cliente.Nonbre);
+            SqlParameter nombre = new SqlParameter("@nombre", cliente.Nombre);
             nombre.SqlDbType = SqlDbType.VarChar;
             nombre.Size = 30;
             cmd.Parameters.Add(nombre);

@@ -61,7 +61,7 @@ namespace FrbaHotel
 
         private void CargarCliente()
         {
-            txtNombre.Text = cliente.Nonbre;
+            txtNombre.Text = cliente.Nombre;
             txtApellido.Text = cliente.Apellido;
             txtNroDocumento.Text = cliente.NumeroDoc.ToString();
             cmbTipoDoc.SelectedItem = cliente.TipoDoc;

@@ -47,7 +47,7 @@
             // txtReserva
             // 
             this.txtReserva.Location = new System.Drawing.Point(125, 23);
-            this.txtReserva.Mask = "99999";
+            this.txtReserva.Mask = "9999999";
             this.txtReserva.Name = "txtReserva";
             this.txtReserva.Size = new System.Drawing.Size(100, 20);
             this.txtReserva.TabIndex = 1;

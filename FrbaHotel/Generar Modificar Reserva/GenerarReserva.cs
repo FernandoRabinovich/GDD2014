@@ -133,7 +133,7 @@ namespace FrbaHotel
             /* Si hay disponibilidad y di de alta al cliente, hacer la reserva e informar el código de la misma. */
             if (habitaciones.Count > 0)
             {
-                if (idCliente != 0)
+                if (!string.IsNullOrEmpty(this.cliente.Nombre) || idCliente != 0)
                 {
                     if (MessageBox.Show("¿Confirma los datos para realizar la reserva?", this.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -271,32 +271,63 @@ namespace FrbaHotel
             /* El tipo de habitacion puede cambiar pero el regimen y el hotel no. */
             /* Ahora verifico la disponibilidad de la habitacion que esta queriendo reservar. Si hay, entonces devuelvo un idHabitacion sino,
               informo que no hay disponibilidad. */
-            cmbHotel.Enabled = false;
-            cmbRegimenHotel.Enabled = false;
             decimal costo;
 
-            int idHabitacion = this.VerificarDisponibilidad(out costo);
-            
-            if(idHabitacion != 0)
+            if (this.ValidarCamposRequeridos())
             {
-                habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion, ((TipoHabitacion)cmbTipoHabitacion.SelectedItem).Descripcion, ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, idHabitacion, costo));
-                grdHabitaciones.DataSource = habitaciones;
-                grdHabitaciones.Refresh();
-                lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + costo).ToString();
+                int idHabitacion = this.VerificarDisponibilidad(out costo);
+
+                if (idHabitacion != 0)
+                {
+                    habitaciones.Add(new HabitacionesPorReserva(((Hotel)cmbHotel.SelectedItem).Descripcion, ((TipoHabitacion)cmbTipoHabitacion.SelectedItem).Descripcion, ((Regimen)cmbRegimenHotel.SelectedItem).Descripcion, idHabitacion, costo));
+                    grdHabitaciones.DataSource = "";
+                    grdHabitaciones.DataSource = habitaciones;
+                    grdHabitaciones.Columns["IdHotel"].Visible = false;
+                    grdHabitaciones.Columns["IdRegimen"].Visible = false;
+                    grdHabitaciones.Columns["IdTipoHabitacion"].Visible = false;
+                    grdHabitaciones.Columns["IdHabitacion"].Visible = false;
+                    grdHabitaciones.Refresh();
+                    lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + costo).ToString();
+                }
             }
+        }
+
+        private bool ValidarCamposRequeridos()
+        {
+            string campo = string.Empty;
+
+            if (cmbHotel.SelectedItem == null)
+                campo = cmbHotel.Tag.ToString();
+            if (cmbTipoHabitacion.SelectedItem == null)
+                campo = cmbTipoHabitacion.Tag.ToString();
+            if (cmbRegimenHotel.SelectedItem == null)
+                campo = cmbRegimenHotel.Tag.ToString();
+
+            if (campo.Length > 0)
+            {
+                MessageBox.Show("El campo " + campo + " es requerido.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
         }
 
         private void mEliminar_Click(object sender, EventArgs e)
         {
-            decimal costo = Decimal.Parse(grdHabitaciones.Rows[0].Cells["costo"].Value.ToString());
+            decimal costo = Decimal.Parse(grdHabitaciones.SelectedRows[0].Cells["costo"].Value.ToString());
             /* Tengo que permitir eliminar una habitación de la "posible" reserva */
-            habitaciones.Remove(new HabitacionesPorReserva(grdHabitaciones.Rows[0].Cells["Hotel"].Value.ToString(), 
-                grdHabitaciones.Rows[0].Cells["TipoHabitacion"].Value.ToString(), grdHabitaciones.Rows[0].Cells["Regimen"].Value.ToString(), 
-                Int32.Parse(grdHabitaciones.Rows[0].Cells["idHabitacion"].Value.ToString()), Decimal.Parse(grdHabitaciones.Rows[0].Cells["costo"].Value.ToString())));
+            habitaciones.RemoveAt(
+                habitaciones.FindIndex(
+                    delegate(HabitacionesPorReserva h) { return h.IdHabitacion == Int32.Parse(grdHabitaciones.SelectedRows[0].Cells["idHabitacion"].Value.ToString());}));
+
+            grdHabitaciones.DataSource = "";
             grdHabitaciones.DataSource = habitaciones;
+            grdHabitaciones.Columns["IdHotel"].Visible = false;
+            grdHabitaciones.Columns["IdRegimen"].Visible = false;
+            grdHabitaciones.Columns["IdTipoHabitacion"].Visible = false;
             grdHabitaciones.Refresh();
 
-            lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) + costo).ToString();
+            lblCostoTotal.Text = (decimal.Parse(lblCostoTotal.Text) - costo).ToString();
 
             if (habitaciones.Count == 0)
             {
@@ -343,25 +374,30 @@ namespace FrbaHotel
                     cmd.Parameters.Add(tipoHabitacion);
 
                     // Si no funciona con un list es un DataTable
-                    SqlParameter tipoHabitacionesReserva = new SqlParameter("@habitacionesReserva", habitaciones);
+                    DataTable dtHabitaciones = new DataTable();
+                    dtHabitaciones.Columns.Add("idHabitacion");
+                    foreach(HabitacionesPorReserva h in habitaciones)
+                    {
+                        dtHabitaciones.Rows.Add(h.IdHabitacion);
+                    }
+
+                    SqlParameter tipoHabitacionesReserva = new SqlParameter("@habitacionesReservadas", dtHabitaciones);
                     tipoHabitacionesReserva.SqlDbType = SqlDbType.Structured;
                     cmd.Parameters.Add(tipoHabitacionesReserva);
 
                     reader = cmd.ExecuteReader();
 
-                    reader.Read();
-                    idHabitacion = Int32.Parse(reader["id"].ToString());
-                    costo = Decimal.Parse(reader["costo"].ToString());
-
                     /* Si hay disponibilidad inhabilito la modificacion de la reserva */                    
-                    if (idHabitacion != 0)
+                    if (reader.HasRows)
                     {
+                        reader.Read();
+                        idHabitacion = Int32.Parse(reader["id"].ToString());
+                        costo = Decimal.Parse(reader["costo"].ToString());
+
                         fechaDesde.Enabled = false;
                         fechaHasta.Enabled = false;
                         cmbHotel.Enabled = false;
-                        cmbTipoHabitacion.Enabled = false;
                         cmbRegimenHotel.Enabled = false;
-                        btnAgregar.Enabled = false;
                         btnAltaCliente.Visible = true;
                     }
                     else
@@ -398,7 +434,6 @@ namespace FrbaHotel
         {
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
-            SqlDataReader reader = null;
 
             try
             {
@@ -416,12 +451,18 @@ namespace FrbaHotel
                 apellido.SqlDbType = SqlDbType.VarChar;
                 apellido.Size = 255;
                 cmd.Parameters.Add(apellido);
-                SqlParameter tipoDocumento = new SqlParameter("@idTipoDocumento", ((TipoDoc)cmbTipoDoc.SelectedItem).Id);
-                tipoDocumento.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(tipoDocumento);
-                SqlParameter nroDocumento = new SqlParameter("@nroDocumento", Int32.Parse(txtNumeroDoc.Text));
-                nroDocumento.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(nroDocumento);
+                if (cmbTipoDoc.SelectedItem != null)
+                {
+                    SqlParameter tipoDocumento = new SqlParameter("@idTipoDocumento", ((TipoDoc)cmbTipoDoc.SelectedItem).Id);
+                    tipoDocumento.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(tipoDocumento);
+                }
+                if (!string.IsNullOrEmpty(txtNumeroDoc.Text))
+                {
+                    SqlParameter nroDocumento = new SqlParameter("@nroDocumento", Int32.Parse(txtNumeroDoc.Text));
+                    nroDocumento.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(nroDocumento);
+                }
                 SqlParameter mail = new SqlParameter("@mail", txtMail.Text);
                 mail.SqlDbType = SqlDbType.VarChar;
                 mail.Size = 255;
@@ -443,7 +484,6 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
-                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }  
@@ -458,17 +498,17 @@ namespace FrbaHotel
 
         private void AltaClienteClosing(object sender, FormClosingEventArgs e)
         {
-            if (frmAltaCliente.cliente.Id != 0)
+            if (!string.IsNullOrEmpty(frmAltaCliente.cliente.Nombre))
             {
                 this.cliente = frmAltaCliente.cliente;
                 btnAltaCliente.Enabled = false;
-                btnReservar.Enabled = true;
+                btnReservar.Visible = true;
             }
         }
 
         private void CargarParametrosCliente(ref SqlCommand cmd)
         {
-            SqlParameter nombre = new SqlParameter("@nombre", cliente.Nonbre);
+            SqlParameter nombre = new SqlParameter("@nombre", cliente.Nombre);
             nombre.SqlDbType = SqlDbType.VarChar;
             nombre.Size = 30;
             cmd.Parameters.Add(nombre);

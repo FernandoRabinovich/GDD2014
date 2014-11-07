@@ -34,6 +34,8 @@
             this.lblIngresosRestantes = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.grdClientes = new System.Windows.Forms.DataGridView();
+            this.menuClientes = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mAgregar = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtNumeroDoc = new System.Windows.Forms.MaskedTextBox();
             this.cmbTipoDoc = new System.Windows.Forms.ComboBox();
@@ -47,15 +49,13 @@
             this.btnFiltro = new System.Windows.Forms.Button();
             this.btnAltaCliente = new System.Windows.Forms.Button();
             this.btnRegistrar = new System.Windows.Forms.Button();
-            this.menuClientes = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.mAgregar = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.lblReserva = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdClientesEstadia)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdClientes)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.menuClientes.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -75,9 +75,14 @@
             // 
             // grdClientesEstadia
             // 
+            this.grdClientesEstadia.AllowUserToAddRows = false;
+            this.grdClientesEstadia.AllowUserToDeleteRows = false;
+            this.grdClientesEstadia.AllowUserToResizeRows = false;
             this.grdClientesEstadia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdClientesEstadia.Location = new System.Drawing.Point(20, 236);
             this.grdClientesEstadia.Name = "grdClientesEstadia";
+            this.grdClientesEstadia.ReadOnly = true;
+            this.grdClientesEstadia.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdClientesEstadia.Size = new System.Drawing.Size(560, 89);
             this.grdClientesEstadia.TabIndex = 37;
             // 
@@ -101,11 +106,31 @@
             // 
             // grdClientes
             // 
+            this.grdClientes.AllowUserToAddRows = false;
+            this.grdClientes.AllowUserToDeleteRows = false;
+            this.grdClientes.AllowUserToResizeRows = false;
             this.grdClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdClientes.ContextMenuStrip = this.menuClientes;
             this.grdClientes.Location = new System.Drawing.Point(20, 119);
             this.grdClientes.Name = "grdClientes";
+            this.grdClientes.ReadOnly = true;
+            this.grdClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdClientes.Size = new System.Drawing.Size(560, 111);
             this.grdClientes.TabIndex = 4;
+            // 
+            // menuClientes
+            // 
+            this.menuClientes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mAgregar});
+            this.menuClientes.Name = "menuClientes";
+            this.menuClientes.Size = new System.Drawing.Size(153, 48);
+            // 
+            // mAgregar
+            // 
+            this.mAgregar.Name = "mAgregar";
+            this.mAgregar.Size = new System.Drawing.Size(152, 22);
+            this.mAgregar.Text = "Agregar";
+            this.mAgregar.Click += new System.EventHandler(this.mAgregar_Click_1);
             // 
             // groupBox3
             // 
@@ -136,12 +161,14 @@
             // 
             // cmbTipoDoc
             // 
+            this.cmbTipoDoc.DisplayMember = "descripcion";
             this.cmbTipoDoc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoDoc.FormattingEnabled = true;
             this.cmbTipoDoc.Location = new System.Drawing.Point(317, 16);
             this.cmbTipoDoc.Name = "cmbTipoDoc";
             this.cmbTipoDoc.Size = new System.Drawing.Size(129, 21);
             this.cmbTipoDoc.TabIndex = 10;
+            this.cmbTipoDoc.ValueMember = "id";
             // 
             // label4
             // 
@@ -231,19 +258,6 @@
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
-            // menuClientes
-            // 
-            this.menuClientes.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mAgregar});
-            this.menuClientes.Name = "menuClientes";
-            this.menuClientes.Size = new System.Drawing.Size(117, 26);
-            // 
-            // mAgregar
-            // 
-            this.mAgregar.Name = "mAgregar";
-            this.mAgregar.Size = new System.Drawing.Size(116, 22);
-            this.mAgregar.Text = "Agregar";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -281,9 +295,9 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdClientesEstadia)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdClientes)).EndInit();
+            this.menuClientes.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.menuClientes.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -40,6 +40,7 @@ namespace FrbaHotel
             catch(Exception ex)
             {
                 MessageBox.Show("No se pudo cargar los datos de la facturación de la estadía. (" + ex.Message + ")", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
             }
         }
 
@@ -85,7 +86,7 @@ namespace FrbaHotel
         {
             foreach(DataGridViewRow row in grdLineasFactura.Rows)
             {
-                lblTotal.Text = (decimal.Parse(lblTotal.Text) + decimal.Parse(row.Cells["Total"].ToString())).ToString();
+                lblTotal.Text = (decimal.Parse(lblTotal.Text) + decimal.Parse(row.Cells["Total"].Value.ToString())).ToString();
             }
         }
 
@@ -158,101 +159,105 @@ namespace FrbaHotel
 
         private void Guardar_Click(object sender, EventArgs e)
         {
-            SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
-            SqlCommand cmd = null;
-            SqlTransaction sqlTran = null;
-
-            try
+            if (cmbMedioPago.SelectedItem != null)
             {
-                cn.Open();
-                sqlTran = cn.BeginTransaction();
-                cmd = cn.CreateCommand();
-                cmd.Transaction = sqlTran;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "GRAFO_LOCO.CargarFactura";
-
-                SqlParameter fecha = new SqlParameter("@FechaCreacion", DateTime.Parse(lblFechaFacturacion.Text));
-                fecha.SqlDbType = SqlDbType.DateTime;
-                cmd.Parameters.Add(fecha);
-                SqlParameter total = new SqlParameter("@Monto", decimal.Parse(lblTotal.Text));
-                total.SqlDbType = SqlDbType.Decimal;
-                cmd.Parameters.Add(total);
-                SqlParameter estadia = new SqlParameter("@IdEstadia", Int32.Parse(lblEstadia.Text));
-                estadia.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(estadia);
-                SqlParameter mediopago = new SqlParameter("@IdTipoPago", ((TipoPago)cmbMedioPago.SelectedItem).Id);
-                mediopago.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(mediopago);
-                if (grpTarjeta.Enabled)
-                {
-                    SqlParameter nombreTarjeta = new SqlParameter("@NombreTarjeta", txtNombreTarjeta.Text);
-                    nombreTarjeta.SqlDbType = SqlDbType.VarChar;
-                    nombreTarjeta.Size = 50;
-                    cmd.Parameters.Add(nombreTarjeta);
-                    SqlParameter numeroTarjeta = new SqlParameter("@NumeroTarjeta", txtNumeroTarjeta.Text);
-                    numeroTarjeta.SqlDbType = SqlDbType.BigInt;
-                    cmd.Parameters.Add(numeroTarjeta);
-                }
-
-                int idFactura = (Int32)cmd.ExecuteScalar();
-
-                cmd.Parameters.Clear();
-                cmd.CommandText = "GRAFO_LOCO.CargarLineasFactura";
-
-                foreach(DataRow r in grdLineasFactura.Rows)
-                {
-                    if (r["Tipo"].ToString().Equals("consumible"))
-                    {
-                        SqlParameter factura = new SqlParameter("@IdFactura", idFactura);
-                        factura.SqlDbType = SqlDbType.Int;
-                        cmd.Parameters.Add(factura);
-                        SqlParameter consumible = new SqlParameter("@IdConsumible", decimal.Parse(r["Item"].ToString()));
-                        consumible.SqlDbType = SqlDbType.Decimal;
-                        cmd.Parameters.Add(consumible);
-                        SqlParameter cantidad = new SqlParameter("@Cantidad", decimal.Parse(r["Cantidad"].ToString()));
-                        cantidad.SqlDbType = SqlDbType.Decimal;
-                        cmd.Parameters.Add(cantidad);
-                        SqlParameter precioUni = new SqlParameter("@PrecioUnitario", decimal.Parse(r["Total"].ToString()) / decimal.Parse(r["Cantidad"].ToString()));
-                        precioUni.SqlDbType = SqlDbType.Decimal;
-                        cmd.Parameters.Add(precioUni);
-                        SqlParameter precioTot = new SqlParameter("@PrecioTotal", decimal.Parse(r["Total"].ToString()));
-                        precioTot.SqlDbType = SqlDbType.Decimal;
-                        cmd.Parameters.Add(precioTot);
-
-                        cmd.ExecuteNonQuery();
-                        cmd.Parameters.Clear();
-                    }
-                }
-
-                sqlTran.Commit();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
+                SqlCommand cmd = null;
+                SqlTransaction sqlTran = null;
 
                 try
                 {
-                    sqlTran.Rollback();
+                    cn.Open();
+                    sqlTran = cn.BeginTransaction();
+                    cmd = cn.CreateCommand();
+                    cmd.Transaction = sqlTran;
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandText = "GRAFO_LOCO.CargarFactura";
+
+                    SqlParameter fecha = new SqlParameter("@FechaCreacion", DateTime.Parse(lblFechaFacturacion.Text));
+                    fecha.SqlDbType = SqlDbType.DateTime;
+                    cmd.Parameters.Add(fecha);
+                    SqlParameter total = new SqlParameter("@Monto", decimal.Parse(lblTotal.Text));
+                    total.SqlDbType = SqlDbType.Decimal;
+                    cmd.Parameters.Add(total);
+                    SqlParameter estadia = new SqlParameter("@IdEstadia", Int32.Parse(lblEstadia.Text));
+                    estadia.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(estadia);
+                    SqlParameter mediopago = new SqlParameter("@IdTipoPago", ((TipoPago)cmbMedioPago.SelectedItem).Id);
+                    mediopago.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(mediopago);
+                    if (grpTarjeta.Enabled)
+                    {
+                        SqlParameter nombreTarjeta = new SqlParameter("@NombreTarjeta", txtNombreTarjeta.Text);
+                        nombreTarjeta.SqlDbType = SqlDbType.VarChar;
+                        nombreTarjeta.Size = 50;
+                        cmd.Parameters.Add(nombreTarjeta);
+                        SqlParameter numeroTarjeta = new SqlParameter("@NumeroTarjeta", txtNumeroTarjeta.Text);
+                        numeroTarjeta.SqlDbType = SqlDbType.BigInt;
+                        cmd.Parameters.Add(numeroTarjeta);
+                    }
+
+                    int idFactura = (Int32)cmd.ExecuteScalar();
+
+                    cmd.Parameters.Clear();
+                    cmd.CommandText = "GRAFO_LOCO.CargarLineasFactura";
+
+                    foreach (DataGridViewRow r in grdLineasFactura.Rows)
+                    {
+                        if (r.Cells["Tipo"].Value.ToString().Equals("consumible"))
+                        {
+                            SqlParameter factura = new SqlParameter("@IdFactura", idFactura);
+                            factura.SqlDbType = SqlDbType.Int;
+                            cmd.Parameters.Add(factura);
+                            SqlParameter consumible = new SqlParameter("@IdConsumible", decimal.Parse(r.Cells["Item"].Value.ToString()));
+                            consumible.SqlDbType = SqlDbType.Decimal;
+                            cmd.Parameters.Add(consumible);
+                            SqlParameter cantidad = new SqlParameter("@Cantidad", decimal.Parse(r.Cells["Cantidad"].Value.ToString()));
+                            cantidad.SqlDbType = SqlDbType.Decimal;
+                            cmd.Parameters.Add(cantidad);
+                            SqlParameter precioUni = new SqlParameter("@PrecioUnitario", decimal.Parse(r.Cells["Total"].Value.ToString()) / decimal.Parse(r.Cells["Cantidad"].Value.ToString()));
+                            precioUni.SqlDbType = SqlDbType.Decimal;
+                            cmd.Parameters.Add(precioUni);
+                            SqlParameter precioTot = new SqlParameter("@PrecioTotal", decimal.Parse(r.Cells["Total"].Value.ToString()));
+                            precioTot.SqlDbType = SqlDbType.Decimal;
+                            cmd.Parameters.Add(precioTot);
+
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                    }
+
+                    sqlTran.Commit();
                 }
-                catch (Exception ex2)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    try
+                    {
+                        sqlTran.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                        MessageBox.Show(ex2.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                finally
+                {
+                    cn.Close();
+                    if (cmd != null)
+                        cmd.Dispose();
                 }
             }
-            finally
-            {
-                cn.Close();
-                if (cmd != null)
-                    cmd.Dispose();
-            } 
+            else MessageBox.Show("Debe seleccionar un medio de pago.", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void cmbMedioPago_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (((TipoPago)cmbMedioPago.SelectedItem).Descripcion.Equals("Efectivo")) // Efectivo
-                grdLineasFactura.Enabled = false;
+                grpTarjeta.Enabled = false;
             else
-                grdLineasFactura.Enabled = true; // Tarjeta
+                grpTarjeta.Enabled = true; // Tarjeta
         }
     }
   }

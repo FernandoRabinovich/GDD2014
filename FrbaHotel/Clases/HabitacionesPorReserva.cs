@@ -35,11 +35,11 @@ namespace FrbaHotel
             set { this.idHabitacion = value; }
         }
 
-        private decimal costoHabitacion;
-        public decimal CostoHabitacion
+        private decimal costo;
+        public decimal Costo
         {
-            get { return this.costoHabitacion; }
-            set { this.costoHabitacion = value; }
+            get { return this.costo; }
+            set { this.costo = value; }
         }
 
         private int idHotel;
@@ -69,7 +69,7 @@ namespace FrbaHotel
             this.hotel = hotel;
             this.tipoHabitacion = tipoHabitacion;
             this.idHabitacion = idHabitacion;
-            this.costoHabitacion = costoHabitacion;
+            this.costo = costoHabitacion;
         }
 
         public HabitacionesPorReserva(int idHotel, int idTipoHabitacion, int idRegimen, int idHabitacion, decimal costoHabitacion)
@@ -78,7 +78,7 @@ namespace FrbaHotel
             this.idHotel = idHotel;
             this.idTipoHabitacion = idTipoHabitacion;
             this.idHabitacion = idHabitacion;
-            this.costoHabitacion = costoHabitacion;
+            this.costo = costoHabitacion;
         }
 
         public HabitacionesPorReserva()

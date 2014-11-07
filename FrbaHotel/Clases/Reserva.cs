@@ -42,13 +42,21 @@ namespace FrbaHotel
             set{this.idRegimen = value;}
         }
 
-        public Reserva(int codigo, int idHotel, int idRegimen, DateTime fechaDesde, DateTime fechaHasta)
+        private int idCliente;
+        public int IdCliente
+        {
+            get { return this.idCliente; }
+            set { this.idCliente = value; }
+        }
+
+        public Reserva(int codigo, int idHotel, int idRegimen, DateTime fechaDesde, DateTime fechaHasta, int idCliente)
         {
             this.codigo = codigo;
             this.idHotel = idHotel;
             this.idRegimen = idRegimen;
             this.fechaDesde = fechaDesde;
             this.fechaHasta = fechaHasta;
+            this.idCliente = idCliente;
         }
 
         public Reserva()

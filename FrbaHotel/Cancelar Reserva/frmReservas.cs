@@ -29,7 +29,6 @@ namespace FrbaHotel
         {
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
-            SqlDataReader reader = null;
 
             try
             {
@@ -54,9 +53,6 @@ namespace FrbaHotel
                     nroDoc.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(nroDoc);
                 }
-                SqlParameter fecha = new SqlParameter("@fecha", DateTime.Parse(System.Configuration.ConfigurationSettings.AppSettings["fechaSistema"].ToString()));
-                fecha.SqlDbType = SqlDbType.DateTime;
-                cmd.Parameters.Add(fecha);
 
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 adapter.SelectCommand = cmd;
@@ -73,7 +69,6 @@ namespace FrbaHotel
             finally
             {
                 cn.Close();
-                reader.Close();
                 if (cmd != null)
                     cmd.Dispose();
             }  
@@ -81,7 +76,7 @@ namespace FrbaHotel
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            frmCancelarReserva frmCancelar = new frmCancelarReserva(Int32.Parse(grdReservas.SelectedRows[0].Cells["Codigo"].ToString()));
+            frmCancelarReserva frmCancelar = new frmCancelarReserva(Int32.Parse(grdReservas.SelectedRows[0].Cells["Codigo"].Value.ToString()));
             frmCancelar.StartPosition = FormStartPosition.CenterScreen;
             frmCancelar.ShowDialog();
         }

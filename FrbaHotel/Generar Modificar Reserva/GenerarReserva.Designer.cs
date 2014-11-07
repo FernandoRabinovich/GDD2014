@@ -147,9 +147,9 @@
             this.cmbHotel.DisplayMember = "descripcion";
             this.cmbHotel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHotel.FormattingEnabled = true;
-            this.cmbHotel.Location = new System.Drawing.Point(124, 85);
+            this.cmbHotel.Location = new System.Drawing.Point(62, 85);
             this.cmbHotel.Name = "cmbHotel";
-            this.cmbHotel.Size = new System.Drawing.Size(177, 21);
+            this.cmbHotel.Size = new System.Drawing.Size(239, 21);
             this.cmbHotel.TabIndex = 29;
             this.cmbHotel.Tag = "Hotel";
             this.cmbHotel.ValueMember = "id";
@@ -287,9 +287,13 @@
             // 
             // grdClientes
             // 
+            this.grdClientes.AllowUserToAddRows = false;
+            this.grdClientes.AllowUserToDeleteRows = false;
             this.grdClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdClientes.Location = new System.Drawing.Point(20, 120);
             this.grdClientes.Name = "grdClientes";
+            this.grdClientes.ReadOnly = true;
+            this.grdClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdClientes.Size = new System.Drawing.Size(560, 193);
             this.grdClientes.TabIndex = 4;
             this.grdClientes.Tag = "Cliente";

@@ -16,6 +16,7 @@ namespace FrbaHotel
         int idRegimen;
         DateTime fechaDesde;
         DateTime fechaHasta;
+        int idCliente;
         List<HabitacionesPorReserva> habitaciones = new List<HabitacionesPorReserva>();
         bool checkIn; 
 
@@ -39,7 +40,7 @@ namespace FrbaHotel
                 cmd.CommandText = "GRAFO_LOCO.BuscarReservaPorCodigo";
 
                 SqlParameter codigo = new SqlParameter("@codigoReserva", Int32.Parse(txtReserva.Text));
-                codigo.SqlDbType = SqlDbType.DateTime;
+                codigo.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(codigo);
                 SqlDataAdapter adapter = new SqlDataAdapter();
                 DataSet dataSet = new DataSet();
@@ -54,8 +55,9 @@ namespace FrbaHotel
                     idHotel = Int32.Parse(dataSet.Tables[0].Rows[0]["IdHotel"].ToString());
                     idRegimen = Int32.Parse(dataSet.Tables[0].Rows[0]["IdTipoRegimen"].ToString());
                     checkIn = Int32.Parse(dataSet.Tables[0].Rows[0]["checkIn"].ToString()) == 1 ? true:false;
+                    idCliente = Int32.Parse(dataSet.Tables[0].Rows[0]["IdCliente"].ToString());
 
-                    Reserva reserva = new Reserva(Int32.Parse(txtReserva.Text), idHotel, idRegimen,fechaDesde, fechaHasta);
+                    Reserva reserva = new Reserva(Int32.Parse(txtReserva.Text), idHotel, idRegimen,fechaDesde, fechaHasta, idCliente);
 
                     foreach (DataRow r in dataSet.Tables[1].Rows)
                     {
@@ -75,7 +77,7 @@ namespace FrbaHotel
 
                     if (checkIn)
                     {
-                        frmCheckIn frmCheckIn = new frmCheckIn(reserva, habitaciones);
+                        frmCheckIn frmCheckIn = new frmCheckIn(reserva, habitaciones, cantidadClientes - 1);
                         frmCheckIn.StartPosition = FormStartPosition.CenterScreen;
                         frmCheckIn.Show();
                     }

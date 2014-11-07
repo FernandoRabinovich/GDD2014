@@ -32,6 +32,7 @@ namespace FrbaHotel
         {
             this.id = id;
             this.precio = precio;
+            this.descripcion = descripcion;
         }
 
         public Consumible()
