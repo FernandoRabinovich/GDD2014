@@ -91,7 +91,7 @@ namespace FrbaHotel
 
                     cmd.CommandText = "GRAFO_LOCO.IngresarFuncionalidadPorRol";
                     cmd.Parameters.Clear();
-                    SqlParameter rol = new SqlParameter("@idRol", idRol);
+                    SqlParameter rol = new SqlParameter("@rol", idRol);
                     rol.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(rol);
 
