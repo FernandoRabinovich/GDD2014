@@ -89,6 +89,9 @@ namespace FrbaHotel
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "GRAFO_LOCO.ActualizarCliente";
 
+                    SqlParameter idCliente = new SqlParameter("@idCliente", this.cliente.Id);
+                    idCliente.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(idCliente);
                     SqlParameter nombre = new SqlParameter("@nombre", txtNombre.Text);
                     nombre.SqlDbType = SqlDbType.VarChar;
                     nombre.Size = 30;
