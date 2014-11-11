@@ -45,9 +45,6 @@ namespace FrbaHotel
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "GRAFO_LOCO.ObtenerHoteles";
 
-                    SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
-                    usuario.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(usuario);
                     reader = cmd.ExecuteReader();
 
                     while(reader.Read())
@@ -60,7 +57,6 @@ namespace FrbaHotel
                 finally
                 {
                     cn.Close();
-                    reader.Close();
                     if (cmd != null)
                         cmd.Dispose();
                 }
@@ -227,6 +223,8 @@ namespace FrbaHotel
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
             SqlDataReader reader = null;
+            cmbRegimenHotel.Items.Clear();
+            cmbTipoHabitacion.Items.Clear();
 
             try
             {
@@ -236,7 +234,7 @@ namespace FrbaHotel
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerRegimenPorHotel";
 
-                SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
+                SqlParameter hotel = new SqlParameter("@idHotel", ((Hotel)cmbHotel.SelectedItem).Id);
                 hotel.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(hotel);
                 reader = cmd.ExecuteReader();
@@ -357,7 +355,7 @@ namespace FrbaHotel
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "GRAFO_LOCO.ObtenerDisponibilidadHabitacion";
 
-                    SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
+                    SqlParameter hotel = new SqlParameter("@idHotel", ((Hotel)cmbHotel.SelectedItem).Id);
                     hotel.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(hotel);
 

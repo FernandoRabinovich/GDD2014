@@ -92,6 +92,7 @@ namespace FrbaHotel
         {
             if (txtNumero.Text.Length != 0)
             {
+                lblCostoTotal.Text = "0";
                 // Aca tengo que buscar la reserva y cargar los datos
                 SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
                 SqlCommand cmd = null;
@@ -113,13 +114,12 @@ namespace FrbaHotel
 
                     adapter.Fill(dataSet);
 
-
                     if (dataSet.Tables.Count > 0)
                     {
                         fechaDesde.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaDesde"].ToString());
                         fechaHasta.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaHasta"].ToString());
-                        cmbHotel.SelectedValue = Int32.Parse(dataSet.Tables[0].Rows[0]["IdHotel"].ToString());
-                        cmbRegimenHotel.SelectedIndex = Int32.Parse(dataSet.Tables[0].Rows[0]["IdTipoRegimen"].ToString());
+                        cmbHotel.SelectedText = dataSet.Tables[0].Rows[0]["NombreHotel"].ToString();
+                        cmbRegimenHotel.SelectedText = dataSet.Tables[0].Rows[0]["Regimen"].ToString();
                         grdHabitaciones.DataSource = dataSet.Tables[1];
                         grdHabitaciones.Columns["IdTipoHabitacion"].Visible = false;
                         grdHabitaciones.Columns["id"].Visible = false;
@@ -167,9 +167,6 @@ namespace FrbaHotel
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.CommandText = "GRAFO_LOCO.ObtenerHoteles";
 
-                    SqlParameter usuario = new SqlParameter("@user", frmPrincipal.idUsuario);
-                    usuario.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(usuario);
                     reader = cmd.ExecuteReader();
 
                     while(reader.Read())
@@ -345,6 +342,9 @@ namespace FrbaHotel
         {
             // Cargar el tipo de Habitacion y Regimen (segun Hotel).
             // Cargar los hoteles (según usuario).
+            cmbRegimenHotel.Items.Clear();
+            cmbTipoHabitacion.Items.Clear();
+
             SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
             SqlCommand cmd = null;
             SqlDataReader reader = null;
@@ -357,7 +357,7 @@ namespace FrbaHotel
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "GRAFO_LOCO.ObtenerRegimenPorHotel";
 
-                SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
+                SqlParameter hotel = new SqlParameter("@idHotel", ((Hotel)cmbHotel.SelectedItem).Id);
                 hotel.SqlDbType = SqlDbType.Int;
                 cmd.Parameters.Add(hotel);
                 reader = cmd.ExecuteReader();
