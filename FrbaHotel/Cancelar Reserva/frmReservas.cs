@@ -44,9 +44,16 @@ namespace FrbaHotel
                     codigo.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(codigo);
                 }
-                SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
-                hotel.SqlDbType = SqlDbType.Int;
-                cmd.Parameters.Add(hotel);
+
+                if (frmPrincipal.idUsuario != 3)
+                {
+                    SqlParameter hotel = new SqlParameter("@idHotel", frmPrincipal.idHotel);
+                    hotel.SqlDbType = SqlDbType.Int;
+                    cmd.Parameters.Add(hotel);
+                }
+                else if (string.IsNullOrEmpty(txtCodigo.Text))
+                    throw new Exception("Debe indicar el código de reserva");
+
                 if (!string.IsNullOrEmpty(txtNroDocumento.Text))
                 {
                     SqlParameter nroDoc = new SqlParameter("@nroDoc", Int32.Parse(txtNroDocumento.Text));

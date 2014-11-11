@@ -118,8 +118,8 @@ namespace FrbaHotel
                     {
                         fechaDesde.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaDesde"].ToString());
                         fechaHasta.Value = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaHasta"].ToString());
-                        cmbHotel.SelectedText = dataSet.Tables[0].Rows[0]["NombreHotel"].ToString();
-                        cmbRegimenHotel.SelectedText = dataSet.Tables[0].Rows[0]["Regimen"].ToString();
+                        cmbHotel.SelectedIndex = cmbHotel.FindString(dataSet.Tables[0].Rows[0]["NombreHotel"].ToString());
+                        cmbRegimenHotel.SelectedIndex = cmbRegimenHotel.FindString(dataSet.Tables[0].Rows[0]["Regimen"].ToString());
                         grdHabitaciones.DataSource = dataSet.Tables[1];
                         grdHabitaciones.Columns["IdTipoHabitacion"].Visible = false;
                         grdHabitaciones.Columns["id"].Visible = false;
@@ -171,6 +171,8 @@ namespace FrbaHotel
 
                     while(reader.Read())
                         cmbHotel.Items.Add(new Hotel(Int32.Parse(reader["id"].ToString()), reader["descripcion"].ToString()));
+
+                    cmbHotel.SelectedIndex = 0;
                 }
                 catch (Exception ex)
                 {
