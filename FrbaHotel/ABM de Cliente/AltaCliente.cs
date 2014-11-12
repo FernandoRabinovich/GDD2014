@@ -42,7 +42,7 @@ namespace FrbaHotel
             {
                 // Devuelvo el objeto creado con los datos ingresados para el nuevo cliente o, si el que lo llamo es el formulario principal, hago el ingreso.
                 cliente = new Cliente(txtApellido.Text, txtDireccion.Text, fechaNacimiento.Value, txtMail.Text, txtNombre.Text, Int32.Parse(txtNumeroCalle.Text),
-                                Int32.Parse(txtNroDocumento.Text), Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem), txtNacionalidad.Text,
+                                Int32.Parse(txtNroDocumento.Text), string.IsNullOrEmpty(txtPiso.Text) ? 0 : Int32.Parse(txtPiso.Text), ((TipoDoc)cmbTipoDoc.SelectedItem), txtNacionalidad.Text,
                                 txtLocalidad.Text, txtDpto.Text, txtTelefono.Text);
 
                 if (this.MdiParent != null)
@@ -102,10 +102,6 @@ namespace FrbaHotel
                 campo = txtDireccion.Tag.ToString();
             if (txtNumeroCalle.Text.Length == 0)
                 campo = txtNumeroCalle.Tag.ToString();
-            if (txtPiso.Text.Length == 0)
-                campo = txtPiso.Tag.ToString();
-            if (txtDpto.Text.Length == 0)
-                campo = txtDpto.Tag.ToString();
             if (txtLocalidad.Text.Length == 0)
                 campo = txtLocalidad.Tag.ToString();
             if (txtNacionalidad.Text.Length == 0)

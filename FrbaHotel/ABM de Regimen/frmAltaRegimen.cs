@@ -23,7 +23,6 @@ namespace FrbaHotel
             {
                 SqlConnection cn = new SqlConnection(System.Configuration.ConfigurationSettings.AppSettings["connectionString"].ToString());
                 SqlCommand cmd = null;
-                SqlDataReader reader = null;
 
                 try
                 {
@@ -39,7 +38,6 @@ namespace FrbaHotel
                     cmd.Parameters.Add(descripcion);
                     SqlParameter precio = new SqlParameter("@precio", decimal.Parse(txtPrecio.Text));
                     precio.SqlDbType = SqlDbType.Decimal;
-                    precio.Precision = 2;
                     cmd.Parameters.Add(precio);
 
                     cmd.ExecuteNonQuery();
@@ -51,7 +49,6 @@ namespace FrbaHotel
                 finally
                 {
                     cn.Close();
-                    reader.Close();
                     if (cmd != null)
                         cmd.Dispose();
                 }

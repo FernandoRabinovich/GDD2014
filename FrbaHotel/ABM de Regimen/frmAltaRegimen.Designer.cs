@@ -86,6 +86,7 @@
             // 
             this.txtPrecio.Location = new System.Drawing.Point(91, 80);
             this.txtPrecio.Mask = "9999.99";
+            this.txtPrecio.MaximumSize = new System.Drawing.Size(9999, 99);
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(100, 20);
             this.txtPrecio.TabIndex = 5;

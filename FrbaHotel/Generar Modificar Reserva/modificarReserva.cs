@@ -90,6 +90,8 @@ namespace FrbaHotel
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
+            lblCostoTotal.Text = "0";
+
             if (txtNumero.Text.Length != 0)
             {
                 lblCostoTotal.Text = "0";

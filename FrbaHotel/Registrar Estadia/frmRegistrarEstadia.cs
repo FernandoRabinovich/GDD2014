@@ -48,7 +48,7 @@ namespace FrbaHotel
 
                 adapter.Fill(dataSet);
 
-                if (dataSet.Tables.Count > 0)
+                if (dataSet.Tables[0].Rows.Count > 0)
                 {
                     fechaDesde = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaDesde"].ToString());
                     fechaHasta = DateTime.Parse(dataSet.Tables[0].Rows[0]["FechaHasta"].ToString());

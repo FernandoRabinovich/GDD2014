@@ -124,9 +124,12 @@ namespace FrbaHotel
                     SqlParameter numero = new SqlParameter("@nroCalle", Int32.Parse(txtNumeroCalle.Text));
                     numero.SqlDbType = SqlDbType.Int;
                     cmd.Parameters.Add(numero);
-                    SqlParameter piso = new SqlParameter("@piso", Int32.Parse(txtPiso.Text));
-                    piso.SqlDbType = SqlDbType.Int;
-                    cmd.Parameters.Add(piso);
+                    if (string.IsNullOrEmpty(txtPiso.Text))
+                    {
+                        SqlParameter piso = new SqlParameter("@piso", Int32.Parse(txtPiso.Text));
+                        piso.SqlDbType = SqlDbType.Int;
+                        cmd.Parameters.Add(piso);
+                    }
                     SqlParameter nacionalidad = new SqlParameter("@nacionalidad", txtNacionalidad.Text);
                     nacionalidad.SqlDbType = SqlDbType.VarChar;
                     nacionalidad.Size = 255;
@@ -135,10 +138,13 @@ namespace FrbaHotel
                     localidad.SqlDbType = SqlDbType.VarChar;
                     localidad.Size = 100;
                     cmd.Parameters.Add(localidad);
-                    SqlParameter dpto = new SqlParameter("@departamento", txtDpto.Text);
-                    dpto.SqlDbType = SqlDbType.VarChar;
-                    dpto.Size = 1;
-                    cmd.Parameters.Add(dpto);
+                    if (string.IsNullOrEmpty(txtDpto.Text))
+                    {
+                        SqlParameter dpto = new SqlParameter("@departamento", txtDpto.Text);
+                        dpto.SqlDbType = SqlDbType.VarChar;
+                        dpto.Size = 1;
+                        cmd.Parameters.Add(dpto);
+                    }
 
                     cmd.ExecuteNonQuery();
                 }
@@ -179,10 +185,6 @@ namespace FrbaHotel
                 campo = txtDireccion.Tag.ToString();
             if (txtNumeroCalle.Text.Length == 0)
                 campo = txtNumeroCalle.Tag.ToString();
-            if (txtPiso.Text.Length == 0)
-                campo = txtPiso.Tag.ToString();
-            if (txtDpto.Text.Length == 0)
-                campo = txtDpto.Tag.ToString();
             if (txtLocalidad.Text.Length == 0)
                 campo = txtLocalidad.Tag.ToString();
             if (txtNacionalidad.Text.Length == 0)
